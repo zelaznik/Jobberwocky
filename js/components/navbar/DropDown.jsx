@@ -13,11 +13,8 @@ class DropDownItem extends React.Component {
 }
 
 var NavDropDown = React.createClass({
-    getInitialState: function() {
-        return {collapsed: true};
-    },
     render: function() {
-        var open = this.state.collapsed ? "" : " open";
+        var open = this._isCurrent() ? " open" : "";
         return (
             <li className={'dropdown' + open} onClick={this._onClick} >
                 <a data-toggle="dropdown" href="#">
@@ -34,8 +31,16 @@ var NavDropDown = React.createClass({
         );
     },
 
+    _key: function() {
+      return this.props.reactKey;
+    },
+
+    _isCurrent: function() {
+        return this.props.parent.current() === this._key();
+    },
+
     _onClick: function() {
-        this.setState({collapsed: !this.state.collapsed});
+        this.props.parent.setCurrent(this._key());
     }
 });
 
