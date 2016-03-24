@@ -1,4 +1,5 @@
 import React from 'react';
+import DropDownMixin from './mixins/_Mixin-DropDown.jsx';
 
 class DropDownItem extends React.Component {
     render() {
@@ -12,12 +13,13 @@ class DropDownItem extends React.Component {
     }
 }
 
-var NavDropDown = React.createClass({
+var NavMainDropDown = React.createClass({
+    mixins: [DropDownMixin],
+
     render: function() {
-        var open = this._isCurrent() ? " open" : "";
         return (
-            <li className={'dropdown' + open} onClick={this._onClick} >
-                <a data-toggle="dropdown" href="#">
+            <li className={`dropdown ${ this._clsOpen() }` }>
+                <a className={ this._clsCurrent() } data-toggle="dropdown" href="#">
                     <span aria-hidden='true' className={this.props.icon} />
                     {this.props.label}
                     <b className="caret" />
@@ -31,17 +33,7 @@ var NavDropDown = React.createClass({
         );
     },
 
-    _key: function() {
-      return this.props.reactKey;
-    },
 
-    _isCurrent: function() {
-        return this.props.parent.current() === this._key();
-    },
-
-    _onClick: function() {
-        this.props.parent.setCurrent(this._key());
-    }
 });
 
-export default NavDropDown;
+export default NavMainDropDown;

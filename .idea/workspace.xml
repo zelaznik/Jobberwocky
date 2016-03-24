@@ -2,23 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3bd7597-c668-4987-bdd4-3c8e596a058e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/utils/singleton.jsx" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/components/App.jsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/components/NavBar.jsx" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app.jsx" afterPath="$PROJECT_DIR$/js/app.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/MainContent.jsx" afterPath="$PROJECT_DIR$/js/components/MainContent.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/navbar/DropDown.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/DropDown.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/navbar/Item.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/Item.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/navbar/Main.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/Main.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/navbar/Root.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/Root.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/navbar/Top.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/Top.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/tables/Root.jsx" afterPath="$PROJECT_DIR$/js/components/tables/Root.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/utils/counter.jsx" afterPath="$PROJECT_DIR$/js/utils/counter.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/components/navbar/Combined.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/components/navbar/Top-DropDown-AccountSettings.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/components/navbar/Top-DropDown-Messages.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/components/navbar/Top-DropDown-Notifications.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/components/navbar/mixins/_Mixin-DropDown.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/components/navbar/mixins/_Mixin-RenderTop.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/constants/keycodes.jsx" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/js/components/navbar/Item.jsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/js/components/navbar/Root.jsx" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/js/components/navbar/DropDown.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/Main-DropDown.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/style.css" afterPath="$PROJECT_DIR$/assets/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/style.css.map" afterPath="$PROJECT_DIR$/assets/css/style.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/style.sass" afterPath="$PROJECT_DIR$/assets/css/style.sass" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/app.jsx" afterPath="$PROJECT_DIR$/js/app.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/bundle.js.map" afterPath="$PROJECT_DIR$/js/bundle.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/components/navbar/Main.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/Main.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/components/navbar/Top.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/Top.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/utils/singleton.jsx" afterPath="$PROJECT_DIR$/js/utils/singleton.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack.config.js" afterPath="$PROJECT_DIR$/webpack.config.js" />
     </list>
     <ignored path="Jobberwocky.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,21 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="47" column="7" selection-start-line="1" selection-start-column="6" selection-end-line="47" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/components/navbar/Main.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-405">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="542">
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -61,41 +55,83 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Item.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/components/navbar/Item.jsx">
+      <file leaf-file-name="Top-DropDown-AccountSettings.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/components/navbar/Top-DropDown-AccountSettings.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Combined.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/components/navbar/Combined.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Top-DropDown-Messages.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/components/navbar/Top-DropDown-Messages.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Top-DropDown-Notifications.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/components/navbar/Top-DropDown-Notifications.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#194#367#0" expanded="false" />
+                <element signature="e#383#595#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_Mixin-RenderTop.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/components/navbar/mixins/_Mixin-RenderTop.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="3" selection-start-line="21" selection-start-column="3" selection-end-line="21" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_Mixin-DropDown.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/components/navbar/mixins/_Mixin-DropDown.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-              <folding />
+              <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+              <folding>
+                <element signature="e#0#33#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DropDown.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/components/navbar/DropDown.jsx">
+      <file leaf-file-name="Top.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/components/navbar/Top.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Root.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/components/tables/Root.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Root.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/components/navbar/Root.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+            <state relative-caret-position="255">
+              <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -103,13 +139,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/app.jsx">
+      <file leaf-file-name="Main-DropDown.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/components/navbar/Main-DropDown.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state relative-caret-position="375">
+              <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
+                <marker date="1458853015000" expanded="true" signature="618:798" placeholder="..." />
+                <marker date="1458853015000" expanded="true" signature="845:1021" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -128,7 +166,6 @@
         <option value="$PROJECT_DIR$/components/Temp.jsx" />
         <option value="$PROJECT_DIR$/components/App.jsx" />
         <option value="$PROJECT_DIR$/app.jsx" />
-        <option value="$PROJECT_DIR$/assets/css/style.sass" />
         <option value="$PROJECT_DIR$/components/NavbarPullRight.jsx" />
         <option value="$PROJECT_DIR$/components/NavBarPullRight.jsx" />
         <option value="$PROJECT_DIR$/components/NavBarMain.jsx" />
@@ -143,17 +180,29 @@
         <option value="$PROJECT_DIR$/components/navbar/Top.jsx" />
         <option value="$PROJECT_DIR$/components/navbar/Main.jsx" />
         <option value="$PROJECT_DIR$/components/NavBar.jsx" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/js/utils/singleton.jsx" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/js/components/App.jsx" />
         <option value="$PROJECT_DIR$/js/app.jsx" />
-        <option value="$PROJECT_DIR$/js/components/navbar/Root.jsx" />
         <option value="$PROJECT_DIR$/js/components/tables/Root.jsx" />
         <option value="$PROJECT_DIR$/js/utils/counter.jsx" />
-        <option value="$PROJECT_DIR$/js/components/navbar/Main.jsx" />
+        <option value="$PROJECT_DIR$/js/constants/keycodes.jsx" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/js/utils/singleton.jsx" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/js/components/navbar/mixins/DropDown.jsx" />
         <option value="$PROJECT_DIR$/js/components/navbar/DropDown.jsx" />
+        <option value="$PROJECT_DIR$/js/components/navbar/_Mixin-DropDown.jsx" />
+        <option value="$PROJECT_DIR$/js/components/navbar/Root.jsx" />
+        <option value="$PROJECT_DIR$/assets/css/style.sass" />
+        <option value="$PROJECT_DIR$/js/components/navbar/Main-DropDown.jsx" />
+        <option value="$PROJECT_DIR$/js/components/navbar/Item.jsx" />
+        <option value="$PROJECT_DIR$/js/components/navbar/Main.jsx" />
+        <option value="$PROJECT_DIR$/js/components/navbar/_Mixin-RenderTop.jsx" />
+        <option value="$PROJECT_DIR$/js/components/navbar/Top-DropDown-Notifications.jsx" />
+        <option value="$PROJECT_DIR$/js/components/navbar/Top-DropDown-Messages.jsx" />
+        <option value="$PROJECT_DIR$/js/components/navbar/Top-DropDown-AccountSettings.jsx" />
+        <option value="$PROJECT_DIR$/js/components/navbar/Top-DropDown.jsx" />
+        <option value="$PROJECT_DIR$/js/components/navbar/Top.jsx" />
       </list>
     </option>
   </component>
@@ -165,10 +214,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="799" />
-    <option name="y" value="173" />
-    <option name="width" value="1519" />
-    <option name="height" value="951" />
+    <option name="x" value="638" />
+    <option name="y" value="232" />
+    <option name="width" value="1660" />
+    <option name="height" value="1027" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -259,7 +308,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
+              <option name="myItemId" value="constants" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -278,10 +327,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tables" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -307,6 +352,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Jobberwocky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Jobberwocky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Jobberwocky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Jobberwocky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -314,17 +391,18 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../es6_singleton" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/js/components/navbar/mixins" />
+      <recent name="$PROJECT_DIR$/js/components/navbar" />
       <recent name="$PROJECT_DIR$/js" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/components/navbar" />
-      <recent name="$PROJECT_DIR$/assets" />
     </key>
   </component>
   <component name="RunManager">
@@ -394,20 +472,20 @@
       <updated>1458788037502</updated>
       <workItem from="1458788039893" duration="11937000" />
       <workItem from="1458801258805" duration="7296000" />
-      <workItem from="1458830906486" duration="3140000" />
+      <workItem from="1458830906486" duration="18768000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22373000" />
+    <option name="totallyTimeSpent" value="38001000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="799" y="173" width="1519" height="951" extended-state="0" />
+    <frame x="638" y="232" width="1660" height="1027" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24884793" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26987952" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25283447" sideWeight="0.5028653" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23277661" sideWeight="0.5028653" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -434,7 +512,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -465,7 +543,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/Root.jsx">
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/Combined.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
@@ -479,9 +557,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="113" column="1" selection-start-line="113" selection-start-column="1" selection-end-line="113" selection-end-column="1" />
-          <folding>
-            <element signature="n#NavBarPullRight#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -506,7 +582,7 @@
         <state relative-caret-position="180">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -521,7 +597,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/components/App.jsx" />
     <entry file="file://$PROJECT_DIR$/js/components/NavBar.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/Root.jsx">
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/Combined.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
@@ -535,9 +611,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="106" column="10" selection-start-line="106" selection-start-column="10" selection-end-line="106" selection-end-column="10" />
-          <folding>
-            <element signature="n#NavBarPullRight#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -572,7 +646,7 @@
         <state relative-caret-position="75">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -581,6 +655,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6585">
           <caret line="439" column="0" selection-start-line="439" selection-start-column="0" selection-end-line="439" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -589,6 +664,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5040">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -597,13 +673,6 @@
         <state relative-caret-position="30">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/css/style.sass">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6585">
-          <caret line="439" column="0" selection-start-line="439" selection-start-column="0" selection-end-line="439" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -620,47 +689,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/utils/singleton.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/components/App.jsx" />
     <entry file="file://$PROJECT_DIR$/js/app.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/Top.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
-          <folding>
-            <element signature="n#NavBarPullRight#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -680,36 +716,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/Root.jsx">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+        <state relative-caret-position="195">
+          <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/utils/singleton.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="47" column="7" selection-start-line="1" selection-start-column="6" selection-end-line="47" selection-end-column="7" />
+        <state relative-caret-position="45">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/DropDown.jsx">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
+        <state relative-caret-position="105">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/Item.jsx">
+    <entry file="file://$PROJECT_DIR$/assets/css/style.sass">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+        <state relative-caret-position="125">
+          <caret line="3513" column="25" selection-start-line="3513" selection-start-column="25" selection-end-line="3513" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/constants/keycodes.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -722,10 +774,108 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/mixins/_Mixin-DropDown.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/mixins/_Mixin-RenderTop.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="3" selection-start-line="21" selection-start-column="3" selection-end-line="21" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/Item.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/Combined.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/Main-DropDown.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <marker date="1458853015000" expanded="true" signature="618:798" placeholder="..." />
+            <marker date="1458853015000" expanded="true" signature="845:1021" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/components/navbar/Main.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-405">
+        <state relative-caret-position="542">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/Top-DropDown-Messages.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/Top-DropDown-Notifications.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#194#367#0" expanded="false" />
+            <element signature="e#383#595#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/Top-DropDown.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/Top-DropDown-AccountSettings.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/Top.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

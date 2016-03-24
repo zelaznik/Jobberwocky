@@ -1,8 +1,20 @@
 import React from 'react';
-import NavItem from './Item.jsx';
-import NavDropDown from './DropDown.jsx';
 
+import MainDropDown from './Main-DropDown.jsx';
 import counter from '../../utils/counter.jsx';
+
+var NavItem = React.createClass({
+    render() {
+        return (
+            <li>
+                <a href={this.props.href}>
+                    <span aria-hidden="true" className={`icon ${this.props.icon}`} />
+                    <span>{this.props.label}</span>
+                </a>
+            </li>
+        );
+    }
+});
 
 var NavBarMain = React.createClass({
     getInitialState() {
@@ -32,13 +44,13 @@ var NavBarMain = React.createClass({
                         <NavItem key={seq.next} reactKey={seq.value} parent={this} href="index" icon="se7en-home" label="Dashboard" />
                         <NavItem key={seq.next} reactKey={seq.value} parent={this} href="social" icon="se7en-feed" label="Social Feed" />
 
-                        <NavDropDown key={seq.next} reactKey={seq.value} parent={this} icon="se7en-star" label="UI Features" items={[
+                        <MainDropDown key={seq.next} reactKey={seq.value} parent={this} icon="se7en-star" label="UI Features" items={[
                             {href: 'buttons',     label: 'Buttons'},
                             {href: 'fontawesome', label: 'Font Awesome Icons'},
                             {href: 'glyphicons',  label: 'Glyphicons'}
                         ]} />
 
-                        <NavDropDown key={seq.next} reactKey={seq.value} parent={this} icon="se7en-forms" label="Forms" items={[
+                        <MainDropDown key={seq.next} reactKey={seq.value} parent={this} icon="se7en-forms" label="Forms" items={[
                             {href: 'form-components', label: 'Form Components'},
                             {href: 'form-advanced', label: 'Advanced Forms'},
                             {href: 'xeditable', label: 'X-Editable'},
@@ -46,7 +58,7 @@ var NavBarMain = React.createClass({
                             {href: 'dropzone-file-upload', label: 'Dropzone File Upload'}
                         ]} />
 
-                        <NavDropDown key={seq.next} reactKey={seq.value} parent={this} icon="se7en-tables" label="Tables" items={[
+                        <MainDropDown key={seq.next} reactKey={seq.value} parent={this} icon="se7en-tables" label="Tables" items={[
                             {href: 'tables', label: 'Basic Tables'},
                             {href: 'datatables', label: 'DataTables'},
                             {href: 'datatables-editable', label: 'Editable Datatables'}
@@ -54,7 +66,7 @@ var NavBarMain = React.createClass({
 
                         <NavItem key={seq.next} reactKey={seq.value} parent={this} href="charts.html" icon="se7en-charts" label="Charts" />
 
-                        <NavDropDown key={seq.next} reactKey={seq.value} parent={this} icon="se7en-pages" label="Pages" items={[
+                        <MainDropDown key={seq.next} reactKey={seq.value} parent={this} icon="se7en-pages" label="Pages" items={[
                             {href: 'chat', label: 'Chat'},
                             {href: 'calendar', label: 'Calendar'},
                             {href: 'timeline', label: 'Timeline'},

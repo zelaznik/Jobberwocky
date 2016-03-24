@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import NavBar from './components/navbar/Root.jsx';
+import NavBar from './components/navbar/Combined.jsx';
 import MainContent from './components/MainContent.jsx';
 
 class App extends React.Component {

@@ -1,6 +1,21 @@
+/* Easy way to make any class into a singleton in ES6.
+class DbConnection extends singleton() {
+    constructor() {
+        super();
+        [your code here]
+    }
+}
+class LogFile extends singleton() {
+    [ In this example, LogFile and DbConnection do NOT share
+      a common parent / ancestor class.  The function singleton()
+      generates a new class every time it's invoked.
+    ]
+}
+*/
+
 function singleton() {
     if (this instanceof singleton) {
-        throw new Error("cannot call singleton as a constructor function.");
+        throw new TypeError(`cannot call singleton as a constructor function.`);
     }
 
     var instance;

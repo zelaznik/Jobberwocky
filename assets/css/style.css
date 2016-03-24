@@ -3011,85 +3011,83 @@ ul.timeline {
 .compose-btn {
   margin-bottom: 10px; }
 
-.messages {
-  height: 650px; }
-  .messages .widget-container {
-    height: 100%; }
-  .messages .message-list {
-    padding: 0;
-    height: 100%; }
-    .messages .message-list .list-group {
-      box-shadow: none;
-      margin: 0;
-      border-right: 1px solid #DDD;
-      height: 100%;
-      overflow-y: auto; }
-      .messages .message-list .list-group .list-group-item:last-child p {
-        border-bottom: 1px solid #DDD; }
-      .messages .message-list .list-group .list-group-item a {
-        position: relative; }
-        .messages .message-list .list-group .list-group-item a .status {
-          width: 10px;
-          height: 10px;
-          float: left;
-          border-radius: 50%;
-          margin-top: 13px; }
-          .messages .message-list .list-group .list-group-item a .status.unread {
-            background-color: #007aff; }
-        .messages .message-list .list-group .list-group-item a .favorite {
-          position: absolute;
-          left: 13px;
-          top: 30px;
-          display: none; }
-          .messages .message-list .list-group .list-group-item a .favorite.fa-star-o {
-            color: #AAA; }
-          .messages .message-list .list-group .list-group-item a .favorite.fa-star {
-            color: #F0AD44;
-            display: block; }
-        .messages .message-list .list-group .list-group-item a h2 {
-          font-size: 14px;
-          font-weight: 600;
-          padding: 10px 10px 0 20px;
-          margin-bottom: 4px; }
-          .messages .message-list .list-group .list-group-item a h2 span {
-            float: right;
-            font-size: 12px;
-            font-weight: 400; }
-        .messages .message-list .list-group .list-group-item a p {
-          padding-top: 0;
-          padding-left: 20px;
-          font-size: 13px; }
-      .messages .message-list .list-group .list-group-item:hover a .favorite {
-        display: block; }
-  .messages .message-content {
-    padding: 0;
+.messages .widget-container {
+  height: 100%; }
+.messages .message-list {
+  padding: 0;
+  height: 100%; }
+  .messages .message-list .list-group {
+    box-shadow: none;
+    margin: 0;
+    border-right: 1px solid #DDD;
     height: 100%;
-    overflow-y: auto;
-    padding-left: 20px; }
-    .messages .message-content .message-header {
-      position: relative;
-      padding: 15px 15px 5px 0;
+    overflow-y: auto; }
+    .messages .message-list .list-group .list-group-item:last-child p {
       border-bottom: 1px solid #DDD; }
-      .messages .message-content .message-header .date {
-        font-size: 13px; }
-      .messages .message-content .message-header .message-actions {
+    .messages .message-list .list-group .list-group-item a {
+      position: relative; }
+      .messages .message-list .list-group .list-group-item a .status {
+        width: 10px;
+        height: 10px;
+        float: left;
+        border-radius: 50%;
+        margin-top: 13px; }
+        .messages .message-list .list-group .list-group-item a .status.unread {
+          background-color: #007aff; }
+      .messages .message-list .list-group .list-group-item a .favorite {
         position: absolute;
-        bottom: -12px;
-        left: 50%;
-        margin: 0 0 0 -64px; }
-        .messages .message-content .message-header .message-actions .btn {
-          font-size: 14px;
-          width: 32px;
-          padding: 0;
-          background: #FFF;
-          height: 24px;
-          line-height: 1.6; }
-          .messages .message-content .message-header .message-actions .btn:hover {
-            background: #BBB; }
-          .messages .message-content .message-header .message-actions .btn .fa {
-            margin: 0; }
-    .messages .message-content .message-text {
-      padding: 30px 15px 15px 0; }
+        left: 13px;
+        top: 30px;
+        display: none; }
+        .messages .message-list .list-group .list-group-item a .favorite.fa-star-o {
+          color: #AAA; }
+        .messages .message-list .list-group .list-group-item a .favorite.fa-star {
+          color: #F0AD44;
+          display: block; }
+      .messages .message-list .list-group .list-group-item a h2 {
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px 10px 0 20px;
+        margin-bottom: 4px; }
+        .messages .message-list .list-group .list-group-item a h2 span {
+          float: right;
+          font-size: 12px;
+          font-weight: 400; }
+      .messages .message-list .list-group .list-group-item a p {
+        padding-top: 0;
+        padding-left: 20px;
+        font-size: 13px; }
+    .messages .message-list .list-group .list-group-item:hover a .favorite {
+      display: block; }
+.messages .message-content {
+  padding: 0;
+  height: 100%;
+  overflow-y: auto;
+  padding-left: 20px; }
+  .messages .message-content .message-header {
+    position: relative;
+    padding: 15px 15px 5px 0;
+    border-bottom: 1px solid #DDD; }
+    .messages .message-content .message-header .date {
+      font-size: 13px; }
+    .messages .message-content .message-header .message-actions {
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      margin: 0 0 0 -64px; }
+      .messages .message-content .message-header .message-actions .btn {
+        font-size: 14px;
+        width: 32px;
+        padding: 0;
+        background: #FFF;
+        height: 24px;
+        line-height: 1.6; }
+        .messages .message-content .message-header .message-actions .btn:hover {
+          background: #BBB; }
+        .messages .message-content .message-header .message-actions .btn .fa {
+          margin: 0; }
+  .messages .message-content .message-text {
+    padding: 30px 15px 15px 0; }
 
 /*----------------------------------------------------------------------------------- */
 /*  Pricing Tables */
