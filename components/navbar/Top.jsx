@@ -99,7 +99,12 @@ class NavBarTop extends React.Component {
         return (
             <div className="container-fluid top-bar">
                 <NavBarPullRight />
-                <button className="navbar-toggle"><span className="icon-bar" /><span className="icon-bar" /><span className="icon-bar" /></button><a className="logo" href="index.html">se7en</a>
+                <button className="navbar-toggle">
+                    <span className="icon-bar" />
+                    <span className="icon-bar" />
+                    <span className="icon-bar" />
+                </button>
+                <a className="logo" href="index.html">se7en</a>
                 <form className="navbar-form form-inline col-lg-2 hidden-xs">
                     <input className="form-control" placeholder="Search" type="text" />
                 </form>
