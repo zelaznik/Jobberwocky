@@ -1,5 +1,5 @@
 import React from 'react';
-import DropDownMixin from './mixins/_Mixin-DropDown.jsx';
+import DropDownMixin from './mixins/Mixin-DropDown.jsx';
 
 var AccountSetting = React.createClass({
     render() {

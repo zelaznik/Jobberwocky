@@ -6,7 +6,8 @@ var columns = [
 ];
 var data = [
     ['Robert','Kelso','robert@gmail.com','8-15-2013','Approved'],
-    ['John','Dorian','john@gmail.com','2-6-1984','Rejected']
+    ['John','Dorian','john@gmail.com','2-6-1984','Rejected'],
+    ['Steve','Zelaznik','zelaznik@yahoo.com','1-12000','Hired']
 ];
 
 class MainContent extends React.Component {
