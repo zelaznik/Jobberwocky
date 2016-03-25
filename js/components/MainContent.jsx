@@ -3,7 +3,6 @@ import Table from './table/Table.jsx';
 
 var MainContent = React.createClass({
     render() {
-        console.log(this.props.table);
         return (
             <div className="container-fluid main-content">
                 <div className="page-title">
@@ -14,9 +13,11 @@ var MainContent = React.createClass({
 
                 <div className="row">
                     <div className="col-lg-12">
-                        <Table headers = {this.props.table.headers}
-                               fields  = {this.props.table.fields}
-                               records = {this.props.table.records} />
+                        <Table headers   = {this.props.table.headers}
+                               fields    = {this.props.table.fields}
+                               records   = {this.props.table.records}
+                               immutable = {this.props.table.immutable}
+                        />
                     </div>
                 </div>
             </div>

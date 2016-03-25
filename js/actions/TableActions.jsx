@@ -2,6 +2,12 @@ import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import TableConstants from '../constants/TableConstants.jsx';
     
 const TableActions = Object.freeze({
+    new() {
+        AppDispatcher.dispatch({
+            actionType: TableConstants.NEW
+        });
+    },
+
     create(params) {
         AppDispatcher.dispatch({
             actionType: TableConstants.CREATE,

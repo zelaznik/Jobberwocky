@@ -1,8 +1,9 @@
 import keyMirror from 'keymirror';
 
 const TableConstants = keyMirror({
-    CREATE: null,
-    UPDATE: null,
+    NEW:     null,
+    CREATE:  null,
+    UPDATE:  null,
     DESTROY: null
 });
 

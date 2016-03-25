@@ -3,20 +3,35 @@ import TableStore from '../../stores/UniversalStore.jsx';
 import TableActions from '../../actions/TableActions.jsx';
 
 var Cell = React.createClass({
-    getInitialState() {
-        return {};
+    render() {
+        if ( this.props.editMode && !this.props.immutable )
+            return this._editView();
+        else
+            return this._standardView();
     },
 
-    render() {
-        if (this.props.editMode) {
-            return (
-                <td>
-                    <input type="text" defaultValue={this.props.value} onChange={this.onChange} />
-                </td>
-            );
-        } else {
-            return (<td>{this.props.value}</td>);
-        }
+    _editView() {
+        return (
+            <td>
+                <input type="text"
+                       defaultValue={this.props.value}
+                       onChange={this.onChange}
+                       disabled={this.props.immutable} />
+            </td>
+        );
+    },
+
+    _standardView() {
+        return (
+            <td onDoubleClick={ this.props.onDoubleClick } >
+                {this.props.value}
+            </td>
+        );
+    },
+
+
+    edit() {
+        this.setState({editMode: true});
     },
 
     onChange(e) {
@@ -34,6 +49,7 @@ var Header = React.createClass({
 });
 
 var Action = React.createClass({
+    /* Created For Editing, Saving, Deleting, and Cancelling */
     render() {
         return (
             <td onClick={this.props.onClick}>

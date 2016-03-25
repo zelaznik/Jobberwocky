@@ -27,15 +27,12 @@ var App = React.createClass({
         UniversalStore.removeChangeListener(this._onChange);
     },
 
-    _newState() {
-
-    },
-
     _onChange() {
         this.setState( this.getInitialState() );
     }
 
 });
+
 
 document.addEventListener("DOMContentLoaded", () => {
    var body = document.getElementsByTagName('body')[0];
