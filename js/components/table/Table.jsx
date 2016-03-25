@@ -2,121 +2,26 @@ import React from 'react';
 import TableStore from '../../stores/UniversalStore.jsx';
 import TableActions from '../../actions/TableActions.jsx';
 
-var Cell = React.createClass({
-    getInitialState() {
-        return {};
-    },
+import { Header } from './Table-Cells.jsx';
+import Row from './Table-Row.jsx';
 
+var AddRow = React.createClass({
     render() {
-        if (this.props.editMode) {
-            return (
-                <td>
-                    <input type="text" defaultValue={this.props.value} onChange={this.onChange} />
-                </td>
-            );
-        } else {
-            return (<td>{this.props.value}</td>);
-        }
+       return (
+           <a className="btn btn-sm btn-primary-outline pull-right" id="add-row" onClick={this.onClick}>
+               <i className="fa fa-plus" />Add row
+           </a>
+       );
     },
 
-    onChange(e) {
-        this.props.row.registerPendingChange(
-            this.props.field, e.target.value
-        );
+    onClick() {
+        alert("HELLO");
     }
-
-});
-
-class Header extends React.Component {
-    render() {
-        return (<th>{this.props.value}</th>)
-    }
-}
-
-var Action = React.createClass({
-    render() {
-        return (
-            <td onClick={this.props.onClick}>
-                <a className="edit-row">
-                    { this.props.label }
-                </a>
-            </td>
-        );
-    }
-});
-
-var Row = React.createClass({
-    getInitialState() {
-      return {pendingChanges: {}, editMode: false};
-    },
-
-    render() {
-        return (
-            <tr>
-                { this.values() }
-                { this.actionItems() }
-            </tr>
-        )
-    },
-
-    values() {
-        return this.props.fields.map((field, i) => (
-            <Cell row={this} field={field} value={this.props.values[field]}
-                  key={i} editMode={ this.state.editMode } />
-        ));
-    },
-
-    actionItems() {
-      if ( this.state.editMode ) {
-          return [
-              <Action key='0' label="Save" onClick={this.save}/>,
-              <Action key='1' label="Cancel" onClick={this.cancel}/>
-          ];
-      } else {
-          return [
-              <Action key='0' label="Edit" onClick={this.edit}/>,
-              <Action key='1' label="Delete" onClick={this.destroy}/>
-          ];
-      }
-    },
-
-    registerPendingChange(key, value) {
-        console.log(`key: ${key}, value: ${value}`);
-      this.state.pendingChanges[key] = value;
-    },
-
-    save() {
-        TableActions.update(
-            this.props.values.id,
-            this.state.pendingChanges
-        );
-        this.cancel();
-    },
-
-    edit() {
-        this.setState({editMode: true});
-    },
-
-    destroy() {
-        TableActions.destroy(
-            this.props.values.id
-        );
-        this.cancel();
-    },
-
-    cancel() {
-        this.setState({pendingChanges: {}, editMode: false});
-    }
-
 });
 
 var Table = React.createClass({
     addRow() {
-        return (
-            <a className="btn btn-sm btn-primary-outline pull-right" id="add-row">
-                <i className="fa fa-plus" />Add row
-            </a>
-        );
+        return (<AddRow />);
     },
 
     head() {
