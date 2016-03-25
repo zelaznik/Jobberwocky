@@ -1,5 +1,5 @@
 import React from 'react';
-import DropDownMixin from './mixins/Mixin-DropDown.jsx';
+import CurrentObjectMixin from '../../_mixins/Mixin-CurrentObject.jsx';
 
 var AccountSetting = React.createClass({
     render() {
@@ -16,7 +16,7 @@ var AccountSetting = React.createClass({
 
 
 var AccountSettingsDropDown = React.createClass({
-    mixins: [DropDownMixin],
+    mixins: [CurrentObjectMixin],
 
     render() {
         return (

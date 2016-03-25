@@ -1,6 +1,6 @@
 import React from 'react';
-import DropDownMixin from './mixins/Mixin-DropDown.jsx';
-import RenderTop from './mixins/Mixin-RenderTop.jsx';
+import CurrentObjectMixin from '../../_mixins/Mixin-CurrentObject.jsx';
+import RenderTop from '../_mixins/Mixin-RenderTop.jsx';
 
 var Notification = React.createClass({
     newFlag() {
@@ -24,11 +24,11 @@ var Notification = React.createClass({
 });
 
 var NotificationsDropDown = React.createClass({
-    mixins: [DropDownMixin, RenderTop],
+    mixins: [CurrentObjectMixin, RenderTop],
     params: {
         icon:          'se7en-flag',
         category:      'notifications',
-        counter:        (items) => items.filter((v) => !!v.new).length ,
+        counter:        (items) => items.filter((v) => v.new).length ,
         renderItem:     (item, key) => <Notification key={key} item={item} />
     }
 });

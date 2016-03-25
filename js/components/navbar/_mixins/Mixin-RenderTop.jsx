@@ -1,7 +1,7 @@
 import React from 'react';
 
 var RenderTop = Object.freeze({
-    render() {
+    render: function() {
         return (
             <li className={`dropdown ${ this._clsOpen() } ${ this.params.category } hidden-xs`}>
                 <a className="dropdown-toggle" data-toggle="dropdown" href="#">

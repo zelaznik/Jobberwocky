@@ -1,6 +1,6 @@
 import React from 'react';
-import DropDownMixin from './mixins/Mixin-DropDown.jsx';
-import RenderTop from './mixins/Mixin-RenderTop.jsx';
+import CurrentObjectMixin from '../../_mixins/Mixin-CurrentObject.jsx';
+import RenderTop from '../_mixins/Mixin-RenderTop.jsx';
 
 var Message = React.createClass({
     render() {
@@ -16,7 +16,7 @@ var Message = React.createClass({
 });
 
 var NewMessagesDropDown = React.createClass({
-    mixins: [DropDownMixin, RenderTop],
+    mixins: [CurrentObjectMixin, RenderTop],
     params: {
         icon:          'se7en-envelope',
         category:      'messages',

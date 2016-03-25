@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
-import KeyCodes from '../../../constants/keycodes.jsx';
+import KeyCodes from '../../constants/keycodes.jsx';
 
-const DropDownMixin = Object.freeze({
+const CurrentObjectMixin = Object.freeze({
 
     getInitialState: function() {
         return {current: false};
@@ -42,4 +42,4 @@ const DropDownMixin = Object.freeze({
     }
 });
 
-export default DropDownMixin;
+export default CurrentObjectMixin;

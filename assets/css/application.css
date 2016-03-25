@@ -33,7 +33,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
  *     ensure that you either have "example_alt_pagination" as a body class name, or better yet,
  *     modify that selector.
  *   Note that the path used for Images is relative. All images are by default located in
- *     ../images/tables/ - relative to this CSS file.
+ *     ../images/table/ - relative to this CSS file.
  */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

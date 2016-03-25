@@ -1,17 +1,9 @@
 import React from 'react';
-import Table from './tables/Root.jsx';
+import Table from './table/Table.jsx';
 
-var columns = [
-    'First Name','Last Name','Email','Date Added','Status'
-];
-var data = [
-    ['Robert','Kelso','robert@gmail.com','8-15-2013','Approved'],
-    ['John','Dorian','john@gmail.com','2-6-1984','Rejected'],
-    ['Steve','Zelaznik','zelaznik@yahoo.com','1-12000','Hired']
-];
-
-class MainContent extends React.Component {
+var MainContent = React.createClass({
     render() {
+        console.log(this.props.table);
         return (
             <div className="container-fluid main-content">
                 <div className="page-title">
@@ -20,16 +12,16 @@ class MainContent extends React.Component {
                     </h1>
                 </div>
 
-                {/* DataTables Example */}
                 <div className="row">
                     <div className="col-lg-12">
-                        <Table fields={columns} data={data} />
+                        <Table headers = {this.props.table.headers}
+                               fields  = {this.props.table.fields}
+                               records = {this.props.table.records} />
                     </div>
                 </div>
-                {/* end DataTables Example */}
             </div>
         );
     }
-}
+});
 
 export default MainContent;

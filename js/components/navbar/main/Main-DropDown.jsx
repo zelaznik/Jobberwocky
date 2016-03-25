@@ -1,5 +1,5 @@
 import React from 'react';
-import DropDownMixin from './mixins/Mixin-DropDown.jsx';
+import CurrentObjectMixin from '../../_mixins/Mixin-CurrentObject.jsx';
 
 class DropDownItem extends React.Component {
     render() {
@@ -14,7 +14,7 @@ class DropDownItem extends React.Component {
 }
 
 var NavMainDropDown = React.createClass({
-    mixins: [DropDownMixin],
+    mixins: [CurrentObjectMixin],
 
     render: function() {
         return (

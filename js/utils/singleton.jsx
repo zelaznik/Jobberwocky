@@ -21,12 +21,12 @@ function singleton() {
     var instance;
     return class Singleton {
         constructor() {
-            if (instance) {
-                throw new Error(`Cannot create multiple instances of ${this.constructor.name}.`);
-            } else {
-                instance = this;
-            }
+            if (instance)
+                throw new Error(`Cannot create multiple instances of ${instance.constructor.name}.`);
+            super(...arguments);
+            instance = this;
         }
+
         static instance() {
             return instance;
         }
