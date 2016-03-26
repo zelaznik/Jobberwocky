@@ -19,7 +19,7 @@ var NavMainDropDown = React.createClass({
     render: function() {
         return (
             <li className={`dropdown ${ this._clsOpen() }` }>
-                <a className={ this._clsCurrent() } data-toggle="dropdown" href="#">
+                <a data-toggle="dropdown" href="#">
                     <span aria-hidden='true' className={this.props.icon} />
                     {this.props.label}
                     <b className="caret" />

@@ -1,6 +1,6 @@
 import React from 'react';
 import CurrentObjectMixin from '../../_mixins/Mixin-CurrentObject.jsx';
-import RenderTop from '../_mixins/Mixin-RenderTop.jsx';
+import RenderTop from '../_shared/Mixin-RenderTop.jsx';
 
 var Message = React.createClass({
     render() {

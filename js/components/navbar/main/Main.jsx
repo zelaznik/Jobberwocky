@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router';
+import NavLink from '../_shared/NavLink.jsx';
 import MainDropDown from './Main-DropDown.jsx';
 
 var NavItem = React.createClass({
     render() {
         return (
             <li>
-                <Link to={this.props.href}>
+                <NavLink to={this.props.href}>
                     <span aria-hidden="true" className={`icon ${this.props.icon}`} />
                     <span>{this.props.label}</span>
-                </Link>
+                </NavLink>
             </li>
         );
     }
