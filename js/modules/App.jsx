@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NavBar from './components/navbar/NavBar.jsx';
-import MainContent from './components/MainContent.jsx';
-import UniversalStore from './stores/UniversalStore.jsx';
-import routes from './routes.jsx';
+import NavBar from './../components/navbar/NavBar.jsx';
+import MainContent from './../components/MainContent.jsx';
+import UniversalStore from './../stores/UniversalStore.jsx';
+import routes from './../routes.jsx';
 
-var App = React.createClass({
+const App = React.createClass({
     getInitialState() {
         return UniversalStore.data();
     },
@@ -14,7 +14,7 @@ var App = React.createClass({
       return (
           <div className="modal-shiftfix">
              <NavBar routes={routes} />
-             <MainContent table={this.state.table} />
+              {this.props.children}
           </div>
       );
    },
@@ -30,12 +30,6 @@ var App = React.createClass({
     _onChange() {
         this.setState( this.getInitialState() );
     }
-
 });
 
-
-document.addEventListener("DOMContentLoaded", () => {
-   var body = document.getElementsByTagName('body')[0];
-   var main = document.getElementById('main');
-   ReactDOM.render(<App />, main);
-});
+export default App;

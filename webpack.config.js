@@ -1,9 +1,10 @@
 module.exports = {
     context: __dirname,
-    entry: "./js/app.jsx",
+    entry: "./js/index.jsx",
     output: {
         path: "./js",
-        filename: "bundle.js"
+        filename: "bundle.js",
+        publicPath: '/'
     },
     devtool: 'source-map',
     resolve: {
