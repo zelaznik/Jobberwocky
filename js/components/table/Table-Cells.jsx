@@ -1,5 +1,5 @@
 import React from 'react';
-import TableStore from '../../stores/UniversalStore.jsx';
+import TableStore from '../../stores/GlobalStore.jsx';
 import TableActions from '../../actions/TableActions.jsx';
 
 var Cell = React.createClass({

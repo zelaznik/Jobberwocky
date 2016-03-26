@@ -1,8 +1,8 @@
-import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 
-const CHANGE_EVENT = 'change';
+import AppDispatcher from '../dispatcher/appDispatcher.jsx';
+import { CHANGE_EVENT } from '../constants/EventConstants.jsx';
 import deepCopy from '../utils/deepCopy.jsx';
 
 var _navBarData = {

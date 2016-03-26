@@ -1,4 +1,4 @@
-import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
+import AppDispatcher from '../dispatcher/appDispatcher.jsx';
 import TableConstants from '../constants/TableConstants.jsx';
     
 const TableActions = Object.freeze({
