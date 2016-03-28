@@ -7,7 +7,7 @@ import deepCopy from '../utils/deepCopy';
 import getValues from '../utils/getValues';
 import { Sequence, SequenceProxy } from '../utils/sequence.js';
 
-const CHANGE_EVENT = 'change';
+import { CHANGE_EVENT } from '../constants/EventConstants.jsx';
 
 var _fields = [
     'id', 'first','last','email','date','status'

@@ -85,7 +85,7 @@ var Table = React.createClass({
                 </div>
             </div>
         );
-    }
+    },
 
 });
 
