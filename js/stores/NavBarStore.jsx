@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 
-import AppDispatcher from '../dispatcher/appDispatcher.jsx';
+import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import { CHANGE_EVENT } from '../constants/EventConstants.jsx';
 import deepCopy from '../utils/deepCopy.jsx';
 

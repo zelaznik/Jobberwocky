@@ -2,13 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3bd7597-c668-4987-bdd4-3c8e596a058e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/components/navbar/_shared/NavLink.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/js/components/navbar/_mixins/Mixin-RenderTop.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/_shared/Mixin-RenderTop.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/actions/RouteActions.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/constants/ApiEndpoints.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/constants/PayloadConstants.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/web-api/WebApi.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/components/navbar/main/Main-DropDown.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/main/Main-DropDown.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/actions/SessionActions.jsx" afterPath="$PROJECT_DIR$/js/actions/SessionActions.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/actions/TableActions.jsx" afterPath="$PROJECT_DIR$/js/actions/TableActions.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/components/authentication/Login.jsx" afterPath="$PROJECT_DIR$/js/components/authentication/Login.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/components/navbar/main/Main.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/main/Main.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/components/navbar/top/Top-DropDown-Messages.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/top/Top-DropDown-Messages.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/components/navbar/top/Top-DropDown-Notifications.jsx" afterPath="$PROJECT_DIR$/js/components/navbar/top/Top-DropDown-Notifications.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/constants/SessionConstants.jsx" afterPath="$PROJECT_DIR$/js/constants/SessionConstants.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/dispatcher/appDispatcher.jsx" afterPath="$PROJECT_DIR$/js/dispatcher/appDispatcher.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/index.jsx" afterPath="$PROJECT_DIR$/js/index.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/routes.jsx" afterPath="$PROJECT_DIR$/js/routes.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/stores/NavBarStore.jsx" afterPath="$PROJECT_DIR$/js/stores/NavBarStore.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/stores/SessionStore.jsx" afterPath="$PROJECT_DIR$/js/stores/SessionStore.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/stores/TableStore.jsx" afterPath="$PROJECT_DIR$/js/stores/TableStore.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/stores/_BaseStore.jsx" afterPath="$PROJECT_DIR$/js/stores/_BaseStore.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="Jobberwocky.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,58 +40,78 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Errors.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/components/Errors.jsx">
+      <file leaf-file-name="WebApi.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/web-api/WebApi.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+            <state relative-caret-position="315">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding>
+                <element signature="e#37#94#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionConstants.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/constants/SessionConstants.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NavBar.jsx" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/components/navbar/NavBar.jsx">
+      <file leaf-file-name="SessionActions.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/actions/SessionActions.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+            <state relative-caret-position="225">
+              <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+              <folding>
+                <element signature="e#0#60#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApiEndpoints.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/constants/ApiEndpoints.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/components/navbar/main/Main.jsx">
+      <file leaf-file-name="AppDispatcher.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/dispatcher/AppDispatcher.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="49" column="14" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
+            <state relative-caret-position="0">
+              <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionStore.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/stores/SessionStore.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#0#60#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main-DropDown.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/components/navbar/main/Main-DropDown.jsx">
+      <file leaf-file-name="NavBarStore.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/stores/NavBarStore.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="27" column="46" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Mixin-CurrentObject.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/components/_mixins/Mixin-CurrentObject.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
-              <folding>
-                <element signature="e#0#33#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="441">
+              <caret line="42" column="28" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="28" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -93,19 +124,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/js/utils/deepCopy.jsx" />
-        <option value="$PROJECT_DIR$/js/components/navbar/_mixins/Mixin-RenderTop.jsx" />
-        <option value="$PROJECT_DIR$/js/store/TableStore.jsx" />
-        <option value="$PROJECT_DIR$/js/utils/getValues.jsx" />
-        <option value="$PROJECT_DIR$/js/components/table/_mixins/Mixin-RowEdit.jsx" />
-        <option value="$PROJECT_DIR$/js/components/_mixins/Mixin-DropDown.jsx" />
-        <option value="$PROJECT_DIR$/js/components/_mixins/Mixin-CurrentObject.jsx" />
-        <option value="$PROJECT_DIR$/js/components/navbar/top/Top-DropDown-AccountSettings.jsx" />
-        <option value="$PROJECT_DIR$/js/components/navbar/top/Top-DropDown-Notifications.jsx" />
-        <option value="$PROJECT_DIR$/js/components/navbar/top/Top-DropDown-Messages.jsx" />
-        <option value="$PROJECT_DIR$/js/stores/appStore.jsx" />
         <option value="$PROJECT_DIR$/js/stores/MasterStore.jsx" />
-        <option value="$PROJECT_DIR$/js/stores/UniversalStore.jsx" />
         <option value="$PROJECT_DIR$/js/stores/_mixins/ChangeListenerMixin.jsx" />
         <option value="$PROJECT_DIR$/js/utils/singleton.jsx" />
         <option value="$PROJECT_DIR$/js/utils/deepEquals.jsx" />
@@ -115,14 +134,11 @@
         <option value="$PROJECT_DIR$/js/app.jsx" />
         <option value="$PROJECT_DIR$/js/utils/sequence.jsx" />
         <option value="$PROJECT_DIR$/js/utils/sequence.js" />
-        <option value="$PROJECT_DIR$/js/components/table/Table-Cells.jsx" />
         <option value="$PROJECT_DIR$/js/components/table/Table-Row.jsx" />
-        <option value="$PROJECT_DIR$/js/components/table/Table.jsx" />
         <option value="$PROJECT_DIR$/js/components/table/Table-Rows.jsx" />
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/index.jsx" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/js/routes.jsx" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/js/components/navbar/top/Top.jsx" />
@@ -132,18 +148,33 @@
         <option value="$PROJECT_DIR$/js/constants/EventConstants.jsx" />
         <option value="$PROJECT_DIR$/js/stores/GlobalStore.jsx" />
         <option value="$PROJECT_DIR$/js/actions/TableActions.jsx" />
-        <option value="$PROJECT_DIR$/js/stores/TableStore.jsx" />
-        <option value="$PROJECT_DIR$/js/dispatcher/appDispatcher.jsx" />
         <option value="$PROJECT_DIR$/js/actions/GlobalActions.jsx" />
         <option value="$PROJECT_DIR$/js/stores/NavBarStore.jsx" />
         <option value="$PROJECT_DIR$/assets/css/style.sass" />
-        <option value="$PROJECT_DIR$/js/index.jsx" />
-        <option value="$PROJECT_DIR$/js/components/MainContent.jsx" />
         <option value="$PROJECT_DIR$/js/components/Errors.jsx" />
         <option value="$PROJECT_DIR$/js/modules/App.jsx" />
-        <option value="$PROJECT_DIR$/js/components/navbar/main/Main.jsx" />
         <option value="$PROJECT_DIR$/js/components/navbar/_shared/NavLink.jsx" />
         <option value="$PROJECT_DIR$/js/components/navbar/main/Main-DropDown.jsx" />
+        <option value="$PROJECT_DIR$/js/components/navbar/main/Main.jsx" />
+        <option value="$PROJECT_DIR$/js/routes.jsx" />
+        <option value="$PROJECT_DIR$/js/stores/_BaseStore.jsx" />
+        <option value="$PROJECT_DIR$/js/components/table/Table-Cells.jsx" />
+        <option value="$PROJECT_DIR$/js/components/table/Table.jsx" />
+        <option value="$PROJECT_DIR$/js/stores/UniversalStore.jsx" />
+        <option value="$PROJECT_DIR$/js/components/MainContent.jsx" />
+        <option value="$PROJECT_DIR$/js/index.jsx" />
+        <option value="$PROJECT_DIR$/js/constants/SessionConstants.jsx" />
+        <option value="$PROJECT_DIR$/js/constants/AuthConstants.jsx" />
+        <option value="$PROJECT_DIR$/js/constants/PayloadConstants.jsx" />
+        <option value="$PROJECT_DIR$/js/dispatcher/appDispatcher.jsx" />
+        <option value="$PROJECT_DIR$/js/dispatcher/AppDispatcher.jsx" />
+        <option value="$PROJECT_DIR$/js/components/authentication/Login.jsx" />
+        <option value="$PROJECT_DIR$/js/web-api/blah" />
+        <option value="$PROJECT_DIR$/js/constants/ApiEndpoints.jsx" />
+        <option value="$PROJECT_DIR$/js/stores/TableStore.jsx" />
+        <option value="$PROJECT_DIR$/js/stores/SessionStore.jsx" />
+        <option value="$PROJECT_DIR$/js/actions/SessionActions.jsx" />
+        <option value="$PROJECT_DIR$/js/web-api/WebApi.jsx" />
       </list>
     </option>
   </component>
@@ -155,10 +186,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="662" />
-    <option name="y" value="399" />
-    <option name="width" value="1742" />
-    <option name="height" value="675" />
+    <option name="x" value="928" />
+    <option name="y" value="128" />
+    <option name="width" value="1284" />
+    <option name="height" value="960" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -231,7 +262,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
+              <option name="myItemId" value="web-api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Jobberwocky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Jobberwocky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stores" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -252,10 +301,6 @@
               <option name="myItemId" value="components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="navbar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -271,62 +316,18 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="navbar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Jobberwocky" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Jobberwocky" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_mixins" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Jobberwocky" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Jobberwocky" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
+              <option name="myItemId" value="actions" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../es6_singleton" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../small-frontend" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
@@ -399,6 +400,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="f3bd7597-c668-4987-bdd4-3c8e596a058e" name="Default" comment="" />
@@ -420,34 +424,50 @@
       <workItem from="1458968315369" duration="3645000" />
       <workItem from="1458972797647" duration="2928000" />
       <workItem from="1458976038342" duration="380000" />
+      <workItem from="1458977302047" duration="603000" />
+      <workItem from="1459011751881" duration="824000" />
+      <workItem from="1459085985715" duration="662000" />
+      <workItem from="1459117869065" duration="29000" />
+      <workItem from="1459119978161" duration="17290000" />
+      <workItem from="1459203339531" duration="1066000" />
+      <workItem from="1459353515057" duration="635000" />
+      <workItem from="1459372508298" duration="7511000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99588000" />
+    <option name="totallyTimeSpent" value="128208000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="662" y="399" width="1742" height="675" extended-state="0" />
+    <frame x="928" y="128" width="1284" height="960" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25028703" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21339564" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20643431" sideWeight="0.510241" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18742986" sideWeight="0.510241" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24945135" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.48975903" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2684729" sideWeight="0.48975903" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -459,34 +479,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="14" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/components/App.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/Item.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/Top-DropDown.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/constants/navBarConstants.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/constants/ApplicationConstants.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/constants/CompanyConstants.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/components/table/_mixins/Mixin-RowEdit.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/_shared/Mixin-RenderTop.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/stores/MasterStore.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/stores/_mixins/ChangeListenerMixin.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/utils/getValues.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="18" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/utils/deepEquals.jsx" />
     <entry file="file://$PROJECT_DIR$/js/utils/deepCopy.jsx">
       <provider selected="true" editor-type-id="text-editor">
@@ -530,13 +527,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/table/Table-Cells.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/bundle.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -551,48 +541,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/table/Table.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="959">
-          <caret line="78" column="22" selection-start-line="78" selection-start-column="22" selection-end-line="78" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/components/navbar/top/Top-DropDown-Notifications.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="329">
           <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/top/Top-DropDown-AccountSettings.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/top/Top-DropDown-Messages.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/routes.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/top/Top.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -604,14 +556,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/bundle.js.map">
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
@@ -621,10 +572,141 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/constants/GlobalConstants.jsx" />
+    <entry file="file://$PROJECT_DIR$/js/stores/GlobalStore.jsx" />
+    <entry file="file://$PROJECT_DIR$/js/components/_examples/BootstrapModalExample.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/actions/GlobalActions.jsx" />
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/main/Main.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/NavBar.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/_mixins/Mixin-CurrentObject.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/top/Top.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/top/Top-DropDown-Messages.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/top/Top-DropDown-AccountSettings.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/Errors.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="52" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/style.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1558">
+          <caret line="4055" column="15" selection-start-line="4055" selection-start-column="15" selection-end-line="4055" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/main/Main-DropDown.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/routes.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="44" column="22" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/stores/_BaseStore.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/modules/App.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/stores/UniversalStore.jsx" />
+    <entry file="file://$PROJECT_DIR$/js/components/table/Table.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-564">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/MainContent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/table/Table-Cells.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/constants/TableConstants.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="30" />
+        <state relative-caret-position="30">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -635,150 +717,128 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/constants/GlobalConstants.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/actions/TableActions.jsx">
+    <entry file="file://$PROJECT_DIR$/js/components/navbar/_shared/NavLink.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
-          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#60#0" expanded="false" />
-          </folding>
+          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/stores/GlobalStore.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/dispatcher/appDispatcher.jsx">
+    <entry file="file://$PROJECT_DIR$/js/web-api/blah">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="30">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/stores/TableStore.jsx">
+    <entry file="file://$PROJECT_DIR$/js/constants/PayloadConstants.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state relative-caret-position="75">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/components/authentication/Login.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-309">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
-            <element signature="e#0#60#0" expanded="false" />
+            <element signature="e#0#26#0" expanded="true" />
+            <marker date="1459141866000" expanded="true" signature="2082:2113" placeholder="..." />
+            <marker date="1459141866000" expanded="true" signature="2580:3397" placeholder="..." />
+            <marker date="1459141866000" expanded="true" signature="2658:3378" placeholder="..." />
+            <marker date="1459141866000" expanded="true" signature="2691:2811" placeholder="..." />
+            <marker date="1459141866000" expanded="true" signature="2908:3093" placeholder="..." />
+            <marker date="1459141866000" expanded="true" signature="3136:3355" placeholder="..." />
+            <marker date="1459141866000" expanded="true" signature="3248:3330" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/stores/NavBarStore.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="441">
+          <caret line="42" column="28" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/_examples/BootstrapModalExample.jsx">
+    <entry file="file://$PROJECT_DIR$/js/stores/TableStore.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/actions/TableActions.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/actions/GlobalActions.jsx" />
-    <entry file="file://$PROJECT_DIR$/js/components/MainContent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="37" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/modules/App.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/_shared/NavLink.jsx">
+    <entry file="file://$PROJECT_DIR$/js/actions/RouteActions.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/index.jsx">
+    <entry file="file://$PROJECT_DIR$/js/constants/SessionConstants.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/css/style.sass">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="287" column="11" selection-start-line="287" selection-start-column="11" selection-end-line="287" selection-end-column="11" />
+        <state relative-caret-position="120">
+          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/main/Main.jsx">
+    <entry file="file://$PROJECT_DIR$/js/constants/ApiEndpoints.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="49" column="14" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/main/Main-DropDown.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="27" column="46" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/_mixins/Mixin-CurrentObject.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/Errors.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+        <state relative-caret-position="90">
+          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/components/navbar/NavBar.jsx">
+    <entry file="file://$PROJECT_DIR$/js/dispatcher/AppDispatcher.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+        <state relative-caret-position="0">
+          <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/stores/SessionStore.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/actions/SessionActions.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/web-api/WebApi.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="e#37#94#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

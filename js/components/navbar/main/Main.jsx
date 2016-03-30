@@ -24,18 +24,17 @@ function DropDown(params, block) {
 
 var NavBarMain = React.createClass({
     _renderDropDown(row, key) {
-        return (<MainDropDown key={key} href={row.href} icon={row.icon} label={row.label} items={row.items}/>);
+        return (<MainDropDown key={key} {...row} />);
     },
 
     _renderMain(row, key) {
-        return (<NavItem key={key} href={row.href} icon={row.icon} label={row.label}/>);
+        return (<NavItem key={key} {...row} />);
     },
 
     _renderRoutes() {
         var r = {
             dropdown: (params, block) => new DropDown(params, block)
         };
-
 
         var withDropDowns = this.props.routes(r);
         return withDropDowns.map((row, key) => {
