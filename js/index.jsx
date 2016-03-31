@@ -42,7 +42,7 @@ var router = (
             <Route path="/gallery" component={Gallery} />
         </Route>
         <Route path="/login" component={Login} />
-        <Route path="*" component={ Error404 } />
+        <Route path="*" component={ Error404 } status="404" />
     </Router>
 );
 

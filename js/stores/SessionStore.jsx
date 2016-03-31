@@ -5,8 +5,6 @@ import assign from 'object-assign';
 
 import { CHANGE_EVENT } from '../constants/EventConstants.jsx';
 
-// Load an access token from the session storage, you might want to implement
-// a 'remember me' using localSgorage
 var _authToken = sessionStorage.getItem('authToken'),
     _email = sessionStorage.getItem('email'),
     _errors=[];
@@ -61,9 +59,14 @@ AppDispatcher.register((payload) => {
             }
             break;
 
-        case SessionConstants.SEND_LOGOUT:
-            clearSession();
-            SessionStore.emitChange();
+        case SessionConstants.RECEIVE_LOGOUT:
+            console.log(payload);
+            if (payload.error === null) {
+                clearSession();
+                SessionStore.emitChange();
+            } else {
+                console.log(payload.error);
+            }
             break;
     }
 });

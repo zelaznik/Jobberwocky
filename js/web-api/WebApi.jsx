@@ -1,36 +1,28 @@
 import ApiEndpoints from '../constants/ApiEndpoints.jsx';
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
+
 import SessionConstants from '../constants/SessionConstants.jsx';
+import SessionActions from '../actions/SessionActions.jsx';
 import SessionStore from '../stores/SessionStore.jsx';
 var request = require('superagent');
 
 function sign_in(params) {
     request
-    .post(ApiEndpoints.SIGN_IN)
-    .set('Accept', 'application/vnd.marketplace.v1')
-    .set('Content-Type',  'application/json')
-    .send({session: params})
-    .end(function(error, response) {
-        AppDispatcher.dispatch({
-            actionType: SessionConstants.RECEIVE_LOGIN,
-            response: response, error: error
-        });
-    });
+        .post(ApiEndpoints.SIGN_IN)
+        .set('Accept', 'application/vnd.marketplace.v1')
+        .set('Content-Type',  'application/json')
+        .send({session: params})
+        .end(SessionActions.response_create);
 }
 
 function sign_out() {
     request
-        .delete(ApiEndpoints.SIGN_IN)
+        .del(ApiEndpoints.SIGN_OUT)
         .set('Accept', 'application/vnd.marketplace.v1')
         .set('Content-Type',  'application/json')
         .set('Authorization', SessionStore.token())
         .send({id: SessionStore.token()})
-        .end(function(error, response) {
-            AppDispatcher.dispatch({
-                actionType: SessionConstants.RECEIVE_LOGOUT,
-                response: response, error: error
-            });
-        });
+        .end((e,r) => SessionActions.response_destroy(e,r));
 }
 
 AppDispatcher.register( (payload) => {

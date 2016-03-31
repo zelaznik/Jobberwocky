@@ -85,11 +85,11 @@ var Login = React.createClass({
         if ( !SessionStore.loggedIn() )
             return;
 
-        const { location } = this.props;
+        const { location, history } = this.props;
         if (location.state && location.state.nextPathname) {
-            this.props.history.push(location.state.nextPathname);
+            history.push(location.state.nextPathname);
         } else {
-            this.props.history.push('/');
+            history.push('/');
         }
     },
 

@@ -13,9 +13,27 @@ class LogFile extends singleton() {
 }
 */
 
-function singleton() {
+function singletonWithParent(Parent) {
+    var instance;
+    return class Singleton extends Parent {
+        constructor() {
+            if (instance)
+                throw new Error(`Cannot create multiple instances of ${instance.constructor.name}.`);
+            super(...arguments);
+            instance = this;
+        }
+        static instance() {
+            return instance;
+        }
+    };
+}
+
+function singleton(Parent = null) {
     if (this instanceof singleton) {
         throw new TypeError(`cannot call singleton as a constructor function.`);
+    }
+    if (Parent) {
+        return singletonWithParent(Parent);
     }
 
     var instance;
