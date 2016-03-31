@@ -33,6 +33,10 @@ var SessionStore = assign({}, EventEmitter.prototype, {
         };
     },
 
+    token() {
+        return sessionStorage.getItem('authToken');
+    },
+
     loggedIn() {
         return _authToken ? true: false;
     },

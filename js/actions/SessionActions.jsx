@@ -10,10 +10,10 @@ const SessionActions = Object.freeze({
             params: params
         });
     },
-    destroy(params) {
+    destroy() {
+        WebApi.sign_out();
         AppDispatcher.dispatch({
-            actionType: SessionConstants.SEND_LOGOUT,
-            params: params
+            actionType: SessionConstants.SEND_LOGOUT
         });
     }
 });
