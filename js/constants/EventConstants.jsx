@@ -1,3 +1,3 @@
 const CHANGE_EVENT = 'change';
-
-export { CHANGE_EVENT };
+const LOGOUT = 'logout';
+export { CHANGE_EVENT , LOGOUT };

@@ -3,7 +3,7 @@ import SessionConstants from '../constants/SessionConstants.jsx';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 
-import { CHANGE_EVENT } from '../constants/EventConstants.jsx';
+import { CHANGE_EVENT, LOGOUT } from '../constants/EventConstants.jsx';
 
 var _authToken = sessionStorage.getItem('authToken'),
     _email = sessionStorage.getItem('email'),
@@ -60,9 +60,9 @@ AppDispatcher.register((payload) => {
             break;
 
         case SessionConstants.RECEIVE_LOGOUT:
-            console.log(payload);
             if (payload.error === null) {
                 clearSession();
+                SessionStore.emit(LOGOUT);
                 SessionStore.emitChange();
             } else {
                 console.log(payload.error);

@@ -1,4 +1,4 @@
-const ApiRoot = 'http://api.marketplaceapi.dev';
+const ApiRoot = 'http://api.jobberwocky.dev';
 
 const ApiEndpoints = Object.freeze({
     SIGN_IN:   `${ApiRoot}/users/sign_in`,
