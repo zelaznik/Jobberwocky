@@ -5,24 +5,41 @@ import SessionConstants from '../constants/SessionConstants.jsx';
 import SessionActions from '../actions/SessionActions.jsx';
 import SessionStore from '../stores/SessionStore.jsx';
 var request = require('superagent');
+var $ = require('jquery');
 
-function sign_in(params) {
-    request
-        .post(ApiEndpoints.SIGN_IN)
-        .set('Accept', 'application/vnd.marketplace.v1')
-        .set('Content-Type',  'application/json')
-        .send({session: params})
-        .end(SessionActions.response_create);
+var headers = ()=>({
+    'Accept': 'application/vnd.marketplace.v1',
+    'Content-Type': 'application/json',
+    'Authorization': SessionStore.token()
+});
+
+function req(url, data, callback) {
+    $.ajax({
+        url: url,
+        type: this,
+        headers: headers(),
+        crossDomain: true,
+        data: JSON.stringify(data),
+        success(response) {
+            callback(null, response)
+        },
+        error(error) {
+            callback(error, null)
+        }
+    });
 }
 
+var GET = req.bind('GET'),
+    POST = req.bind('POST'),
+    PUT = req.bind('PUT'),
+    PATCH = req.bind('PATCH'),
+    DELETE = req.bind('DELETE');
+
+function sign_in(params) {
+    POST(ApiEndpoints.SIGN_IN, {session: params}, SessionActions.response_create);
+}
 function sign_out() {
-    request
-        .del(ApiEndpoints.SIGN_OUT)
-        .set('Accept', 'application/vnd.marketplace.v1')
-        .set('Content-Type',  'application/json')
-        .set('Authorization', SessionStore.token())
-        .send({id: SessionStore.token()})
-        .end((e,r) => SessionActions.response_destroy(e,r));
+    DELETE(ApiEndpoints.SIGN_OUT, {id: SessionStore.token()}, SessionActions.response_destroy);
 }
 
 AppDispatcher.register( (payload) => {

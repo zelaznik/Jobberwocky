@@ -4,7 +4,6 @@ import SessionConstants from '../constants/SessionConstants.jsx';
 
 const SessionActions = Object.freeze({
     create(params) {
-        WebApi.sign_in(params);
         AppDispatcher.dispatch({
             actionType: SessionConstants.SEND_LOGIN,
             params: params

@@ -7,14 +7,15 @@ import { CHANGE_EVENT, LOGOUT } from '../constants/EventConstants.jsx';
 
 var _authToken = sessionStorage.getItem('authToken'),
     _email = sessionStorage.getItem('email'),
-    _errors=[];
+    _errors=[],
+    _id = null;
 
 function setSession(params) {
-    _authToken = params.auth_token;
-    sessionStorage.setItem('authToken', _authToken);
-
-    _email = params.email;
-    sessionStorage.setItem('email', _email);
+    var u = params.response.user;
+    sessionStorage.setItem('authToken', u.auth_token);
+    sessionStorage.setItem('email', u.email);
+    sessionStorage.setItem('userId', u.id);
+    [ _authToken, _email , _id ] = [u.auth_token, u.email, u.id ];
 }
 
 function clearSession(params) {
@@ -54,7 +55,7 @@ AppDispatcher.register((payload) => {
     switch(payload.actionType) {
         case SessionConstants.RECEIVE_LOGIN:
             if (payload.error === null) {
-                setSession(payload.response.body);
+                setSession(payload);
                 SessionStore.emitChange();
             }
             break;
