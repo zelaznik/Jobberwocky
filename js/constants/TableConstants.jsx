@@ -1,6 +1,6 @@
-import keyMirror from 'keymirror';
+import uniqueKeySet from '../utils/uniqueKeySet.jsx';
 
-const TableConstants = keyMirror({
+const TableConstants = uniqueKeySet({
     NEW:     null,
     CREATE:  null,
     UPDATE:  null,

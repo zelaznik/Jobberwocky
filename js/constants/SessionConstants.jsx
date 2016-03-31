@@ -1,6 +1,6 @@
-import keyMirror from 'keymirror';
+import uniqueKeySet from '../utils/uniqueKeySet.jsx';
 
-const SessionConstants = keyMirror({
+const SessionConstants = uniqueKeySet({
     SEND_LOGIN:  null,
     RECEIVE_LOGIN: null,
     
