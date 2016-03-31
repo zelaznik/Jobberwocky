@@ -1,4 +1,4 @@
-const routes = (r) => ([
+var routes = (r) => ([
 
     {href: 'dashboard', icon: 'se7en-home', label: 'Dashboard'},
     {href: 'social', icon: 'se7en-feed', label: 'Social Feed'},
@@ -29,8 +29,8 @@ const routes = (r) => ([
         {href: 'chat', label: 'Chat'},
         {href: 'calendar', label: 'Calendar'},
         {href: 'timeline', label: 'Timeline'},
-        {href: 'login1', label: 'Login1'},
-        {href: 'login2', label: 'Login2'},
+        {href: 'login', label: 'Login1'},
+        {href: 'login', label: 'Login2'},
         {href: 'signup1', label: 'Sign Up 1'},
         {href: 'messages', label: 'Messages/Inbox'},
         {href: 'pricing', label: 'Pricing/Tables'},

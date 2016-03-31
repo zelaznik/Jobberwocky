@@ -1,6 +1,7 @@
 import React from 'react';
 import deepCopy from '../../utils/deepCopy.jsx';
 import SessionActions from '../../actions/SessionActions.jsx';
+import SessionStore from '../../stores/SessionStore.jsx';
 
 var WithPassword = React.createClass({
     getInitialState() {
@@ -72,10 +73,24 @@ var Login = React.createClass({
 
     componentDidMount() {
         document.body.classList.add('login1');
+        SessionStore.addChangeListener(this.toOriginalPage);
     },
 
     componentWillUnmount() {
         document.body.classList.remove('login1');
+        SessionStore.removeChangeListener(this.toOriginalPage);
+    },
+
+    toOriginalPage() {
+        if ( !SessionStore.loggedIn() )
+            return;
+
+        const { location } = this.props;
+        if (location.state && location.state.nextPathname) {
+            this.props.history.push(location.state.nextPathname);
+        } else {
+            this.props.history.push('/');
+        }
     },
 
     render() {
