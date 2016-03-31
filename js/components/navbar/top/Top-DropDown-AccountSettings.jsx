@@ -22,7 +22,9 @@ var AccountSettingsDropDown = React.createClass({
         return (
             <li className={`dropdown ${this._clsOpen()} user hidden-xs`}>
                 <a data-toggle="dropdown" className="dropdown-toggle" href="#">
-                    <img width="34" height="34" src="assets/images/avatar-male.jpg" />John Smith<b className="caret" />
+                    <img width="34" height="34" src="assets/images/avatar-male.jpg" />
+                    {this.props.user.email}
+                    <b className="caret" />
                 </a>
                 <ul className="dropdown-menu">
                     <AccountSetting icon="user"     label="My Account" />

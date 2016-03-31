@@ -11,7 +11,7 @@ var NavBarTopRight = React.createClass({
                 <ul className="nav navbar-nav pull-right">
                     <NotificationsDropDown items={this.props.data.notifications} />
                     <NewMessagesDropDown items={this.props.data.messages} />
-                    <AccountSettingsDropDown />
+                    <AccountSettingsDropDown user={this.props.data.user} />
                 </ul>
             </div>
         );

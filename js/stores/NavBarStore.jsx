@@ -1,9 +1,9 @@
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 
-import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import { CHANGE_EVENT } from '../constants/EventConstants.jsx';
 import deepCopy from '../utils/deepCopy.jsx';
+import SessionStore from './SessionStore.jsx';
 
 var _navBarData = {
     notifications: [
@@ -22,7 +22,11 @@ var _navBarData = {
 
 var NavBarStore = assign({}, EventEmitter.prototype, {
     data() {
-        return deepCopy(_navBarData);
+        var data = deepCopy(_navBarData);
+        data.user = {
+            email: sessionStorage.getItem('email')
+        };
+        return data;
     },
 
     emitChange() {
@@ -39,15 +43,9 @@ var NavBarStore = assign({}, EventEmitter.prototype, {
 
 });
 
-AppDispatcher.register( (action) => {
-    switch(action.actionType) {
-        /*
-        case TableConstants.UPDATE:
-            update(action.id, action.params);
-            TableStore.emitChange();
-            break;
-        */
-    }
+SessionStore.addChangeListener( ()=> {
+    NavBarStore.emitChange()
 });
+
 
 export default NavBarStore;

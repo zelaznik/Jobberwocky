@@ -1,12 +1,21 @@
 import React from 'react';
 import NavBarTop from './top/Top.jsx';
 import NavBarMain from './main/Main.jsx';
-
 import NavBarStore from '../../stores/NavBarStore.jsx';
 
 var NavBar = React.createClass({
     getInitialState() {
-        return {data: NavBarStore.data()};
+        return {
+            data: NavBarStore.data()
+        };
+    },
+
+    componentDidMount() {
+        NavBarStore.addChangeListener(this.refresh);
+    },
+
+    componentWillUnmount() {
+        NavBarStore.removeChangeListener(this.refresh);
     },
 
     render() {
@@ -22,5 +31,7 @@ var NavBar = React.createClass({
         this.setState({data: NavBarStore.data()});
     }
 });
+
+
 
 export default NavBar;

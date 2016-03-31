@@ -13,7 +13,6 @@ const App = React.createClass({
         return (
             <div className="modal-shiftfix">
                 <NavBar routes={routes} />
-                <h1>Logged In:{` ${this.state.loggedIn}`}</h1>
                 {this.props.children}
             </div>
         );
@@ -25,7 +24,6 @@ const App = React.createClass({
         SessionStore.removeChangeListener(this.getNewSession);
     },
     getNewSession() {
-        alert("NEW SESSION DATA");
         this.setState({session: SessionStore.data() });
     }
 });
