@@ -50,12 +50,24 @@ var SessionStore = assign({}, EventEmitter.prototype, {
     }
 });
 
+function sendErrorAlerts(payload) {
+    var p = {
+        display: true,
+        status: payload.error.status,
+        statusText: payload.error.statusText,
+        responseText: payload.error.responseText
+    };
+    setTimeout(() => { AlertActions.danger(p) }, 0);
+}
+
 AppDispatcher.register((payload) => {
     switch(payload.actionType) {
         case SessionConstants.RECEIVE_LOGIN:
             if (payload.error === null) {
                 setSession(payload);
                 SessionStore.emitChange();
+            } else {
+                sendErrorAlerts(payload);
             }
             break;
 
@@ -65,13 +77,7 @@ AppDispatcher.register((payload) => {
                 SessionStore.emit(LOGOUT);
                 SessionStore.emitChange();
             } else {
-                var p = {
-                    display: true,
-                    status: payload.error.status,
-                    statusText: payload.error.statusText,
-                    responseText: payload.error.responseText
-                };
-                setTimeout(() => { AlertActions.danger(p) }, 0);
+                sendErrorAlerts(payload);
             }
             break;
     }

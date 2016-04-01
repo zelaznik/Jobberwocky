@@ -9,7 +9,7 @@ import App from './modules/App.jsx';
 /* STANDALONE COMPONENTS */
 import MainContent from './components/MainContent.jsx';
 import { Error404 } from './components/Errors.jsx';
-import Login from './components/authentication/Login.jsx';
+import Login from './modules/Login.jsx';
 import AlertModal from './components/modals/AlertModal.jsx';
 
 /* UTILITIES */

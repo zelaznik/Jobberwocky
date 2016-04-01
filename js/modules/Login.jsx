@@ -1,7 +1,12 @@
 import React from 'react';
-import deepCopy from '../../utils/deepCopy.jsx';
-import SessionActions from '../../actions/SessionActions.jsx';
-import SessionStore from '../../stores/SessionStore.jsx';
+
+import SessionActions from '../actions/SessionActions.jsx';
+import SessionStore from '../stores/SessionStore.jsx';
+
+import AlertStore from '../stores/AlertStore.jsx';
+import AlertModal from '../components/modals/AlertModal.jsx';
+
+import deepCopy from '../utils/deepCopy.jsx';
 
 var WithPassword = React.createClass({
     getInitialState() {
@@ -68,17 +73,26 @@ var WithSocialMedia = React.createClass({
 
 var Login = React.createClass({
     getInitialState() {
-        return {active: false};
+        return {
+            active: false,
+            alerts: AlertStore.data()
+        };
     },
 
     componentDidMount() {
         document.body.classList.add('login1');
         SessionStore.addChangeListener(this.toOriginalPage);
+        AlertStore.addChangeListener(this.refresh);
     },
 
     componentWillUnmount() {
         document.body.classList.remove('login1');
         SessionStore.removeChangeListener(this.toOriginalPage);
+        AlertStore.removeChangeListener(this.refresh);
+    },
+
+    refresh() {
+        this.setState({ alerts: AlertStore.data() });
     },
 
     toOriginalPage() {
@@ -112,6 +126,7 @@ var Login = React.createClass({
                         </a>
                     </p>
                 </div>
+                <AlertModal alerts={this.state.alerts} />
             </div>
         );
     }
