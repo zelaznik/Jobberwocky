@@ -1,7 +1,7 @@
 var routes = (r) => ([
 
-    {href: 'dashboard', icon: 'se7en-home', label: 'Dashboard'},
-    {href: 'social', icon: 'se7en-feed', label: 'Social Feed'},
+    {href: 'programs', icon: 'se7en-home', label: 'Dashboard'},
+    {href: 'users', icon: 'se7en-feed', label: 'Social Feed'},
 
     r.dropdown({icon: 'se7en-star', label: 'UI Features'}, (r) => [
         {href: 'buttons',     label: 'Buttons'},

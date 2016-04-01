@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+var ReactDOM = require('react-dom');
 
 import TableActions from '../../actions/TableActions.jsx';
 import { Action, Cell } from './Table-Cells.jsx';

@@ -3,52 +3,43 @@ import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 
 import SessionConstants from '../constants/SessionConstants.jsx';
 import SessionActions from '../actions/SessionActions.jsx';
-import SessionStore from '../stores/SessionStore.jsx';
 
-var $ = require('jquery');
+/* Includes the session tokens and CORS headers.
+This wrapper is also backbone.js locally */
+import $ajaxWrapper from './ajaxWrapper';
 
-var headers = ()=>({
-    'Accept': 'application/vnd.marketplace.v1',
-    'Content-Type': 'application/json',
-    'Authorization': SessionStore.token()
-});
-
-var req = (method, url, data, callback) => ((
-    $.ajax({
-        type: method,
+function apiRequest(method, url, data, callback) {
+    $ajaxWrapper({
         url: url,
-        headers: headers(),
-        crossDomain: true,
+        type: method,
         data: JSON.stringify(data),
-        success(response) { callback(null, response); },
-        error(error, status) { callback(error, null); }
-    })
-));
-
-var GET = req.bind(null, 'GET'),
-    POST = req.bind(null, 'POST'),
-    PUT = req.bind(null, 'PUT'),
-    PATCH = req.bind(null, 'PATCH'),
-    DELETE = req.bind(null, 'DELETE');
-
-function sign_in(params) {
-    POST(ApiEndpoints.SIGN_IN, {session: params}, SessionActions.response_create);
+        success(response) {
+            callback(null, response);
+        },
+        error(error, status) {
+            callback(error, null);
+        }
+    });
 }
-function sign_out() {
-    DELETE(ApiEndpoints.SIGN_OUT, {id: SessionStore.token()}, SessionActions.response_destroy);
-}
+
+var GET =    apiRequest.bind(null, 'GET'),
+    POST =   apiRequest.bind(null, 'POST'),
+    PUT =    apiRequest.bind(null, 'PUT'),
+    PATCH =  apiRequest.bind(null, 'PATCH'),
+    DELETE = apiRequest.bind(null, 'DELETE');
+
 
 AppDispatcher.register( (payload) => {
+    var params = payload.params;
     switch (payload.actionType) {
         case SessionConstants.SEND_LOGIN:
-            sign_in(payload.params);
+            POST(ApiEndpoints.SIGN_IN, {session: params}, SessionActions.response_create);
             break;
 
         case SessionConstants.SEND_LOGOUT:
-            sign_out(payload.params);
+            DELETE(ApiEndpoints.SIGN_OUT, {}, SessionActions.response_destroy);
             break;
     }
 });
 
-const WebApi = { sign_in , sign_out };
-export default WebApi;
+export default { GET, POST, PUT, PATCH, DELETE };

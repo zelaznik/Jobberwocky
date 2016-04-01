@@ -28,8 +28,8 @@ var router = (
     <Router history={ browserHistory } >
         <Route path="/" component={ App } onEnter={ requireAuth }>
             <IndexRoute component={Home} />
-            <Route path="/dashboard" component={ MainContent } />
-            <Route path="/social" component={Social} />
+            <Route path="/programs" component={ MainContent } />
+            <Route path="/users" component={Social} />
             <Route path="/charts" component={Charts} />
             <Route path="/gallery" component={Gallery} />
         </Route>

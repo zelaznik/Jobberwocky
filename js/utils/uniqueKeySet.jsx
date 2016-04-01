@@ -8,7 +8,7 @@ var getID = (function() {
 
 function define(obj, key, val, prefix) {
     prefix = prefix ? `${prefix}.` : '';
-    var withId = `${prefix}${val}.${getID()}`;
+    var withId = `${prefix}${val}:${getID()}`;
     Object.defineProperty(obj, key, {
         get: function() { return withId; },
         iterable: true

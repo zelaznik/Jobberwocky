@@ -79,6 +79,10 @@ var Login = React.createClass({
         };
     },
 
+    refresh() {
+        this.setState( this.getInitialState() );
+    },
+
     componentDidMount() {
         document.body.classList.add('login1');
         SessionStore.addChangeListener(this.toOriginalPage);
@@ -89,10 +93,6 @@ var Login = React.createClass({
         document.body.classList.remove('login1');
         SessionStore.removeChangeListener(this.toOriginalPage);
         AlertStore.removeChangeListener(this.refresh);
-    },
-
-    refresh() {
-        this.setState({ alerts: AlertStore.data() });
     },
 
     toOriginalPage() {
@@ -126,7 +126,11 @@ var Login = React.createClass({
                         </a>
                     </p>
                 </div>
-                <AlertModal alerts={this.state.alerts} />
+
+                <AlertModal alerts={this.state.alerts}
+                            onMouseDown={this.mouseDownHandler}
+                />
+
             </div>
         );
     }
