@@ -1,36 +1,25 @@
+/* REACT AND NODE LIBRARIES */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
+/* APPS AND MODULES */
 import App from './modules/App.jsx';
+
+/* ACTIONS */
+import AlertActions from './actions/AlertActions.jsx';
+
+/* STANDALONE COMPONENTS */
 import MainContent from './components/MainContent.jsx';
 import { Error404 } from './components/Errors.jsx';
 import Login from './components/authentication/Login.jsx';
+import AlertModal from './components/modals/AlertModal.jsx';
 
-import SessionStore from './stores/SessionStore.jsx';
+/* UTILITIES */
+import requireAuth from './utils/requireAuth.jsx';
 
-class PlaceHolder extends React.Component {
-    render() { return (<h1><center>{this.constructor.name}</center></h1>); }
-}
-class Home extends PlaceHolder {}
-class Social extends PlaceHolder {}
-class Charts extends PlaceHolder {}
-class Gallery extends PlaceHolder {}
-
-const requireAuth = (nextState, replace, callback) => {
-    if ( !SessionStore.loggedIn() ) {
-        replace({
-            pathname: '/login',
-            state: {nextPathname: nextState.location.pathname}
-        });
-    }
-
-    if (callback)
-        callback();
-};
-
-window.browserHistory = browserHistory;
-window.SessionStore = SessionStore;
+/* DEVELOPMENT TOOLS */
+import {Home, Social, Charts, Gallery } from './_development/PlaceHolders.jsx';
 
 var router = (
     <Router history={ browserHistory } >

@@ -4,28 +4,24 @@ import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
 import SessionActions from '../actions/SessionActions.jsx';
 import SessionStore from '../stores/SessionStore.jsx';
-var request = require('superagent');
+
 var $ = require('jquery');
 
 var headers = ()=>({
     'Accept': 'application/vnd.marketplace.v1',
     'Content-Type': 'application/json',
-    'Authorization': SessionStore.token()
+    'Authorization': null
 });
 
 function req(url, data, callback) {
     $.ajax({
-        url: url,
         type: this,
+        url: url,
         headers: headers(),
         crossDomain: true,
         data: JSON.stringify(data),
-        success(response) {
-            callback(null, response)
-        },
-        error(error) {
-            callback(error, null)
-        }
+        success(response) { callback(null, response); },
+        error(error, status) { callback(error, null); }
     });
 }
 

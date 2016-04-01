@@ -1,5 +1,6 @@
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
+import AlertActions from '../actions/AlertActions.jsx';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 
@@ -35,11 +36,9 @@ var SessionStore = assign({}, EventEmitter.prototype, {
     token() {
         return sessionStorage.getItem('authToken');
     },
-
     loggedIn() {
         return _authToken ? true: false;
     },
-
     emitChange() {
         this.emit(CHANGE_EVENT);
     },
@@ -66,7 +65,12 @@ AppDispatcher.register((payload) => {
                 SessionStore.emit(LOGOUT);
                 SessionStore.emitChange();
             } else {
-                console.log(payload.error);
+                var p = {
+                    display: true, status: payload.error.status,
+                    statusText: payload.error.statusText,
+                    responseText: payload.error.responseText
+                };
+                setTimeout(() => { AlertActions.danger(p) }, 0);
             }
             break;
     }

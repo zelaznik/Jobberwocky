@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-class Error404 extends React.Component {
+var Error404 = React.createClass({
     render() {
         return (
             <div className="fourofour-container">
@@ -13,15 +13,15 @@ class Error404 extends React.Component {
                 </Link>
             </div>
         );
-    }
+    },
 
     componentDidMount() {
         document.body.classList.add('fourofour');
-    }
+    },
 
     componentWillUnmount() {
         document.body.classList.remove('fourofour');
     }
-}
+});
 
 export { Error404 }

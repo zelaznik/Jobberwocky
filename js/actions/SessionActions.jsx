@@ -1,4 +1,3 @@
-import WebApi from '../web-api/WebApi.jsx';
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
 
@@ -18,19 +17,16 @@ const SessionActions = Object.freeze({
     },
 
     destroy() {
-        WebApi.sign_out();
         AppDispatcher.dispatch({
             actionType: SessionConstants.SEND_LOGOUT
         });
     },
 
     response_destroy(error, response) {
-        if (error === null && response !== null) {
-            AppDispatcher.dispatch({
-                actionType: SessionConstants.RECEIVE_LOGOUT,
-                response: response, error: error
-            });
-        }
+        AppDispatcher.dispatch({
+            actionType: SessionConstants.RECEIVE_LOGOUT,
+            response: response, error: error
+        });
     }
 
 });
