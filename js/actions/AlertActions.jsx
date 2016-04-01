@@ -40,7 +40,14 @@ const AlertActions = Object.freeze({
         AppDispatcher.dispatch({
             actionType: AlertConstants.HIDE
         });
+    },
+
+    clear() {
+        AppDispatcher.dispatch({
+            actionType: AlertConstants.CLEAR
+        });
     }
+
 });
 
 export default AlertActions;

@@ -10,26 +10,26 @@ var $ = require('jquery');
 var headers = ()=>({
     'Accept': 'application/vnd.marketplace.v1',
     'Content-Type': 'application/json',
-    'Authorization': null
+    'Authorization': SessionStore.token()
 });
 
-function req(url, data, callback) {
+var req = (method, url, data, callback) => ((
     $.ajax({
-        type: this,
+        type: method,
         url: url,
         headers: headers(),
         crossDomain: true,
         data: JSON.stringify(data),
         success(response) { callback(null, response); },
         error(error, status) { callback(error, null); }
-    });
-}
+    })
+));
 
-var GET = req.bind('GET'),
-    POST = req.bind('POST'),
-    PUT = req.bind('PUT'),
-    PATCH = req.bind('PATCH'),
-    DELETE = req.bind('DELETE');
+var GET = req.bind(null, 'GET'),
+    POST = req.bind(null, 'POST'),
+    PUT = req.bind(null, 'PUT'),
+    PATCH = req.bind(null, 'PATCH'),
+    DELETE = req.bind(null, 'DELETE');
 
 function sign_in(params) {
     POST(ApiEndpoints.SIGN_IN, {session: params}, SessionActions.response_create);

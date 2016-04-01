@@ -66,7 +66,8 @@ AppDispatcher.register((payload) => {
                 SessionStore.emitChange();
             } else {
                 var p = {
-                    display: true, status: payload.error.status,
+                    display: true,
+                    status: payload.error.status,
                     statusText: payload.error.statusText,
                     responseText: payload.error.responseText
                 };

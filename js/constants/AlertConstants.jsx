@@ -7,7 +7,8 @@ const AlertConstants = uniqueKeySet({
     DANGER: null,
 
     DISPLAY: null,
-    HIDE: null
+    HIDE: null,
+    CLEAR: null
 });
 
 export default AlertConstants;

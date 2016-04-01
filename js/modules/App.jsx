@@ -11,14 +11,11 @@ import AlertModal from '../components/modals/AlertModal.jsx';
 
 const App = React.createClass({
     getInitialState() {
-        var state = {
+        return {
             loggedIn: SessionStore.loggedIn(),
             session: SessionStore.data(),
             alerts: AlertStore.data()
         };
-        console.log("App-State(displayStatus) = " + state.alerts.displayStatus + ".");
-        console.log(state);
-        return state;
     },
     render() {
         return (

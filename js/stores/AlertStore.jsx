@@ -8,19 +8,14 @@ import { CHANGE_EVENT, DISPLAY, HIDE } from '../constants/EventConstants.jsx';
 
 import deepCopy from '../utils/deepCopy.jsx';
 
-var _alerts;
+var _alerts = [];
+
+function addAlert(category, content) {
+    _alerts.push({category: category, content: content });
+}
 
 function clearAlerts() {
-    _alerts = {
-        info: [],
-        warning: [],
-        success: [],
-        danger: []
-    };
-}
-clearAlerts();
-function addAlert(category, message) {
-    _alerts[category].push(message);
+    _alerts = [];
 }
 
 var _displayStatus = false;
@@ -54,10 +49,12 @@ var AlertStore = assign({}, EventEmitter.prototype, {
 });
 
 AppDispatcher.register((payload) => {
-    var { actionType, params } = payload;
+    var actionType = payload.actionType,
+        params = payload.params;
+
     switch (actionType) {
         case AlertConstants.DANGER:
-            addAlert('danger', payload);
+            addAlert('danger', params);
             if (params.display) {
                 reveal();
             }
@@ -73,7 +70,14 @@ AppDispatcher.register((payload) => {
             hide();
             AlertStore.emitChange();
             break;
-        }
+
+        case AlertConstants.CLEAR:
+            clearAlerts();
+            hide();
+            AlertStore.emitChange();
+            break;
+    }
 });
 
+window.AlertStore = AlertStore;
 export default AlertStore;

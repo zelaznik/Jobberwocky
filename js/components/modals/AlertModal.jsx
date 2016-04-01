@@ -1,26 +1,23 @@
-var React = require('react');
+import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import assign from 'object-assign';
-
-import { DISPLAY, HIDE } from '../../constants/EventConstants.jsx';
-import AlertStore from '../../stores/AlertStore.jsx';
 import AlertActions from '../../actions/AlertActions.jsx';
 
 var AlertModal = React.createClass({
     close() {
-        AlertActions.hide();
+        AlertActions.clear();
     },
 
     open() {
         AlertActions.display();
     },
 
-    updateState(args) {
-        this.setState(assign({}, this.state, args));
-    },
-
-    refresh() {
-        this.setState(this.getInitialState());
+    _renderedMessages() {
+        return this.props.alerts.messages.map((msg, key) => (
+            <div key={key}>
+                <h3><strong>{msg.content.status}</strong>: {msg.content.statusText}</h3>
+                <p>{msg.content.responseText}</p>​
+            </div>
+        ));
     },
 
     render() {
@@ -31,8 +28,7 @@ var AlertModal = React.createClass({
                 </Modal.Header>
 
                 <Modal.Body>
-                    <h3><strong>422</strong>: Unprocessable Entity</h3>
-                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>​
+                    {this._renderedMessages()}
                 </Modal.Body>
 
                 <Modal.Footer>
