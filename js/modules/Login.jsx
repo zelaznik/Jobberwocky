@@ -127,9 +127,7 @@ var Login = React.createClass({
                     </p>
                 </div>
 
-                <AlertModal alerts={this.state.alerts}
-                            onMouseDown={this.mouseDownHandler}
-                />
+                <AlertModal alerts={this.state.alerts} />
 
             </div>
         );

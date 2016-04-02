@@ -9,7 +9,6 @@ import routes from '../routes.jsx';
 
 import AlertModal from '../components/modals/AlertModal.jsx';
 
-
 const App = React.createClass({
     getInitialState() {
         return {
@@ -34,15 +33,18 @@ const App = React.createClass({
         AlertStore.addChangeListener(this.getNewSession);
         SessionStore.on(LOGOUT, this.goToLogin);
     },
-    componentWillUnMount() {
-        document.addEventListener('click', this.pageClick);
+
+    componentWillUnmount() {
+        document.removeEventListener('click', this.pageClick);
         SessionStore.removeChangeListener(this.getNewSession);
         AlertStore.removeChangeListener(this.getNewSession);
         SessionStore.removeListener(LOGOUT, this.goToLogin);
     },
+
     getNewSession() {
         this.setState(assign({}, this.state, this.getInitialState()));
     },
+
     goToLogin() {
         var { history } = this.props;
         history.push('/login');
