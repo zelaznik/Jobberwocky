@@ -80,8 +80,7 @@ var AlertModal = React.createClass({
                 break;
 
             case KeyCodes.ENTER:
-                if (!this.intersectsWith(e))
-                    this.close();
+                this.close();
                 break;
         }
     }
