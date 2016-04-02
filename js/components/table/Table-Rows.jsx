@@ -48,7 +48,7 @@ var BaseRow = {
               this.state.pendingChanges
           )
         }
-        this.setState(  this.getInitialState  );
+        this.setState( this.getInitialState() );
     },
 
     update() {
