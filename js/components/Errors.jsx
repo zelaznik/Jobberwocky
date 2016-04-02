@@ -18,7 +18,6 @@ var Error404 = React.createClass({
     componentDidMount() {
         document.body.classList.add('fourofour');
     },
-
     componentWillUnmount() {
         document.body.classList.remove('fourofour');
     }

@@ -1,51 +1,57 @@
-import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
-import TableConstants from '../constants/TableConstants.jsx';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 
-import deepCopy from '../utils/deepCopy';
-import getValues from '../utils/getValues';
-import { Sequence, SequenceProxy } from '../utils/sequence.js';
+import TableActions from '../actions/TableActions.jsx';
+import ApiEndpoints from '../constants/ApiEndpoints.jsx';
+import TableConstants from '../constants/TableConstants.jsx';
+import AlertActions from '../actions/AlertActions.jsx';
+import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
+
 import { CHANGE_EVENT } from '../constants/EventConstants.jsx';
+import deepCopy from '../utils/deepCopy';
 
-var _fields = [
-    'id','title','price','published','user'
-];
+import Backbone from 'backbone';
 
+var _fields = ['id','title','price','published'];
 var _headers = {
-    id: 'Id', title: 'Title', price: 'Price', published: 'Published', user: 'User'
+    id: 'Id', title: 'Title', price: 'Price', published: 'Published'
 };
-
 var _immutable = {
     id: true
 };
 
-var _records = {
-    1: {id: 1, first: 'Robert', last: 'Kelso', email: 'robert@gmail.com', date: '8-15-2013', status: 'Approved'},
-    2: {id: 2, first: 'John', last: 'Dorian', email: 'john@gmail.com', date: '2-6-1984', status: 'Rejected'},
-    3: {id: 3, first: 'Steve', last: 'Zelaznik', email: 'zelaznik@yahoo.com', date: '1-1-2000', status: 'Hired'}
-};
+// var cb = { success: function(r) { console.log("SUCCESS"); console.log(r); }, error: function(e) { console.log("ERROR"); console.log(e); } };
 
-/* For assuring no primary keys collide.
-   Internal objects have a negative index.
-   Once the database returns its positive
-   index, the value can be updated.   */
-var seq = new Sequence(_records);
-for (let key in _records) {
-    seq.update(key)
-}
+var Model = Backbone.Model.extend({
+    url: ApiEndpoints.PRODUCTS,
+    parse(r) {
+        delete r.user;
+        return r;
+    }
+});
+
+var Collection = Backbone.Collection.extend({
+    url: ApiEndpoints.PRODUCTS,
+    model: Model,
+    parse: (r) => (r.products)
+});
+
+var collection = new Collection();
+window.collection = collection;
 
 function create(params) {
-    var id = seq.low;
-    _records[id] = assign({}, {id: id}, params);
+    collection.create(params);
 }
 
 function update(id, updates) {
-    _records[id] = assign({}, _records[id], updates);
+    var model = collection.get(id);
+    model.set(updates);
 }
 
 function destroy(id) {
-    delete _records[id];
+    var model = collection.get(id);
+    collection.remove([model]);
+    model.destroy();
 }
 
 function blank() {
@@ -59,7 +65,7 @@ var TableStore = assign({}, EventEmitter.prototype, {
             fields: deepCopy(_fields),
             headers: deepCopy(_headers),
             immutable: deepCopy(_immutable),
-            records: (getValues(deepCopy(_records)))
+            records: collection.toJSON()
         };
     },
 
@@ -80,25 +86,39 @@ var TableStore = assign({}, EventEmitter.prototype, {
     }
 });
 
-AppDispatcher.register( (action) => {
-    switch(action.actionType) {
+AppDispatcher.register( (payload) => {
+    switch(payload.actionType) {
+        case TableConstants.FETCH:
+            collection.fetch({
+                success: TableActions.fetch_success,
+                error: TableActions.fetch_error });
+            break;
+
+        case TableConstants.FETCH_SUCCESS:
+            TableStore.emitChange();
+            break;
+
+        case TableConstants.FETCH_ERROR:
+            AlertActions.sendDelayed(payload);
+            break;
+
         case TableConstants.NEW:
             blank();
             TableStore.emitChange();
             break;
 
         case TableConstants.CREATE:
-            create(action.params);
+            create(payload.params);
             TableStore.emitChange();
             break;
 
         case TableConstants.UPDATE:
-            update(action.id, action.params);
+            update(payload.id, payload.params);
             TableStore.emitChange();
             break;
 
         case TableConstants.DESTROY:
-            destroy(action.id);
+            destroy(payload.id);
             TableStore.emitChange();
             break;
     }

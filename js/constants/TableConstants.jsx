@@ -6,8 +6,9 @@ const TableConstants = uniqueKeySet({
     UPDATE:  null,
     DESTROY: null,
 
-    SEND_INDEX: null,
-    RECEIVE_INDEX: null
+    FETCH: null,
+    FETCH_SUCCESS: null,
+    FETCH_ERROR: null
 });
 
 export default TableConstants;

@@ -4,10 +4,13 @@ import TableActions from '../../actions/TableActions.jsx';
 
 var Cell = React.createClass({
     render() {
+        var view;
         if ( this.props.editMode && !this.props.immutable )
-            return this._editView();
+            view = this._editView();
         else
-            return this._standardView();
+            view = this._standardView();
+
+        return (view);
     },
 
     _editView() {

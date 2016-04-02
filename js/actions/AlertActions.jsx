@@ -30,6 +30,16 @@ const AlertActions = Object.freeze({
         });
     },
 
+    sendDelayed(payload, dt=0) {
+        var p = {
+            display: true,
+            status: payload.error.status,
+            statusText: payload.error.statusText,
+            responseText: payload.error.responseText
+        };
+        setTimeout(() => { AlertActions.danger(p) }, dt);
+    },
+
     display() {
         AppDispatcher.dispatch({
             actionType: AlertConstants.DISPLAY

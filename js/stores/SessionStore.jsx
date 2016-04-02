@@ -50,16 +50,6 @@ var SessionStore = assign({}, EventEmitter.prototype, {
     }
 });
 
-function sendErrorAlerts(payload) {
-    var p = {
-        display: true,
-        status: payload.error.status,
-        statusText: payload.error.statusText,
-        responseText: payload.error.responseText
-    };
-    setTimeout(() => { AlertActions.danger(p) }, 0);
-}
-
 AppDispatcher.register((payload) => {
     switch(payload.actionType) {
         case SessionConstants.RECEIVE_LOGIN:
@@ -67,7 +57,7 @@ AppDispatcher.register((payload) => {
                 setSession(payload);
                 SessionStore.emitChange();
             } else {
-                sendErrorAlerts(payload);
+                AlertActions.sendDelayed(payload);
             }
             break;
 

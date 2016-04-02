@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from './table/Table.jsx';
 import TableStore from '../stores/TableStore.jsx';
+import TableActions from '../actions/TableActions.jsx';
 
 var MainContent = React.createClass({
     getInitialState() {

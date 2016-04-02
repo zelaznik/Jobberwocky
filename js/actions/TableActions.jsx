@@ -1,11 +1,47 @@
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import TableConstants from '../constants/TableConstants.jsx';
-    
-const TableActions = Object.freeze({
+
+import ApiEndpoints from '../constants/ApiEndpoints.jsx';
+import { GET , POST, DELETE } from '../webApi/WebApi.jsx';
+
+import { Models, Collections } from '../webApi/BackboneApp.jsx';
+
+var cb = {
+    success: function() {
+        console.log("Success");
+        console.log(arguments);
+    },
+    error: function() {
+        console.log("Error");
+        console.log(arguments);
+    }
+};
+
+var TableActions = {
+    get() {
+        AppDispatcher.dispatch({
+            actionType: TableConstants.GET
+        })
+    },
+
     fetch() {
         AppDispatcher.dispatch({
-            actionType: TableConstants.SEND_INDEX
-        })
+            actionType: TableConstants.FETCH
+        });
+    },
+
+    fetch_success(response) {
+        AppDispatcher.dispatch({
+            actionType: TableConstants.FETCH_SUCCESS,
+            response: response, error: null
+        });
+    },
+
+    fetch_error(error) {
+        AppDispatcher.dispatch({
+            actionType: TableConstants.FETCH_ERROR,
+            response: null, error: error
+        });
     },
 
     new() {
@@ -33,6 +69,6 @@ const TableActions = Object.freeze({
             id: id
         });
     }
-});
+};
 
 export default TableActions;

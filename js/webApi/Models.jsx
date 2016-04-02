@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
 
-var Program = Backbone.Model.extend({
-    baseUrl: '/programs/'
+var Product = Backbone.Model.extend({
+    baseUrl: '/products/'
 });
 
 var User = Backbone.Model.extend({
@@ -9,6 +9,6 @@ var User = Backbone.Model.extend({
 });
 
 module.exports = {
-    Program: Program,
+    Product: Product,
     User: User
 };

@@ -3,25 +3,25 @@ import Backbone from 'backbone';
 import assign from 'object-assign';
 
 import SessionStore from '../stores/SessionStore.jsx';
-import { VERSION, ROOT_URL } from '../constants/ApiEndpoints.jsx';
+import ApiEndpoints from '../constants/ApiEndpoints.jsx';
 
 function corsHeaders() {
     return {
-        'Accept': VERSION,
+        'Accept': ApiEndpoints.VERSION,
         'Content-Type': 'application/json',
         'Authorization': SessionStore.token()
     };
 }
 
 function full_url(url, params) {
-    if (url && params.url) {
+    if (url && params.url)
         throw new Error("Duplicate URL arguments for AJAX call");
-    } else if (!url && !params.url) {
+    else if (!url && !params.url)
         throw new Error("Missing URL argument for AJAX call");
-    }
+
     url = url || params.url;
     if (url[0] === '/')
-        url = ROOT_URL + url;
+        url = ApiEndpoints.ROOT_URL + url;
 
     return url;
 }
@@ -29,7 +29,7 @@ function full_url(url, params) {
 function paramsWrapper(url_or_params, params_or_missing) {
     var url, params;
     if (!params_or_missing) {
-        params = url_or_params;
+        params = Object.assign({}, url_or_params);
     } else {
         url = url_or_params;
         params = Object.assign({}, params_or_missing);
@@ -39,15 +39,12 @@ function paramsWrapper(url_or_params, params_or_missing) {
     params.url = full_url(url, params);
     params.crossDomain = true;
 
-    console.log("PARAMS HELPER: ");
-    console.log(params);
     return params;
 }
 
 function ajaxWrapper(url_or_params, params_or_missing) {
     $.ajax(paramsWrapper(url_or_params, params_or_missing));
 }
-Backbone.ajax = ajaxWrapper;
 
 function apiRequest(method, url, data, callback) {
     ajaxWrapper({
@@ -57,7 +54,7 @@ function apiRequest(method, url, data, callback) {
         success(response) {
             callback(null, response);
         },
-        error(error, status) {
+        error(error) {
             callback(error, null);
         }
     });
