@@ -1,12 +1,12 @@
-const ApiRoot = 'http://api.jobberwocky.dev';
+var ApiRoot = 'http://api.jobberwocky.dev';
 
-const ApiEndpoints = Object.freeze({
-    VERSION:    'application/vnd.marketplace.v1',
+var ApiEndpoints = {};
 
-    SIGN_IN:   `${ApiRoot}/users/sign_in`,
-    SIGN_OUT:  `${ApiRoot}/users/sign_out`,
-    SIGN_UP:   `${ApiRoot}/users`
-});
+ApiEndpoints.ROOT_URL = ApiRoot;
+ApiEndpoints.VERSION = 'application/vnd.marketplace.v1';
+ApiEndpoints.SIGN_IN = `${ApiRoot}/users/sign_in`;
+ApiEndpoints.SIGN_OUT = `${ApiRoot}/users/sign_out`;
+ApiEndpoints.SIGN_UP = `${ApiRoot}/users`;
 
-export default ApiEndpoints;
+module.exports = ApiEndpoints;
 
