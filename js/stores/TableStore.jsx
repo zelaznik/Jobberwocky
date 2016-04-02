@@ -6,15 +6,14 @@ import assign from 'object-assign';
 import deepCopy from '../utils/deepCopy';
 import getValues from '../utils/getValues';
 import { Sequence, SequenceProxy } from '../utils/sequence.js';
-
 import { CHANGE_EVENT } from '../constants/EventConstants.jsx';
 
 var _fields = [
-    'id', 'first','last','email','date','status'
+    'id','title','price','published','user'
 ];
 
 var _headers = {
-    id: 'ID', first: 'First Name', last: 'Last Name', email: 'Email', date: 'Date Added', status: 'Status'
+    id: 'Id', title: 'Title', price: 'Price', published: 'Published', user: 'User'
 };
 
 var _immutable = {
