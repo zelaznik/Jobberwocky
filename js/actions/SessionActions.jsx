@@ -1,8 +1,11 @@
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
+import ApiEndpoints from '../constants/ApiEndpoints.jsx';
+import { POST, DELETE } from '../webApi/WebApi.jsx';
 
-const SessionActions = Object.freeze({
+var SessionActions = Object.freeze({
     create(params) {
+        POST(ApiEndpoints.SIGN_IN, {session: params}, this.response_create);
         AppDispatcher.dispatch({
             actionType: SessionConstants.SEND_LOGIN,
             params: params
@@ -17,6 +20,7 @@ const SessionActions = Object.freeze({
     },
 
     destroy() {
+        DELETE(ApiEndpoints.SIGN_OUT, {}, this.response_destroy);
         AppDispatcher.dispatch({
             actionType: SessionConstants.SEND_LOGOUT
         });
