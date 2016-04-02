@@ -7,7 +7,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import App from './modules/App.jsx';
 
 /* STANDALONE COMPONENTS */
-import MainContent from './components/MainContent.jsx';
+import MainContent from './components/Programs.jsx';
 import { Error404 } from './components/Errors.jsx';
 import Login from './modules/Login.jsx';
 import AlertModal from './components/modals/AlertModal.jsx';
@@ -15,11 +15,11 @@ import AlertModal from './components/modals/AlertModal.jsx';
 /* UTILITIES */
 import requireAuth from './utils/requireAuth.jsx';
 
-/* Turn on the API's */
+/* Turn on the API's Keepthem out of the namespace */
 (function() {
-    require('./web-api/WebApi.jsx');
+    require('./webApi/WebApi.jsx');
+    require('./webApi/BackboneApp.jsx');
 })();
-
 
 /* DEVELOPMENT TOOLS */
 import {Home, Social, Charts, Gallery } from './_development/PlaceHolders.jsx';
