@@ -1,6 +1,4 @@
 import React from 'react';
-import TableStore from '../../stores/TableStore.jsx';
-import TableActions from '../../actions/TableActions.jsx';
 
 var Cell = React.createClass({
     render() {

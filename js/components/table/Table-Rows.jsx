@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 
 import TableActions from '../../actions/TableActions.jsx';
 import { Action, Cell } from './Table-Cells.jsx';
-import KeyCodes from '../../constants/keycodes.jsx'
+import KeyCodes from '../../constants/keycodes.jsx';
 
 var BaseRow = {
     render() {
@@ -40,15 +40,6 @@ var BaseRow = {
             }
         }
         return false;
-    },
-
-    create() {
-        if (this.wasModified()) {
-          TableActions.create(
-              this.state.pendingChanges
-          )
-        }
-        this.setState( this.getInitialState() );
     },
 
     update() {
@@ -155,6 +146,14 @@ var NewRow = React.createClass({
             <Action key='0' label="Add" onClick={this.create} />,
             <Action key='1' label="Cancel" onClick={this.cancel} />
         ];
+    },
+
+    create() {
+        if (this.wasModified()) {
+            TableActions.create(
+                this.state.pendingChanges
+            )
+        }
     },
 
     cancel() {

@@ -1,57 +1,78 @@
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 
-import TableActions from '../actions/TableActions.jsx';
-import ApiEndpoints from '../constants/ApiEndpoints.jsx';
 import TableConstants from '../constants/TableConstants.jsx';
-import AlertActions from '../actions/AlertActions.jsx';
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 
 import { CHANGE_EVENT } from '../constants/EventConstants.jsx';
-import deepCopy from '../utils/deepCopy';
+import { Sequence } from '../utils/sequence';
 
-import Backbone from 'backbone';
+var Immutable = require('immutable');
+window.Immutable = Immutable;
 
-var _fields = ['id','title','price','published'];
-var _headers = {
-    id: 'Id', title: 'Title', price: 'Price', published: 'Published'
-};
-var _immutable = {
+var _fields = Immutable.List(
+    ['id','title','price','published']
+);
+
+var _headers = Immutable.Map({
+    id: 'Id', title: 'Title', price: 'Price', published: 'Published', user: 'User'
+});
+
+var _types = Immutable.Map({
+    id: 'key', title: 'string', price: 'money', published: 'boolean', user: 'object'
+});
+
+var _immutable = Immutable.Map({
     id: true
-};
-
-// var cb = { success: function(r) { console.log("SUCCESS"); console.log(r); }, error: function(e) { console.log("ERROR"); console.log(e); } };
-
-var Model = Backbone.Model.extend({
-    url: ApiEndpoints.PRODUCTS,
-    parse(r) {
-        delete r.user;
-        return r;
-    }
 });
 
-var Collection = Backbone.Collection.extend({
-    url: ApiEndpoints.PRODUCTS,
-    model: Model,
-    parse: (r) => (r.products)
-});
+var _records = Immutable.List([]);
+var _fetched_yet;
+var seq = new Sequence();
 
-var collection = new Collection();
-window.collection = collection;
+function assign_all(items) {
+    var obj = {};
+    items.forEach(function(item) {
+        obj[item.id] = item;
+    });
+    _records = Immutable.fromJS(obj);
+}
 
-function create(params) {
-    collection.create(params);
+function create(tempID, params) {
+    var data = _records.toJSON();
+    data[tempID] = assign({}, params, {id: tempID});
+    _records = Immutable.fromJS(data);
+}
+
+function create_success(tempID, response) {
+    var data = _records.toJSON(),
+        row = response.product;
+
+    delete data[tempID];
+    data[row.id] = row;
+    _records = Immutable.fromJS(data);
+}
+
+function create_error(tempID) {
+    var data = _records.toJSON();
+
+    delete data[tempID];
+    _records = Immutable.fromJS(data);
 }
 
 function update(id, updates) {
-    var model = collection.get(id);
-    model.set(updates);
+    var data = _records.toJSON();
+    var row = data[id];
+    for (var key in updates) {
+        row[key] = updates[key];
+    }
+    _records = Immutable.fromJS(data);
 }
 
 function destroy(id) {
-    var model = collection.get(id);
-    collection.remove([model]);
-    model.destroy();
+    var data = _records.toJSON();
+    delete data[id];
+    _records = Immutable.fromJS(data);
 }
 
 function blank() {
@@ -62,10 +83,11 @@ function blank() {
 var TableStore = assign({}, EventEmitter.prototype, {
     data: function() {
         return {
-            fields: deepCopy(_fields),
-            headers: deepCopy(_headers),
-            immutable: deepCopy(_immutable),
-            records: collection.toJSON()
+            fields: _fields.toArray(),
+            headers: _headers.toObject(),
+            immutable: _immutable.toObject(),
+            types: _types.toObject(),
+            records: _records.toSeq()
         };
     },
 
@@ -86,20 +108,14 @@ var TableStore = assign({}, EventEmitter.prototype, {
     }
 });
 
+window.TableStore = TableStore;
+
 AppDispatcher.register( (payload) => {
     switch(payload.actionType) {
-        case TableConstants.FETCH:
-            collection.fetch({
-                success: TableActions.fetch_success,
-                error: TableActions.fetch_error });
-            break;
-
         case TableConstants.FETCH_SUCCESS:
+            assign_all(payload.response.products);
+            _fetched_yet = true;
             TableStore.emitChange();
-            break;
-
-        case TableConstants.FETCH_ERROR:
-            AlertActions.sendDelayed(payload);
             break;
 
         case TableConstants.NEW:
@@ -108,7 +124,17 @@ AppDispatcher.register( (payload) => {
             break;
 
         case TableConstants.CREATE:
-            create(payload.params);
+            create(payload.tempID, payload.params);
+            TableStore.emitChange();
+            break;
+
+        case TableConstants.CREATE_SUCCESS:
+            create_success(payload.tempID, payload.response);
+            TableStore.emitChange();
+            break;
+
+        case TableConstants.CREATE_ERROR:
+            create_error(payload.tempID);
             TableStore.emitChange();
             break;
 

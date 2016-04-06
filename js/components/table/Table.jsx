@@ -31,6 +31,10 @@ var Table = React.createClass({
         return {newMode: false}
     },
 
+    componentWillMount() {
+        TableActions.fetch();
+    },
+
     showNewRow() {
         this.setState({newMode: true});
     },
@@ -61,10 +65,11 @@ var Table = React.createClass({
         return (
             <tbody>
                 { this.optionalNewRecord() }
-                {this.props.records.map((row, key) => (
-                    <Row values={row} key={row.id}
-                         fields={this.props.fields}
-                         immutable={this.props.immutable}
+                {this.props.records.map((mapper, key) => (
+                    <Row key={ key }
+                         values={ mapper.toJSON() }
+                         fields={ this.props.fields }
+                         immutable={ this.props.immutable }
                     />
                 ))}
             </tbody>
@@ -101,7 +106,7 @@ var Table = React.createClass({
                 </div>
             </div>
         );
-    },
+    }
 
 });
 
