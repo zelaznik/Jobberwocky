@@ -41,7 +41,6 @@ function singleton(Parent = null) {
         constructor() {
             if (instance)
                 throw new Error(`Cannot create multiple instances of ${instance.constructor.name}.`);
-            super(...arguments);
             instance = this;
         }
 
