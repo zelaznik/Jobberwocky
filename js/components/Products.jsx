@@ -1,7 +1,6 @@
 import React from 'react';
 import Table from './table/Table.jsx';
 import TableStore from '../stores/TableStore.jsx';
-import TableActions from '../actions/TableActions.jsx';
 
 var MainContent = React.createClass({
     getInitialState() {
@@ -10,10 +9,8 @@ var MainContent = React.createClass({
     render() {
         return (
             <div className="container-fluid main-content">
-                <div className="page-title text-align-center">
-                    <h1 text-align="center">
-                        Programs
-                    </h1>
+                <div className="page-title text-center">
+                    <h1>Products</h1>
                 </div>
 
                 <div className="row">

@@ -7,7 +7,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import App from './modules/App.jsx';
 
 /* STANDALONE COMPONENTS */
-import MainContent from './components/Programs.jsx';
+import MainContent from './components/Products.jsx';
 import { Error404 } from './components/Errors.jsx';
 import Login from './modules/Login.jsx';
 import AlertModal from './components/modals/AlertModal.jsx';
@@ -27,7 +27,7 @@ var router = (
     <Router history={ browserHistory } >
         <Route path="/" component={ App } onEnter={ requireAuth }>
             <IndexRoute component={Home} />
-            <Route path="/programs" component={ MainContent } />
+            <Route path="/products" component={ MainContent } />
             <Route path="/users" component={Social} />
             <Route path="/charts" component={Charts} />
             <Route path="/gallery" component={Gallery} />
