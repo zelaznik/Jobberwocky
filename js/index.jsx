@@ -15,10 +15,9 @@ import AlertModal from './components/modals/AlertModal.jsx';
 /* UTILITIES */
 import requireAuth from './utils/requireAuth.jsx';
 
-/* Turn on the API's Keepthem out of the namespace */
+/* Turn on the API's. Keep them out of the namespace */
 (function() {
     require('./webApi/WebApi.jsx');
-    require('./webApi/BackboneApp.jsx');
 })();
 
 /* DEVELOPMENT TOOLS */

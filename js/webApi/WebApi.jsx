@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import Backbone from 'backbone';
 import assign from 'object-assign';
 
 import SessionStore from '../stores/SessionStore.jsx';
@@ -65,9 +64,6 @@ var GET = (url, data, cb) => (apiRequest('GET', url, data, cb)),
     PUT = (url, data, cb) => (apiRequest('PUT', url, data, cb)),
     PATCH = (url, data, cb) => (apiRequest('PATCH', url, data, cb)),
     DELETE = (url, data, cb) => (apiRequest('DELETE', url, data, cb));
-
-window.apiRequest = apiRequest;
-window.ajaxWrapper = ajaxWrapper;
 
 export { GET , POST , PUT , PATCH , DELETE };
 
