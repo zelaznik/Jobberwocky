@@ -1,8 +1,9 @@
 import React from 'react';
 import Table from './table/Table.jsx';
 import TableStore from '../stores/TableStore.jsx';
+import ProductActions from '../actions/ProductActions.jsx';
 
-var MainContent = React.createClass({
+var Products = React.createClass({
     getInitialState() {
         return {table: TableStore.data()};
     },
@@ -15,7 +16,9 @@ var MainContent = React.createClass({
 
                 <div className="row">
                     <div className="col-lg-12">
-                        <Table {...this.state.table} />
+                        <Table actions={ProductActions}
+                               store={TableStore}
+                               {...this.state.table} />
                     </div>
                 </div>
             </div>
@@ -33,4 +36,4 @@ var MainContent = React.createClass({
 });
 
 
-export default MainContent;
+export default Products;

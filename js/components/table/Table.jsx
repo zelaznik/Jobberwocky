@@ -1,20 +1,6 @@
 import React from 'react';
-
-import TableActions from '../../actions/TableActions.jsx';
-import TableStore from '../../stores/TableStore.jsx';
-
 import { Header } from './Table-Cells.jsx';
 import { Row, NewRow } from './Table-Rows.jsx';
-
-var AjaxCall = React.createClass({
-    render() {
-        return (
-            <a className="btn btn-sm btn-primary-outline pull-right" id="ajax-call" onClick={ this.props.onClick } >
-                <i className="fa fa-plus" />AJAX Call
-            </a>
-        );
-    }
-});
 
 var AddRow = React.createClass({
     render() {
@@ -28,11 +14,11 @@ var AddRow = React.createClass({
 
 var Table = React.createClass({
     getInitialState() {
-        return {newMode: false}
+        return { newMode: false}
     },
 
     componentWillMount() {
-        TableActions.fetch();
+        this.props.actions.fetch();
     },
 
     showNewRow() {
@@ -44,7 +30,7 @@ var Table = React.createClass({
     },
 
     createRow() {
-        TableActions.create()
+        this.props.actions.create()
     },
 
     head() {
@@ -70,6 +56,7 @@ var Table = React.createClass({
                          values={ mapper.toJSON() }
                          fields={ this.props.fields }
                          immutable={ this.props.immutable }
+                         actions={this.props.actions}
                     />
                 ))}
             </tbody>
@@ -78,11 +65,14 @@ var Table = React.createClass({
 
     optionalNewRecord() {
         if (this.state.newMode) {
-            var key = TableStore.tempID();
-            return <NewRow key={key} values={{}}
+            var key = this.props.store.tempID();
+            return <NewRow key={key}
+                           tempID={key}
+                           values={{}}
                            fields={this.props.fields}
                            immutable = { this.props.immutable}
                            cancelFcn = { this.hideNewRow }
+                           actions = { this.props.actions }
                     />
         }
     },
@@ -92,11 +82,10 @@ var Table = React.createClass({
             <div className="widget-container fluid-height clearfix">
                 <div className="heading">
                     <i className="fa fa-table" />DataTable with Sorting
-                    <AddRow   key='0' onClick={ this.showNewRow } />
-                    <AjaxCall key='1' onClick={TableActions.fetch}
-                                    style={{'margin-right': '20px'}}
+                    <AddRow   key='0'
+                              onClick={ this.showNewRow }
+                              actions={ this.props.actions }
                     />
-
                 </div>
                 <div className="widget-content padded clearfix">
                     <table className="table table-bordered table-striped" id="datatable-editable">
@@ -107,7 +96,6 @@ var Table = React.createClass({
             </div>
         );
     }
-
 });
 
 export default Table;

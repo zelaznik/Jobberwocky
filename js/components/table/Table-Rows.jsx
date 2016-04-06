@@ -1,7 +1,6 @@
 import React from 'react';
 var ReactDOM = require('react-dom');
 
-import TableActions from '../../actions/TableActions.jsx';
 import { Action, Cell } from './Table-Cells.jsx';
 import KeyCodes from '../../constants/keycodes.jsx';
 
@@ -44,7 +43,7 @@ var BaseRow = {
 
     update() {
         if (this.wasModified()) {
-            TableActions.update(
+            this.props.actions.update(
                 this.props.values.id,
                 this.state.pendingChanges
             );
@@ -57,7 +56,7 @@ var BaseRow = {
     },
 
     destroy() {
-        TableActions.destroy(
+        this.props.actions.destroy(
             this.props.values.id
         );
         this.setState( this.getInitialState() );
@@ -150,7 +149,8 @@ var NewRow = React.createClass({
 
     create() {
         if (this.wasModified()) {
-            TableActions.create(
+            this.props.actions.create(
+                this.props.tempID,
                 this.state.pendingChanges
             )
         }

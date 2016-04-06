@@ -21,14 +21,14 @@ import requireAuth from './utils/requireAuth.jsx';
 })();
 
 /* DEVELOPMENT TOOLS */
-import {Home, Social, Charts, Gallery } from './_development/PlaceHolders.jsx';
+import {Home, Users, Charts, Gallery } from './_development/PlaceHolders.jsx';
 
 var router = (
     <Router history={ browserHistory } >
         <Route path="/" component={ App } onEnter={ requireAuth }>
             <IndexRoute component={Home} />
             <Route path="/products" component={ MainContent } />
-            <Route path="/users" component={Social} />
+            <Route path="/users" component={Users} />
             <Route path="/charts" component={Charts} />
             <Route path="/gallery" component={Gallery} />
         </Route>
