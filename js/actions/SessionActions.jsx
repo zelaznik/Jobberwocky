@@ -5,19 +5,19 @@ import { POST, DELETE } from '../webApi/WebApi.jsx';
 
 var SessionActions = Object.freeze({
     create(params) {
-        POST(ApiEndpoints.SIGN_IN, {session: params}, this.response_create);
+        POST(ApiEndpoints.SIGN_IN, {session: params}, (error, response) => {
+            AppDispatcher.dispatch({
+                actionType: SessionConstants.RECEIVE_LOGIN,
+                response: response, error: error
+            });
+        });
         AppDispatcher.dispatch({
             actionType: SessionConstants.SEND_LOGIN,
             params: params
         });
     },
 
-    response_create(error, response) {
-        AppDispatcher.dispatch({
-            actionType: SessionConstants.RECEIVE_LOGIN,
-            response: response, error: error
-        });
-    },
+
 
     destroy() {
         DELETE(ApiEndpoints.SIGN_OUT, {}, this.response_destroy);
