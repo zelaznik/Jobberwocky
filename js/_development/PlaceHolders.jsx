@@ -5,8 +5,8 @@ class PlaceHolder extends React.Component {
 }
 
 class Home extends PlaceHolder {}
-class Social extends PlaceHolder {}
+class Users extends PlaceHolder {}
 class Charts extends PlaceHolder {}
 class Gallery extends PlaceHolder {}
 
-export { PlaceHolder, Home, Social, Charts, Gallery };
+export { PlaceHolder, Home, Users, Charts, Gallery };
