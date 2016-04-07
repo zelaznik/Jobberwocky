@@ -1,4 +1,4 @@
-var ApiRoot = 'http://jobberwocky-rails-api.herokuapp.com';
+var ApiRoot = 'http://api.jobberwocky.net';
 import SessionStore from '../stores/SessionStore.jsx';
 
 var ApiEndpoints = {};
@@ -21,8 +21,12 @@ function productsUrl(id) {
 }
 
 ApiEndpoints.PRODUCTS = Object.freeze({
-    CREATE: userProductsUrl, UPDATE: userProductsUrl, DESTROY: userProductsUrl,
-    SHOW: productsUrl, INDEX: productsUrl,
+    CREATE: userProductsUrl,
+    UPDATE: userProductsUrl,
+    DESTROY: userProductsUrl,
+
+    SHOW: productsUrl,
+    INDEX: productsUrl
 });
 
 module.exports = ApiEndpoints;
