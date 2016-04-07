@@ -8,8 +8,6 @@ import { POST, DELETE } from '../webApi/WebApi.jsx';
 
 var SessionActions = Object.freeze({
     create(params) {
-        console.log("SessionActions::create");
-        console.log(params);
         AppDispatcher.dispatch({
             actionType: SessionConstants.SIGN_IN,
             params: params

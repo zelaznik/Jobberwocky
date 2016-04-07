@@ -25,7 +25,6 @@ class TableActions {
     }
 
     create(tempID, params) {
-        console.log(`TableActions::create(tempID=${tempID})`);
         AppDispatcher.dispatch({
             actionType: this.constants.CREATE,
             params: params, tempID: tempID
