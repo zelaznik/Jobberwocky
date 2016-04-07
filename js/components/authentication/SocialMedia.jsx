@@ -1,11 +1,11 @@
 import React from 'react';
 import StringFormat from '../../utils/StringFormat.jsx';
 
-var SocialMedia = React.createClass({
+var SocialMedium = React.createClass({
     render() {
         var align = this.props.align.toLowerCase(),
             source = this.props.source.toLowerCase(),
-            label = StringFormat.snake_to_label(source);
+            label = StringFormat.capitalize(source);
 
         return (
             <a className={`btn btn-primary ${align} ${source}`} href="index.html">
@@ -13,6 +13,18 @@ var SocialMedia = React.createClass({
                 <span>{label} Login</span>
             </a>
         )
+    }
+});
+
+var SocialMedia = React.createClass({
+    render() {
+        return (
+            <div className="social-login clearfix">
+                <SocialMedium align={'left'} source={'Facebook'} />
+                {"   "}
+                <SocialMedium align={'right'} source={'Twitter'} />
+            </div>
+        );
     }
 });
 

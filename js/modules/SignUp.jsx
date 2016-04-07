@@ -1,6 +1,8 @@
 import React from 'react';
 
+import SessionActions from '../actions/SessionActions.jsx';
 import AlertModal from '../components/modals/AlertModal.jsx';
+
 import Credentials from '../components/authentication/Credentials.jsx';
 import SocialMedia from '../components/authentication/SocialMedia.jsx';
 import AuthHandler from '../components/authentication/AuthHandler.jsx';
@@ -21,7 +23,7 @@ var SignUpWithPassword = React.createClass({
 
     onSubmit(e) {
         e.preventDefault();
-        UserActions.create({
+        SessionActions.new_user({
             email: this.state.email,
             password: this.state.password,
             password_confirmation: this.state.password_confirmation
@@ -40,10 +42,7 @@ var SignUp = React.createClass({
                         <img width="100" height="30" src="/assets/images/logo-login@2x.png" />
                     </a>
                     <SignUpWithPassword />
-                    <div className="social-login clearfix">
-                        <SocialMedia align={'left'} source={'Facebook'} />
-                        <SocialMedia align={'right'} source={'Twitter'} />
-                    </div>
+                    <SocialMedia />
                     <p className="signup">
                         <span>Already have an account?</span>
                         <span>{"  "}</span>
