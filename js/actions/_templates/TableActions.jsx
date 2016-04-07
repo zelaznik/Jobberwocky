@@ -75,8 +75,11 @@ class TableActions {
         }
 
         DELETE(`${this.baseUrl}/${id}`, {}, (err, response) => {
-            if (err)
+            if (err) {
+                console.warn("Error destroying database record.");
+                console.log(err);
                 AlertActions.sendDelayed({error: err});
+            }
             if (response)
                 AppDispatcher.dispatch({
                     actionType: this.constants.DESTROY_SUCCESS,
