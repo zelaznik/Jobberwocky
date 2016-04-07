@@ -1,6 +1,6 @@
 import uniqueKeySet from '../utils/uniqueKeySet.jsx';
 
-const TableConstants = uniqueKeySet({
+const TableConstants = uniqueKeySet('Products', {
     NEW: null,
     EDIT: null,
 

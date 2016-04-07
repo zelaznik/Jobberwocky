@@ -10,7 +10,6 @@ import App from './modules/App.jsx';
 import MainContent from './components/Products.jsx';
 import { Error404 } from './components/Errors.jsx';
 import Login from './modules/Login.jsx';
-import AlertModal from './components/modals/AlertModal.jsx';
 
 /* UTILITIES */
 import requireAuth from './utils/requireAuth.jsx';
@@ -18,6 +17,7 @@ import requireAuth from './utils/requireAuth.jsx';
 /* Turn on the API's. Keep them out of the namespace */
 (function() {
     require('./webApi/WebApi.jsx');
+    require('./_development/AddVariablesToWindow.jsx');
 })();
 
 /* DEVELOPMENT TOOLS */
