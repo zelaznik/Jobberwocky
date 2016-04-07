@@ -1,4 +1,4 @@
-var ApiRoot = 'http://api.jobberwocky.dev'; //http://jobberwocky-rails-api.herokuapp.com';
+var ApiRoot = 'http://jobberwocky-rails-api.herokuapp.com';
 import SessionStore from '../stores/SessionStore.jsx';
 
 var ApiEndpoints = {};
