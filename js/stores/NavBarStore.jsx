@@ -24,7 +24,7 @@ var NavBarStore = assign({}, EventEmitter.prototype, {
     data() {
         var data = deepCopy(_navBarData);
         data.user = {
-            email: sessionStorage.getItem('email')
+            email: SessionStore.data().email
         };
         return data;
     },

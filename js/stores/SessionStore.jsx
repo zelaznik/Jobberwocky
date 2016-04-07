@@ -4,44 +4,58 @@ import AlertActions from '../actions/AlertActions.jsx';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 
+function getCookie(name) {
+    var cookies = JSON.parse(document.cookie || "{}");
+    return cookies[name];
+}
+
+function setCookie(name, value) {
+    var cookies = JSON.parse(document.cookie || "{}");
+    cookies[name] = value;
+    document.cookie = JSON.stringify(cookies);
+}
+
+function delCookie(name) {
+    var cookies = JSON.parse(document.cookie || "{}");
+    delete cookies[name];
+    document.cookie = JSON.stringify(cookies);
+}
+
 import { CHANGE_EVENT, LOGOUT } from '../constants/EventConstants.jsx';
 
-var _authToken = sessionStorage.getItem('authToken'),
-    _email = sessionStorage.getItem('email'),
-    _errors=[],
-    _id = null;
+var _errors=[];
 
 function setSession(params) {
     var u = params.response.user;
-    sessionStorage.setItem('authToken', u.auth_token);
-    sessionStorage.setItem('email', u.email);
-    sessionStorage.setItem('userId', u.id);
-    [ _authToken, _email , _id ] = [u.auth_token, u.email, u.id ];
+    setCookie('authToken', u.auth_token);
+    setCookie('email', u.email);
+    setCookie('userId', u.id);
 }
 
 function clearSession(params) {
-    _authToken = _email = null;
-    sessionStorage.removeItem('authToken');
-    sessionStorage.removeItem('email');
+    document.cookie = "{}";
 }
 
 var SessionStore = assign({}, EventEmitter.prototype, {
     data() {
         return {
-            email: _email,
+            email: getCookie('email'),
             loggedIn: this.loggedIn()
         };
     },
 
     token() {
-        return sessionStorage.getItem('authToken');
+        return getCookie('authToken');
     },
+
     loggedIn() {
-        return _authToken ? true: false;
+        return getCookie('authToken') ? true: false;
     },
+
     emitChange() {
         this.emit(CHANGE_EVENT);
     },
+
     addChangeListener(callback) {
         this.on(CHANGE_EVENT, callback);
     },
