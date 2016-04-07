@@ -1,14 +1,12 @@
-import { EventEmitter } from 'events';
 import assign from 'object-assign';
+var Immutable = require('immutable');
 
-import TableConstants from '../constants/TableConstants.jsx';
+import TableConstants from '../constants/ProductConstants.jsx';
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 
-import { CHANGE_EVENT } from '../constants/EventConstants.jsx';
-import { Sequence } from '../utils/sequence';
+import Store from './_templates/Store.jsx';
 
-var Immutable = require('immutable');
-window.Immutable = Immutable;
+import { Sequence } from '../utils/sequence';
 
 var _fields = Immutable.List(
     ['id','title','price','published']
@@ -80,7 +78,7 @@ function blank() {
     _records[id] = {id: id};
 }
 
-var TableStore = assign({}, EventEmitter.prototype, {
+var TableStore = new Store({
     data: function() {
         return {
             fields: _fields.toArray(),
@@ -93,22 +91,8 @@ var TableStore = assign({}, EventEmitter.prototype, {
 
     tempID: function() {
         return seq.low;
-    },
-
-    emitChange() {
-        this.emit(CHANGE_EVENT);
-    },
-
-    addChangeListener(callback) {
-        this.on(CHANGE_EVENT, callback);
-    },
-
-    removeChangeListener(callback) {
-        this.removeListener(CHANGE_EVENT, callback);
     }
 });
-
-window.TableStore = TableStore;
 
 AppDispatcher.register( (payload) => {
     switch(payload.actionType) {

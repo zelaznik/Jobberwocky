@@ -1,66 +1,37 @@
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
 import AlertActions from '../actions/AlertActions.jsx';
-import { EventEmitter } from 'events';
-import assign from 'object-assign';
-
-function getCookie(name) {
-    var cookies = JSON.parse(document.cookie || "{}");
-    return cookies[name];
-}
-
-function setCookie(name, value) {
-    var cookies = JSON.parse(document.cookie || "{}");
-    cookies[name] = value;
-    document.cookie = JSON.stringify(cookies);
-}
-
-function delCookie(name) {
-    var cookies = JSON.parse(document.cookie || "{}");
-    delete cookies[name];
-    document.cookie = JSON.stringify(cookies);
-}
-
-import { CHANGE_EVENT, LOGOUT } from '../constants/EventConstants.jsx';
+import Store from './_templates/Store.jsx';
+import { LOGOUT } from '../constants/EventConstants.jsx';
+import Cookies from '../utils/Cookies.jsx';
 
 var _errors=[];
 
 function setSession(params) {
     var u = params.response.user;
-    setCookie('authToken', u.auth_token);
-    setCookie('email', u.email);
-    setCookie('userId', u.id);
+    Cookies.set('authToken', u.auth_token);
+    Cookies.set('email', u.email);
+    Cookies.set('userId', u.id);
 }
 
-function clearSession(params) {
-    document.cookie = "{}";
+function clearSession() {
+    Cookies.reset();
 }
 
-var SessionStore = assign({}, EventEmitter.prototype, {
+var SessionStore = new Store({
     data() {
         return {
-            email: getCookie('email'),
+            email: Cookies.get('email'),
             loggedIn: this.loggedIn()
         };
     },
 
     token() {
-        return getCookie('authToken');
+        return Cookies.get('authToken');
     },
 
     loggedIn() {
-        return getCookie('authToken') ? true: false;
-    },
-
-    emitChange() {
-        this.emit(CHANGE_EVENT);
-    },
-
-    addChangeListener(callback) {
-        this.on(CHANGE_EVENT, callback);
-    },
-    removeChangeListener(callback) {
-        this.removeListener(CHANGE_EVENT, callback);
+        return !!this.token();
     }
 });
 

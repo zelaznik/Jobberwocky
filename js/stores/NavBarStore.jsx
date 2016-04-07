@@ -1,9 +1,6 @@
-import { EventEmitter } from 'events';
-import assign from 'object-assign';
-
-import { CHANGE_EVENT } from '../constants/EventConstants.jsx';
-import deepCopy from '../utils/deepCopy.jsx';
+import Store from './_templates/Store.jsx';
 import SessionStore from './SessionStore.jsx';
+import deepCopy from '../utils/deepCopy.jsx';
 
 var _navBarData = {
     notifications: [
@@ -20,27 +17,14 @@ var _navBarData = {
     ]
 };
 
-var NavBarStore = assign({}, EventEmitter.prototype, {
+var NavBarStore = new Store({
     data() {
         var data = deepCopy(_navBarData);
         data.user = {
             email: SessionStore.data().email
         };
         return data;
-    },
-
-    emitChange() {
-        this.emit(CHANGE_EVENT);
-    },
-
-    addChangeListener(callback) {
-        this.on(CHANGE_EVENT, callback);
-    },
-
-    removeChangeListener(callback) {
-        this.removeListener(CHANGE_EVENT, callback);
     }
-
 });
 
 SessionStore.addChangeListener( ()=> {
