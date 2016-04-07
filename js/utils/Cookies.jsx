@@ -1,21 +1,23 @@
-var Cookies = Object.freeze({
+var Cookies = {
+    all() {
+        return JSON.parse(document.cookie || "{}");
+    },
     get(name) {
-        var cookies = JSON.parse(document.cookie || "{}");
-        return cookies[name];
+        return Cookies.all()[name];
     },
     set(name, value) {
-        var cookies = JSON.parse(document.cookie || "{}");
+        var cookies = Cookies.all();
         cookies[name] = value;
         document.cookie = JSON.stringify(cookies);
     },
     del(name) {
-        var cookies = JSON.parse(document.cookie || "{}");
+        var cookies = Cookies.all();
         delete cookies[name];
         document.cookie = JSON.stringify(cookies);
     },
     reset() {
         document.cookie = "{}";
     }
-});
+};
 
-export default Cookies;
+export default Object.freeze(Cookies);
