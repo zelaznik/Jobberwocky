@@ -1,35 +1,57 @@
+import assign from 'object-assign';
+
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
+import AlertActions from '../actions/AlertActions.jsx';
 import ApiEndpoints from '../constants/ApiEndpoints.jsx';
 import { POST, DELETE } from '../webApi/WebApi.jsx';
 
 var SessionActions = Object.freeze({
     create(params) {
-        POST(ApiEndpoints.SIGN_IN, {session: params}, (error, response) => {
-            AppDispatcher.dispatch({
-                actionType: SessionConstants.RECEIVE_LOGIN,
-                response: response, error: error
-            });
-        });
+        console.log("SessionActions::create");
+        console.log(params);
         AppDispatcher.dispatch({
-            actionType: SessionConstants.SEND_LOGIN,
+            actionType: SessionConstants.SIGN_IN,
             params: params
         });
-    },
-
-
-
-    destroy() {
-        DELETE(ApiEndpoints.SIGN_OUT, {}, this.response_destroy);
-        AppDispatcher.dispatch({
-            actionType: SessionConstants.SEND_LOGOUT
+        POST(ApiEndpoints.SIGN_IN, {session: params}, (error, response) => {
+            if (error)
+                AlertActions.sendDelayed({error: error});
+            if (response)
+                AppDispatcher.dispatch({
+                    actionType: SessionConstants.SIGN_IN_SUCCESS,
+                    response: response, error: error
+                });
         });
     },
 
-    response_destroy(error, response) {
+    new_user(params) {
+        var password = params.password;
         AppDispatcher.dispatch({
-            actionType: SessionConstants.RECEIVE_LOGOUT,
-            response: response, error: error
+            actionType: SessionConstants.SIGN_UP
+        });
+        POST(ApiEndpoints.SIGN_UP, {user: params}, (error, response) => {
+            if (error)
+                AlertActions.sendDelayed({error: error});
+            if (response)
+                SessionActions.create(assign({}, response.user, {password: password}));
+        });
+    },
+
+    destroy() {
+        AppDispatcher.dispatch({
+            actionType: SessionConstants.SIGN_OUT
+        });
+        DELETE(ApiEndpoints.SIGN_OUT, {}, (error, response) => {
+            if (error) {
+                console.warn(`Error Signing Out:`);
+                console.log(error);
+            } else {
+                AppDispatcher.dispatch({
+                    actionType: SessionConstants.SIGN_OUT_SUCCESS,
+                    response: response, error: error
+                });
+            }
         });
     }
 

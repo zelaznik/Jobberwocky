@@ -1,6 +1,5 @@
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
-import AlertActions from '../actions/AlertActions.jsx';
 import Store from './_templates/Store.jsx';
 import { LOGOUT } from '../constants/EventConstants.jsx';
 import Cookies from '../utils/Cookies.jsx';
@@ -37,24 +36,17 @@ var SessionStore = new Store({
 
 AppDispatcher.register((payload) => {
     switch(payload.actionType) {
-        case SessionConstants.RECEIVE_LOGIN:
-            if (payload.error === null) {
-                setSession(payload);
-                SessionStore.emitChange();
-            } else {
-                AlertActions.sendDelayed(payload);
-            }
+        case SessionConstants.SIGN_IN_SUCCESS:
+            setSession(payload);
+            SessionStore.emitChange();
             break;
 
-        case SessionConstants.RECEIVE_LOGOUT:
-            if (payload.error === null) {
-                clearSession();
-                SessionStore.emit(LOGOUT);
-                SessionStore.emitChange();
-            } else {
-                sendErrorAlerts(payload);
-            }
+        case SessionConstants.SIGN_OUT:
+            clearSession();
+            SessionStore.emit(LOGOUT);
+            SessionStore.emitChange();
             break;
+
     }
 });
 
