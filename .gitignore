@@ -1,4 +1,2 @@
 node_modules/*
-js/bundle.js
-js/bundle.js.map
 .idea/workspace.xml
