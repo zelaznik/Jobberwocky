@@ -19,6 +19,7 @@ var BaseRow = {
             <Cell row={this} field={field} key={i}
                   value={this.props.values[field]}
                   editMode={ this.state.editMode }
+                  type={this.props.types[field]}
                   onDoubleClick = { this.edit }
                   immutable={this.props.immutable[field]}
             />

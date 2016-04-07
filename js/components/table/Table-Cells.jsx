@@ -14,7 +14,7 @@ var Cell = React.createClass({
     _editView() {
         return (
             <td>
-                <input type="text"
+                <input type={this.props.type || 'text'}
                        defaultValue={this.props.value}
                        onChange={this.onChange}
                        disabled={this.props.immutable} />
@@ -25,7 +25,7 @@ var Cell = React.createClass({
     _standardView() {
         return (
             <td onDoubleClick={ this.props.onDoubleClick } >
-                {this.props.value}
+                { this.props.value === undefined ? '' : '' + this.props.value }
             </td>
         );
     },
@@ -40,7 +40,6 @@ var Cell = React.createClass({
             this.props.field, e.target.value
         );
     }
-
 });
 
 var Header = React.createClass({

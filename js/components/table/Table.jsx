@@ -53,6 +53,7 @@ var Table = React.createClass({
                 { this.optionalNewRecord() }
                 {this.props.records.map((mapper, key) => (
                     <Row key={ key }
+                         types={this.props.types}
                          values={ mapper.toJSON() }
                          fields={ this.props.fields }
                          immutable={ this.props.immutable }
@@ -69,6 +70,7 @@ var Table = React.createClass({
             return <NewRow key={key}
                            tempID={key}
                            values={{}}
+                           types={this.props.types}
                            fields={this.props.fields}
                            immutable = { this.props.immutable}
                            cancelFcn = { this.hideNewRow }
