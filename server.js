@@ -8,7 +8,14 @@ var PORT = process.env.PORT || 8080;
 
 // serve our static stuff like index.css and bundled js files.
 app.use('/assets/', express.static(path.join(__dirname,"assets")));
-app.use('/js/', express.static(path.join(__dirname,"js")));
+
+app.get('/js/bundle.js', function (req, res) {
+    res.sendFile(path.join(__dirname, 'js', 'bundle.js'));
+});
+
+app.get('/js/bundle.js.map', function (req, res) {
+    res.sendFile(path.join(__dirname, 'js', 'bundle.js.map'));
+});
 
 app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'))
