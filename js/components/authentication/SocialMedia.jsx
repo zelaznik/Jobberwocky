@@ -22,7 +22,7 @@ var SocialMedia = React.createClass({
             <div className="social-login clearfix">
                 <SocialMedium align={'left'} source={'Facebook'} />
                 {"   "}
-                <SocialMedium align={'right'} source={'Twitter'} />
+                <SocialMedium align={'right'} source={'GitHub'} />
             </div>
         );
     }
