@@ -9,18 +9,19 @@ class TableActions {
     }
 
     fetch() {
-        GET(this.baseUrl, {}, (err, response) => {
+        AppDispatcher.dispatch({
+            actionType: this.constants.FETCH
+        });
+        GET(this.baseUrl.INDEX(), {}, (err, response) => {
             if (err)
                 AlertActions.sendDelayed({error: err});
             if (response)
-                AppDispatcher.dispatch({
-                    actionType: this.constants.FETCH_SUCCESS,
-                    response: response, error: null
-                });
-        });
-
-        AppDispatcher.dispatch({
-            actionType: this.constants.FETCH
+                setTimeout(() => {
+                    AppDispatcher.dispatch({
+                        actionType: this.constants.FETCH_SUCCESS,
+                        response: response, error: null
+                    })
+                }, 0);
         });
     }
 
@@ -30,7 +31,7 @@ class TableActions {
             params: params, tempID: tempID
         });
 
-        POST(this.baseUrl, params, (err, response) => {
+        POST(this.baseUrl.CREATE(), params, (err, response) => {
             if (err) {
                 AppDispatcher.dispatch({
                     actionType: this.constants.CREATE_ERROR,
@@ -52,7 +53,7 @@ class TableActions {
             params: params,
             id: id
         });
-        PATCH(`${this.baseUrl}/${id}`, params, (err, response) => {
+        PATCH(this.baseUrl.UPDATE(id), params, (err, response) => {
             if (err)
                 AlertActions.sendDelayed({error: err});
             if (response)
@@ -73,7 +74,7 @@ class TableActions {
             return;
         }
 
-        DELETE(`${this.baseUrl}/${id}`, {}, (err, response) => {
+        DELETE(this.baseUrl.DESTROY(id), {}, (err, response) => {
             if (err) {
                 console.warn("Error destroying database record.");
                 console.log(err);
