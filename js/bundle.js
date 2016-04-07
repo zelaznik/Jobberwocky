@@ -70,22 +70,25 @@
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
-	var _requireAuth = __webpack_require__(515);
+	var _SignUp = __webpack_require__(519);
+	
+	var _SignUp2 = _interopRequireDefault(_SignUp);
+	
+	var _requireAuth = __webpack_require__(520);
 	
 	var _requireAuth2 = _interopRequireDefault(_requireAuth);
 	
-	var _PlaceHolders = __webpack_require__(516);
+	var _PlaceHolders = __webpack_require__(521);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	/* Turn on the API's. Keep them out of the namespace */
 	
 	
-	/* STANDALONE COMPONENTS */
-	/* REACT AND NODE LIBRARIES */
+	/* APPS AND MODULES */
 	(function () {
-	    __webpack_require__(235);
-	    __webpack_require__(517);
+	    __webpack_require__(237);
+	    __webpack_require__(522);
 	})();
 	
 	/* DEVELOPMENT TOOLS */
@@ -94,7 +97,8 @@
 	/* UTILITIES */
 	
 	
-	/* APPS AND MODULES */
+	/* STANDALONE COMPONENTS */
+	/* REACT AND NODE LIBRARIES */
 	
 	
 	var router = _react2.default.createElement(
@@ -110,6 +114,7 @@
 	        _react2.default.createElement(_reactRouter.Route, { path: '/gallery', component: _PlaceHolders.Gallery })
 	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/sign_up', component: _SignUp2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _Errors.Error404, status: '404' })
 	);
 	
@@ -24807,7 +24812,7 @@
 	
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 	
-	var _SessionStore = __webpack_require__(237);
+	var _SessionStore = __webpack_require__(239);
 	
 	var _SessionStore2 = _interopRequireDefault(_SessionStore);
 	
@@ -25390,6 +25395,10 @@
 	    value: true
 	});
 	
+	var _objectAssign = __webpack_require__(217);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
 	var _AppDispatcher = __webpack_require__(227);
 	
 	var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
@@ -25398,37 +25407,58 @@
 	
 	var _SessionConstants2 = _interopRequireDefault(_SessionConstants);
 	
-	var _ApiEndpoints = __webpack_require__(234);
+	var _AlertActions = __webpack_require__(234);
+	
+	var _AlertActions2 = _interopRequireDefault(_AlertActions);
+	
+	var _ApiEndpoints = __webpack_require__(236);
 	
 	var _ApiEndpoints2 = _interopRequireDefault(_ApiEndpoints);
 	
-	var _WebApi = __webpack_require__(235);
+	var _WebApi = __webpack_require__(237);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var SessionActions = Object.freeze({
 	    create: function create(params) {
+	        console.log("SessionActions::create");
+	        console.log(params);
+	        _AppDispatcher2.default.dispatch({
+	            actionType: _SessionConstants2.default.SIGN_IN,
+	            params: params
+	        });
 	        (0, _WebApi.POST)(_ApiEndpoints2.default.SIGN_IN, { session: params }, function (error, response) {
-	            _AppDispatcher2.default.dispatch({
-	                actionType: _SessionConstants2.default.RECEIVE_LOGIN,
+	            if (error) _AlertActions2.default.sendDelayed({ error: error });
+	            if (response) _AppDispatcher2.default.dispatch({
+	                actionType: _SessionConstants2.default.SIGN_IN_SUCCESS,
 	                response: response, error: error
 	            });
 	        });
+	    },
+	    new_user: function new_user(params) {
+	        var password = params.password;
 	        _AppDispatcher2.default.dispatch({
-	            actionType: _SessionConstants2.default.SEND_LOGIN,
-	            params: params
+	            actionType: _SessionConstants2.default.SIGN_UP
+	        });
+	        (0, _WebApi.POST)(_ApiEndpoints2.default.SIGN_UP, { user: params }, function (error, response) {
+	            if (error) _AlertActions2.default.sendDelayed({ error: error });
+	            if (response) SessionActions.create((0, _objectAssign2.default)({}, response.user, { password: password }));
 	        });
 	    },
 	    destroy: function destroy() {
-	        (0, _WebApi.DELETE)(_ApiEndpoints2.default.SIGN_OUT, {}, this.response_destroy);
 	        _AppDispatcher2.default.dispatch({
-	            actionType: _SessionConstants2.default.SEND_LOGOUT
+	            actionType: _SessionConstants2.default.SIGN_OUT
 	        });
-	    },
-	    response_destroy: function response_destroy(error, response) {
-	        _AppDispatcher2.default.dispatch({
-	            actionType: _SessionConstants2.default.RECEIVE_LOGOUT,
-	            response: response, error: error
+	        (0, _WebApi.DELETE)(_ApiEndpoints2.default.SIGN_OUT, {}, function (error, response) {
+	            if (error) {
+	                console.warn('Error Signing Out:');
+	                console.log(error);
+	            } else {
+	                _AppDispatcher2.default.dispatch({
+	                    actionType: _SessionConstants2.default.SIGN_OUT_SUCCESS,
+	                    response: response, error: error
+	                });
+	            }
 	        });
 	    }
 	});
@@ -25903,12 +25933,18 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var SessionConstants = (0, _uniqueKeySet2.default)({
-	    SEND_LOGIN: null,
-	    RECEIVE_LOGIN: null,
+	var SessionConstants = (0, _uniqueKeySet2.default)('Session', {
+	    SIGN_UP: null,
+	    SIGN_UP_SUCCESS: null,
+	    SIGN_UP_ERROR: null,
 	
-	    SEND_LOGOUT: null,
-	    RECEIVE_LOGOUT: null
+	    SIGN_IN: null,
+	    SIGN_IN_SUCCESS: null,
+	    SIGN_IN_ERROR: null,
+	
+	    SIGN_OUT: null,
+	    SIGN_OUT_SUCCESS: null,
+	    SIGN_OUT_ERROR: null
 	});
 	
 	exports.default = SessionConstants;
@@ -25928,8 +25964,8 @@
 	}();
 	
 	function define(obj, key, val, prefix) {
-	    prefix = prefix ? prefix + '.' : '';
-	    var withId = '' + prefix + val + ':' + getID();
+	    prefix = prefix ? prefix + '::' : '';
+	    var withId = '' + prefix + val + '::' + getID();
 	    Object.defineProperty(obj, key, {
 	        get: function get() {
 	            return withId;
@@ -25954,6 +25990,94 @@
 
 /***/ },
 /* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _AppDispatcher = __webpack_require__(227);
+	
+	var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
+	
+	var _AlertConstants = __webpack_require__(235);
+	
+	var _AlertConstants2 = _interopRequireDefault(_AlertConstants);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var AlertActions = Object.freeze({
+	    danger: function danger(params) {
+	        _AppDispatcher2.default.dispatch({
+	            actionType: _AlertConstants2.default.DANGER,
+	            params: params
+	        });
+	    },
+	    sendDelayed: function sendDelayed(payload) {
+	        var dt = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
+	
+	        var p = {
+	            display: true,
+	            status: payload.error.status,
+	            statusText: payload.error.statusText,
+	            responseText: payload.error.responseText
+	        };
+	        setTimeout(function () {
+	            AlertActions.danger(p);
+	        }, dt);
+	    },
+	    display: function display() {
+	        _AppDispatcher2.default.dispatch({
+	            actionType: _AlertConstants2.default.DISPLAY
+	        });
+	    },
+	    hide: function hide() {
+	        _AppDispatcher2.default.dispatch({
+	            actionType: _AlertConstants2.default.HIDE
+	        });
+	    },
+	    clear: function clear() {
+	        _AppDispatcher2.default.dispatch({
+	            actionType: _AlertConstants2.default.CLEAR
+	        });
+	    }
+	});
+	
+	exports.default = AlertActions;
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _uniqueKeySet = __webpack_require__(233);
+	
+	var _uniqueKeySet2 = _interopRequireDefault(_uniqueKeySet);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var AlertConstants = (0, _uniqueKeySet2.default)('Alert', {
+	    SUCCESS: null,
+	    WARNING: null,
+	    INFO: null,
+	    DANGER: null,
+	
+	    DISPLAY: null,
+	    HIDE: null,
+	    CLEAR: null
+	});
+	
+	exports.default = AlertConstants;
+
+/***/ },
+/* 236 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25974,7 +26098,7 @@
 	module.exports = ApiEndpoints;
 
 /***/ },
-/* 235 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25984,7 +26108,7 @@
 	});
 	exports.DELETE = exports.PATCH = exports.PUT = exports.POST = exports.GET = undefined;
 	
-	var _jquery = __webpack_require__(236);
+	var _jquery = __webpack_require__(238);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
@@ -25992,11 +26116,11 @@
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _SessionStore = __webpack_require__(237);
+	var _SessionStore = __webpack_require__(239);
 	
 	var _SessionStore2 = _interopRequireDefault(_SessionStore);
 	
-	var _ApiEndpoints = __webpack_require__(234);
+	var _ApiEndpoints = __webpack_require__(236);
 	
 	var _ApiEndpoints2 = _interopRequireDefault(_ApiEndpoints);
 	
@@ -26076,7 +26200,7 @@
 	exports.DELETE = DELETE;
 
 /***/ },
-/* 236 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -35924,7 +36048,7 @@
 
 
 /***/ },
-/* 237 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35940,10 +36064,6 @@
 	var _SessionConstants = __webpack_require__(232);
 	
 	var _SessionConstants2 = _interopRequireDefault(_SessionConstants);
-	
-	var _AlertActions = __webpack_require__(238);
-	
-	var _AlertActions2 = _interopRequireDefault(_AlertActions);
 	
 	var _Store = __webpack_require__(240);
 	
@@ -35987,116 +36107,21 @@
 	
 	_AppDispatcher2.default.register(function (payload) {
 	    switch (payload.actionType) {
-	        case _SessionConstants2.default.RECEIVE_LOGIN:
-	            if (payload.error === null) {
-	                setSession(payload);
-	                SessionStore.emitChange();
-	            } else {
-	                _AlertActions2.default.sendDelayed(payload);
-	            }
+	        case _SessionConstants2.default.SIGN_IN_SUCCESS:
+	            setSession(payload);
+	            SessionStore.emitChange();
 	            break;
 	
-	        case _SessionConstants2.default.RECEIVE_LOGOUT:
-	            if (payload.error === null) {
-	                clearSession();
-	                SessionStore.emit(_EventConstants.LOGOUT);
-	                SessionStore.emitChange();
-	            } else {
-	                sendErrorAlerts(payload);
-	            }
+	        case _SessionConstants2.default.SIGN_OUT:
+	            clearSession();
+	            SessionStore.emit(_EventConstants.LOGOUT);
+	            SessionStore.emitChange();
 	            break;
+	
 	    }
 	});
 	
 	exports.default = SessionStore;
-
-/***/ },
-/* 238 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _AppDispatcher = __webpack_require__(227);
-	
-	var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
-	
-	var _AlertConstants = __webpack_require__(239);
-	
-	var _AlertConstants2 = _interopRequireDefault(_AlertConstants);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var AlertActions = Object.freeze({
-	    danger: function danger(params) {
-	        _AppDispatcher2.default.dispatch({
-	            actionType: _AlertConstants2.default.DANGER,
-	            params: params
-	        });
-	    },
-	    sendDelayed: function sendDelayed(payload) {
-	        var dt = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
-	
-	        var p = {
-	            display: true,
-	            status: payload.error.status,
-	            statusText: payload.error.statusText,
-	            responseText: payload.error.responseText
-	        };
-	        setTimeout(function () {
-	            AlertActions.danger(p);
-	        }, dt);
-	    },
-	    display: function display() {
-	        _AppDispatcher2.default.dispatch({
-	            actionType: _AlertConstants2.default.DISPLAY
-	        });
-	    },
-	    hide: function hide() {
-	        _AppDispatcher2.default.dispatch({
-	            actionType: _AlertConstants2.default.HIDE
-	        });
-	    },
-	    clear: function clear() {
-	        _AppDispatcher2.default.dispatch({
-	            actionType: _AlertConstants2.default.CLEAR
-	        });
-	    }
-	});
-	
-	exports.default = AlertActions;
-
-/***/ },
-/* 239 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _uniqueKeySet = __webpack_require__(233);
-	
-	var _uniqueKeySet2 = _interopRequireDefault(_uniqueKeySet);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var AlertConstants = (0, _uniqueKeySet2.default)({
-	    SUCCESS: null,
-	    WARNING: null,
-	    INFO: null,
-	    DANGER: null,
-	
-	    DISPLAY: null,
-	    HIDE: null,
-	    CLEAR: null
-	});
-	
-	exports.default = AlertConstants;
 
 /***/ },
 /* 240 */
@@ -36476,7 +36501,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	module.exports = (0, _uniqueKeySet2.default)({
+	module.exports = (0, _uniqueKeySet2.default)('Events', {
 	    CHANGE_EVENT: null,
 	    LOGOUT: null,
 	
@@ -36743,7 +36768,7 @@
 	
 	var _Store2 = _interopRequireDefault(_Store);
 	
-	var _SessionStore = __webpack_require__(237);
+	var _SessionStore = __webpack_require__(239);
 	
 	var _SessionStore2 = _interopRequireDefault(_SessionStore);
 	
@@ -36837,7 +36862,7 @@
 	
 	var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
 	
-	var _AlertConstants = __webpack_require__(239);
+	var _AlertConstants = __webpack_require__(235);
 	
 	var _AlertConstants2 = _interopRequireDefault(_AlertConstants);
 	
@@ -36961,7 +36986,7 @@
 	
 	var _reactBootstrap = __webpack_require__(252);
 	
-	var _AlertActions = __webpack_require__(238);
+	var _AlertActions = __webpack_require__(234);
 	
 	var _AlertActions2 = _interopRequireDefault(_AlertActions);
 	
@@ -60410,7 +60435,7 @@
 	
 	var _ProductConstants2 = _interopRequireDefault(_ProductConstants);
 	
-	var _ApiEndpoints = __webpack_require__(234);
+	var _ApiEndpoints = __webpack_require__(236);
 	
 	var _ApiEndpoints2 = _interopRequireDefault(_ApiEndpoints);
 	
@@ -60432,13 +60457,13 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _WebApi = __webpack_require__(235);
+	var _WebApi = __webpack_require__(237);
 	
 	var _AppDispatcher = __webpack_require__(227);
 	
 	var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
 	
-	var _AlertActions = __webpack_require__(238);
+	var _AlertActions = __webpack_require__(234);
 	
 	var _AlertActions2 = _interopRequireDefault(_AlertActions);
 	
@@ -60529,7 +60554,11 @@
 	            }
 	
 	            (0, _WebApi.DELETE)(this.baseUrl + '/' + id, {}, function (err, response) {
-	                if (err) _AlertActions2.default.sendDelayed({ error: err });
+	                if (err) {
+	                    console.warn("Error destroying database record.");
+	                    console.log(err);
+	                    _AlertActions2.default.sendDelayed({ error: err });
+	                }
 	                if (response) _AppDispatcher2.default.dispatch({
 	                    actionType: _this4.constants.DESTROY_SUCCESS,
 	                    response: response, error: null
@@ -60618,63 +60647,35 @@
 	
 	var _SessionActions2 = _interopRequireDefault(_SessionActions);
 	
-	var _SessionStore = __webpack_require__(237);
-	
-	var _SessionStore2 = _interopRequireDefault(_SessionStore);
-	
-	var _AlertStore = __webpack_require__(249);
-	
-	var _AlertStore2 = _interopRequireDefault(_AlertStore);
-	
 	var _AlertModal = __webpack_require__(251);
 	
 	var _AlertModal2 = _interopRequireDefault(_AlertModal);
 	
-	var _deepCopy = __webpack_require__(248);
+	var _Credentials = __webpack_require__(515);
 	
-	var _deepCopy2 = _interopRequireDefault(_deepCopy);
+	var _Credentials2 = _interopRequireDefault(_Credentials);
+	
+	var _SocialMedia = __webpack_require__(517);
+	
+	var _SocialMedia2 = _interopRequireDefault(_SocialMedia);
+	
+	var _AuthHandler = __webpack_require__(518);
+	
+	var _AuthHandler2 = _interopRequireDefault(_AuthHandler);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var WithPassword = _react2.default.createClass({
-	    displayName: 'WithPassword',
-	    getInitialState: function getInitialState() {
-	        return { email: '', password: '' };
-	    },
-	    render: function render() {
-	        var _this = this;
+	var LoginWithPassword = _react2.default.createClass({
+	    displayName: 'LoginWithPassword',
 	
+	    mixins: [_Credentials2.default],
+	
+	    render: function render() {
 	        return _react2.default.createElement(
 	            'form',
 	            { href: '#', onSubmit: this.onSubmit },
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'form-group' },
-	                _react2.default.createElement('input', { className: 'form-control',
-	                    placeholder: 'Email Address',
-	                    field: 'email',
-	                    type: 'text',
-	                    value: this.state.email,
-	                    onChange: function onChange(e) {
-	                        return _this.updateForm(e, 'email');
-	                    },
-	                    autoComplete: 'off'
-	                })
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'form-group' },
-	                _react2.default.createElement('input', { className: 'form-control',
-	                    placeholder: 'Password',
-	                    type: 'password',
-	                    value: this.state.password,
-	                    onChange: function onChange(e) {
-	                        return _this.updateForm(e, 'password');
-	                    },
-	                    autoComplete: 'off'
-	                }),
-	                _react2.default.createElement('input', { type: 'submit', value: '' })
-	            ),
+	            this.email_input(),
+	            this.input('password', true),
 	            _react2.default.createElement(
 	                'div',
 	                { className: 'form-options clearfix' },
@@ -60686,10 +60687,6 @@
 	            )
 	        );
 	    },
-	    updateForm: function updateForm(e, key) {
-	        this.state[key] = e.target.value;
-	        this.setState((0, _deepCopy2.default)(this.state));
-	    },
 	    onSubmit: function onSubmit(e) {
 	        e.preventDefault();
 	        _SessionActions2.default.create({
@@ -60699,12 +60696,208 @@
 	    }
 	});
 	
-	var WithSocialMedia = _react2.default.createClass({
-	    displayName: 'WithSocialMedia',
+	var Login = _react2.default.createClass({
+	    displayName: 'Login',
+	
+	    mixins: [_AuthHandler2.default],
+	
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'login-wrapper' },
+	            _react2.default.createElement(
+	                'div',
+	                { id: 'login-container', className: 'login-container active' },
+	                _react2.default.createElement(
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('img', { width: '100', height: '30', src: '/assets/images/logo-login@2x.png' })
+	                ),
+	                _react2.default.createElement(LoginWithPassword, null),
+	                _react2.default.createElement(_SocialMedia2.default, null),
+	                _react2.default.createElement(
+	                    'p',
+	                    { className: 'signup' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        'Don\'t have an account yet?'
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        "  "
+	                    ),
+	                    _react2.default.createElement(
+	                        'a',
+	                        { href: 'sign_up' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            'Sign Up now'
+	                        )
+	                    )
+	                )
+	            ),
+	            _react2.default.createElement(_AlertModal2.default, { alerts: this.state.alerts })
+	        );
+	    }
+	});
+	
+	exports.default = Login;
+
+/***/ },
+/* 515 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _StringFormat = __webpack_require__(516);
+	
+	var _StringFormat2 = _interopRequireDefault(_StringFormat);
+	
+	var _deepCopy = __webpack_require__(248);
+	
+	var _deepCopy2 = _interopRequireDefault(_deepCopy);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var BasePassword = _react2.default.createClass({
+	    displayName: 'BasePassword',
+	    label: function label() {
+	        return _StringFormat2.default.snake_to_label(this.props.name);
+	    },
+	    key: function key() {
+	        return _StringFormat2.default.label_to_snake(this.props.name);
+	    },
+	    inputField: function inputField() {
+	        var _this = this;
+	
+	        return _react2.default.createElement('input', { className: 'form-control',
+	            placeholder: this.label(),
+	            type: 'password',
+	            value: this.props.value,
+	            onChange: function onChange(e) {
+	                return _this.props.updateForm(e, _this.key());
+	            },
+	            autoComplete: 'off'
+	        });
+	    },
+	    optionalSubmitButton: function optionalSubmitButton() {
+	        if (this.props.isFinal) return _react2.default.createElement('input', { type: 'submit', value: '' });
+	    },
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            this.inputField(),
+	            this.optionalSubmitButton()
+	        );
+	    }
+	});
+	
+	var Credentials = Object.freeze({
+	    getInitialState: function getInitialState() {
+	        return { email: '', password: '', password_confirmation: '' };
+	    },
+	    input: function input(name, isFinal) {
+	        return _react2.default.createElement(BasePassword, { key: name, name: name,
+	            isFinal: isFinal,
+	            value: this.state[name],
+	            updateForm: this.updateForm });
+	    },
+	    email_input: function email_input() {
+	        var _this2 = this;
+	
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'form-group', key: 'email' },
+	            _react2.default.createElement('input', { className: 'form-control',
+	                placeholder: 'Email Address',
+	                field: 'email',
+	                type: 'text',
+	                value: this.state.email,
+	                onChange: function onChange(e) {
+	                    return _this2.updateForm(e, 'email');
+	                },
+	                autoComplete: 'off'
+	            })
+	        );
+	    },
+	    updateForm: function updateForm(e, key) {
+	        this.state[key] = e.target.value;
+	        this.setState((0, _deepCopy2.default)(this.state));
+	    }
+	});
+	
+	exports.default = Credentials;
+
+/***/ },
+/* 516 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var StringFormat = Object.freeze({
+	    capitalize: function capitalize(orig) {
+	        return orig[0].toUpperCase() + orig.slice(1).toLowerCase();
+	    },
+	
+	    lowercase: function lowercase(orig) {
+	        return orig.toLowerCase();
+	    },
+	
+	    snake_to_label: function snake_to_label(orig) {
+	        var words = orig.split(/_+/).map(StringFormat.capitalize);
+	        return words.join(" ");
+	    },
+	
+	    label_to_snake: function label_to_snake(orig) {
+	        var words = orig.split(/\s+/).map(StringFormat.lowercase);
+	        return words.join("_");
+	    }
+	
+	});
+	
+	exports.default = StringFormat;
+
+/***/ },
+/* 517 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _StringFormat = __webpack_require__(516);
+	
+	var _StringFormat2 = _interopRequireDefault(_StringFormat);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var SocialMedium = _react2.default.createClass({
+	    displayName: 'SocialMedium',
 	    render: function render() {
 	        var align = this.props.align.toLowerCase(),
 	            source = this.props.source.toLowerCase(),
-	            label = source[0].toUpperCase() + source.slice(1);
+	            label = _StringFormat2.default.capitalize(source);
 	
 	        return _react2.default.createElement(
 	            'a',
@@ -60720,8 +60913,42 @@
 	    }
 	});
 	
-	var Login = _react2.default.createClass({
-	    displayName: 'Login',
+	var SocialMedia = _react2.default.createClass({
+	    displayName: 'SocialMedia',
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'social-login clearfix' },
+	            _react2.default.createElement(SocialMedium, { align: 'left', source: 'Facebook' }),
+	            "   ",
+	            _react2.default.createElement(SocialMedium, { align: 'right', source: 'Twitter' })
+	        );
+	    }
+	});
+	
+	exports.default = SocialMedia;
+
+/***/ },
+/* 518 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _SessionStore = __webpack_require__(239);
+	
+	var _SessionStore2 = _interopRequireDefault(_SessionStore);
+	
+	var _AlertStore = __webpack_require__(249);
+	
+	var _AlertStore2 = _interopRequireDefault(_AlertStore);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var AuthHandler = Object.freeze({
 	    getInitialState: function getInitialState() {
 	        return {
 	            active: false,
@@ -60753,7 +60980,81 @@
 	        } else {
 	            history.push('/');
 	        }
+	    }
+	});
+	
+	exports.default = AuthHandler;
+
+/***/ },
+/* 519 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _SessionActions = __webpack_require__(226);
+	
+	var _SessionActions2 = _interopRequireDefault(_SessionActions);
+	
+	var _AlertModal = __webpack_require__(251);
+	
+	var _AlertModal2 = _interopRequireDefault(_AlertModal);
+	
+	var _Credentials = __webpack_require__(515);
+	
+	var _Credentials2 = _interopRequireDefault(_Credentials);
+	
+	var _SocialMedia = __webpack_require__(517);
+	
+	var _SocialMedia2 = _interopRequireDefault(_SocialMedia);
+	
+	var _AuthHandler = __webpack_require__(518);
+	
+	var _AuthHandler2 = _interopRequireDefault(_AuthHandler);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var SignUpWithPassword = _react2.default.createClass({
+	    displayName: 'SignUpWithPassword',
+	
+	    mixins: [_Credentials2.default],
+	
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'form',
+	            { href: '#', onSubmit: this.onSubmit },
+	            this.email_input(),
+	            this.input('password', false),
+	            this.input('password_confirmation', true),
+	            _react2.default.createElement(
+	                'p',
+	                { 'class': 'signup' },
+	                ""
+	            )
+	        );
 	    },
+	    onSubmit: function onSubmit(e) {
+	        e.preventDefault();
+	        _SessionActions2.default.new_user({
+	            email: this.state.email,
+	            password: this.state.password,
+	            password_confirmation: this.state.password_confirmation
+	        });
+	    }
+	});
+	
+	var SignUp = _react2.default.createClass({
+	    displayName: 'SignUp',
+	
+	    mixins: [_AuthHandler2.default],
+	
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
@@ -60766,28 +61067,28 @@
 	                    { href: '#' },
 	                    _react2.default.createElement('img', { width: '100', height: '30', src: '/assets/images/logo-login@2x.png' })
 	                ),
-	                _react2.default.createElement(WithPassword, null),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'social-login clearfix' },
-	                    _react2.default.createElement(WithSocialMedia, { align: 'left', source: 'Facebook' }),
-	                    _react2.default.createElement(WithSocialMedia, { align: 'right', source: 'Twitter' })
-	                ),
+	                _react2.default.createElement(SignUpWithPassword, null),
+	                _react2.default.createElement(_SocialMedia2.default, null),
 	                _react2.default.createElement(
 	                    'p',
 	                    { className: 'signup' },
 	                    _react2.default.createElement(
 	                        'span',
 	                        null,
-	                        'Don\'t have an account yet?'
+	                        'Already have an account?'
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        "  "
 	                    ),
 	                    _react2.default.createElement(
 	                        'a',
-	                        { href: 'signup1.html' },
+	                        { href: 'login' },
 	                        _react2.default.createElement(
 	                            'span',
 	                            null,
-	                            'Sign up now'
+	                            'Log In Now'
 	                        )
 	                    )
 	                )
@@ -60797,10 +61098,10 @@
 	    }
 	});
 	
-	exports.default = Login;
+	exports.default = SignUp;
 
 /***/ },
-/* 515 */
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60809,7 +61110,7 @@
 	    value: true
 	});
 	
-	var _SessionStore = __webpack_require__(237);
+	var _SessionStore = __webpack_require__(239);
 	
 	var _SessionStore2 = _interopRequireDefault(_SessionStore);
 	
@@ -60827,7 +61128,7 @@
 	exports.default = requireAuth;
 
 /***/ },
-/* 516 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60933,7 +61234,7 @@
 	exports.Gallery = Gallery;
 
 /***/ },
-/* 517 */
+/* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
