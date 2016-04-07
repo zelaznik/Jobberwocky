@@ -1,6 +1,6 @@
 import uniqueKeySet from '../utils/uniqueKeySet.jsx';
 
-export default uniqueKeySet({
+export default uniqueKeySet('Modal', {
     MOUSE_DOWN: null,
     MOUSE_UP: null,
 

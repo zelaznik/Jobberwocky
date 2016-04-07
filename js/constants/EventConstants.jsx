@@ -1,6 +1,6 @@
 import uniqueKeySet from '../utils/uniqueKeySet.jsx';
 
-module.exports = uniqueKeySet({
+module.exports = uniqueKeySet('Events', {
     CHANGE_EVENT: null,
     LOGOUT: null,
 

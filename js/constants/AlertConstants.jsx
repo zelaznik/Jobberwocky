@@ -1,6 +1,6 @@
 import uniqueKeySet from '../utils/uniqueKeySet.jsx';
 
-const AlertConstants = uniqueKeySet({
+const AlertConstants = uniqueKeySet('Alert', {
     SUCCESS: null,
     WARNING: null,
     INFO: null,
