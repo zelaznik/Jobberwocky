@@ -26086,7 +26086,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var ApiRoot = 'http://api.jobberwocky.dev'; //http://jobberwocky-rails-api.herokuapp.com';
+	var ApiRoot = 'http://api.jobberwocky.net';
 	
 	
 	var ApiEndpoints = {};
@@ -26109,8 +26109,12 @@
 	}
 	
 	ApiEndpoints.PRODUCTS = Object.freeze({
-	    CREATE: userProductsUrl, UPDATE: userProductsUrl, DESTROY: userProductsUrl,
-	    SHOW: productsUrl, INDEX: productsUrl
+	    CREATE: userProductsUrl,
+	    UPDATE: userProductsUrl,
+	    DESTROY: userProductsUrl,
+	
+	    SHOW: productsUrl,
+	    INDEX: productsUrl
 	});
 	
 	module.exports = ApiEndpoints;
