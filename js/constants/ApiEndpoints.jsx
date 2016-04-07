@@ -1,4 +1,4 @@
-var ApiRoot = 'http://api.jobberwocky.dev';
+var ApiRoot = 'http://jobberwocky-rails-api.herokuapp.com';
 
 var ApiEndpoints = {};
 

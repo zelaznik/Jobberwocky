@@ -6,13 +6,9 @@ var app = express();
 
 var PORT = process.env.PORT || 8080;
 
-// serve our static stuff like index.css
-app.use(express.static(__dirname));
-
-// send all requests to index.html so browserHistory in React Router works
-app.get('/js/bundle.js', function(req, res) {
-    res.sendFile(path.join(__difname, 'js', 'bundle.js'));
-});
+// serve our static stuff like index.css and bundled js files.
+app.use('/assets/', express.static(path.join(__dirname,"assets")));
+app.use('/js/', express.static(path.join(__dirname,"js")));
 
 app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'))
