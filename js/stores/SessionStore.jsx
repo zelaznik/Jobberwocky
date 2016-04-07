@@ -10,7 +10,7 @@ function setSession(params) {
     var u = params.response.user;
     Cookies.set('authToken', u.auth_token);
     Cookies.set('email', u.email);
-    Cookies.set('userId', u.id);
+    Cookies.set('currentUserId', u.id);
 }
 
 function clearSession() {
@@ -20,9 +20,18 @@ function clearSession() {
 var SessionStore = new Store({
     data() {
         return {
-            email: Cookies.get('email'),
-            loggedIn: this.loggedIn()
+            email: this.email(),
+            loggedIn: this.loggedIn(),
+            currentUserId: this.currentUserId()
         };
+    },
+
+    email() {
+        return Cookies.get('email');
+    },
+
+    currentUserId() {
+        return Cookies.get('currentUserId');
     },
 
     token() {

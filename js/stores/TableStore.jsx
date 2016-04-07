@@ -9,11 +9,11 @@ import Store from './_templates/Store.jsx';
 import { Sequence } from '../utils/sequence';
 
 var _fields = Immutable.List(
-    ['id','title','price','published']
+    ['id','title','price','published', 'user']
 );
 
 var _headers = Immutable.Map({
-    id: 'Id', title: 'Title', price: 'Price', published: 'Published', user: 'User'
+    id: 'Id', title: 'Title', price: 'Price', published: 'Published', user: 'UserID'
 });
 
 var _types = Immutable.Map({
@@ -21,7 +21,7 @@ var _types = Immutable.Map({
 });
 
 var _immutable = Immutable.Map({
-    id: true
+    id: true, user: true
 });
 
 var _records = Immutable.List([]);
@@ -31,7 +31,7 @@ var seq = new Sequence();
 function assign_all(items) {
     var obj = {};
     items.forEach(function(item) {
-        obj[item.id] = item;
+        obj[item.id] = toObject(item);
     });
     _records = Immutable.fromJS(obj);
 }
@@ -47,23 +47,28 @@ function create_success(tempID, response) {
         row = response.product;
 
     delete data[tempID];
-    data[row.id] = row;
+    data[row.id] = toObject(row);
     _records = Immutable.fromJS(data);
 }
 
 function create_error(tempID) {
     var data = _records.toJSON();
-
     delete data[tempID];
     _records = Immutable.fromJS(data);
 }
 
-function update(id, updates) {
-    var data = _records.toJSON();
-    var row = data[id];
+function toObject(updates, orig={}) {
+    var row = assign({}, orig);
     for (var key in updates) {
         row[key] = updates[key];
     }
+    row.user = row.user.id;
+    return row;
+}
+
+function update(id, updates) {
+    var data = _records.toJSON();
+    data[id] = toObject(updates, data[id]);
     _records = Immutable.fromJS(data);
 }
 
