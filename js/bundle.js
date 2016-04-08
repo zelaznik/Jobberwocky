@@ -25443,11 +25443,26 @@
 	            if (response) SessionActions.create((0, _objectAssign2.default)({}, response.user, { password: password }));
 	        });
 	    },
+	    new_auth: function new_auth(provider) {
+	        var initialUrl = _ApiEndpoints2.default.AUTH.NEW + '?provider=' + provider;
+	        (0, _WebApi.GET)(initialUrl, undefined, function (error, response) {
+	            if (error) {
+	                console.warn("Error fetching omni-auth links");
+	                console.log(error);
+	            }
+	            if (response) {
+	                _AppDispatcher2.default.delayedDispatch({
+	                    actionType: _SessionConstants2.default.OMNIAUTH_URL_PRELOAD,
+	                    provider: provider, url: response.url
+	                });
+	            }
+	        });
+	    },
 	    destroy: function destroy() {
 	        _AppDispatcher2.default.dispatch({
 	            actionType: _SessionConstants2.default.SIGN_OUT
 	        });
-	        (0, _WebApi.DELETE)(_ApiEndpoints2.default.SIGN_OUT, {}, function (error, response) {
+	        (0, _WebApi.DELETE)(_ApiEndpoints2.default.SIGN_OUT, undefined, function (error, response) {
 	            if (error) {
 	                console.warn('Error Signing Out:');
 	                console.log(error);
@@ -25505,6 +25520,17 @@
 	        value: function dispatch(payload) {
 	            if (payload.actionType == undefined) throw new Error("Cannot dispatch undefined actionType.");
 	            _get(Object.getPrototypeOf(DispatcherType.prototype), 'dispatch', this).apply(this, arguments);
+	        }
+	    }, {
+	        key: 'delayedDispatch',
+	        value: function delayedDispatch(payload) {
+	            var _this2 = this;
+	
+	            var dt = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
+	
+	            setTimeout(function () {
+	                return _this2.dispatch(payload);
+	            }, dt);
 	        }
 	    }]);
 	
@@ -25942,7 +25968,10 @@
 	
 	    SIGN_OUT: null,
 	    SIGN_OUT_SUCCESS: null,
-	    SIGN_OUT_ERROR: null
+	    SIGN_OUT_ERROR: null,
+	
+	    OMNIAUTH_NEW: null,
+	    OMNIAUTH_URL_PRELOAD: null
 	});
 	
 	exports.default = SessionConstants;
@@ -26086,7 +26115,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var ApiRoot = 'http://api.jobberwocky.net';
+	var ApiRoot = 'http://api.jobberwocky.dev';
 	
 	
 	var ApiEndpoints = {};
@@ -26097,6 +26126,10 @@
 	ApiEndpoints.SIGN_IN = ApiRoot + '/users/sign_in';
 	ApiEndpoints.SIGN_OUT = ApiRoot + '/users/sign_out';
 	ApiEndpoints.SIGN_UP = ApiRoot + '/users';
+	
+	ApiEndpoints.AUTH = {
+	    NEW: ApiRoot + '/auth/new'
+	};
 	
 	function userProductsUrl(id) {
 	    var usersUrl = ApiRoot + '/users/' + _SessionStore2.default.currentUserId();
@@ -26117,7 +26150,7 @@
 	    INDEX: productsUrl
 	});
 	
-	module.exports = ApiEndpoints;
+	module.exports = Object.freeze(ApiEndpoints);
 
 /***/ },
 /* 237 */
@@ -26149,6 +26182,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var Immutable = __webpack_require__(510);
+	
 	var _errors = [];
 	
 	function setSession(params) {
@@ -26162,6 +26197,14 @@
 	    _Cookies2.default.reset();
 	}
 	
+	var _auth = Immutable.Map({});
+	
+	function set_omniauth_url(provider, url) {
+	    var data = _auth.toJSON();
+	    data[provider] = url;
+	    _auth = Immutable.Map(data);
+	}
+	
 	var SessionStore = new _Store2.default({
 	    data: function data() {
 	        return {
@@ -26169,6 +26212,9 @@
 	            loggedIn: this.loggedIn(),
 	            currentUserId: this.currentUserId()
 	        };
+	    },
+	    omni_auth_url: function omni_auth_url(provider) {
+	        return _auth.get(provider);
 	    },
 	    email: function email() {
 	        return _Cookies2.default.get('email');
@@ -26194,6 +26240,11 @@
 	        case _SessionConstants2.default.SIGN_OUT:
 	            clearSession();
 	            SessionStore.emit(_EventConstants.LOGOUT);
+	            SessionStore.emitChange();
+	            break;
+	
+	        case _SessionConstants2.default.OMNIAUTH_URL_PRELOAD:
+	            set_omniauth_url(payload.provider, payload.url);
 	            SessionStore.emitChange();
 	            break;
 	
@@ -55226,19 +55277,19 @@
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _ProductConstants = __webpack_require__(508);
+	var _Store = __webpack_require__(238);
+	
+	var _Store2 = _interopRequireDefault(_Store);
+	
+	var _sequence = __webpack_require__(508);
+	
+	var _ProductConstants = __webpack_require__(509);
 	
 	var _ProductConstants2 = _interopRequireDefault(_ProductConstants);
 	
 	var _AppDispatcher = __webpack_require__(227);
 	
 	var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
-	
-	var _Store = __webpack_require__(238);
-	
-	var _Store2 = _interopRequireDefault(_Store);
-	
-	var _sequence = __webpack_require__(509);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -55298,7 +55349,7 @@
 	    for (var key in updates) {
 	        row[key] = updates[key];
 	    }
-	    row.user = row.user.id;
+	    row.user = row.user.id || row.user;
 	    return row;
 	}
 	
@@ -55379,46 +55430,6 @@
 
 /***/ },
 /* 508 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _uniqueKeySet = __webpack_require__(233);
-	
-	var _uniqueKeySet2 = _interopRequireDefault(_uniqueKeySet);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var TableConstants = (0, _uniqueKeySet2.default)('Products', {
-	    NEW: null,
-	    EDIT: null,
-	
-	    CREATE: null,
-	    CREATE_SUCCESS: null,
-	    CREATE_ERROR: null,
-	
-	    FETCH: null,
-	    FETCH_SUCCESS: null,
-	    FETCH_ERROR: null,
-	
-	    UPDATE: null,
-	    UPDATE_SUCCESS: null,
-	    UPDATE_ERROR: null,
-	
-	    DESTROY: null,
-	    DESTROY_SUCCESS: null,
-	    DESTROY_ERROR: null
-	
-	});
-	
-	exports.default = TableConstants;
-
-/***/ },
-/* 509 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -55467,6 +55478,46 @@
 	    Sequence: Sequence,
 	    SequenceProxy: SequenceProxy
 	};
+
+/***/ },
+/* 509 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _uniqueKeySet = __webpack_require__(233);
+	
+	var _uniqueKeySet2 = _interopRequireDefault(_uniqueKeySet);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var TableConstants = (0, _uniqueKeySet2.default)('Products', {
+	    NEW: null,
+	    EDIT: null,
+	
+	    CREATE: null,
+	    CREATE_SUCCESS: null,
+	    CREATE_ERROR: null,
+	
+	    FETCH: null,
+	    FETCH_SUCCESS: null,
+	    FETCH_ERROR: null,
+	
+	    UPDATE: null,
+	    UPDATE_SUCCESS: null,
+	    UPDATE_ERROR: null,
+	
+	    DESTROY: null,
+	    DESTROY_SUCCESS: null,
+	    DESTROY_ERROR: null
+	
+	});
+	
+	exports.default = TableConstants;
 
 /***/ },
 /* 510 */
@@ -60469,7 +60520,7 @@
 	
 	var _TableActions2 = _interopRequireDefault(_TableActions);
 	
-	var _ProductConstants = __webpack_require__(508);
+	var _ProductConstants = __webpack_require__(509);
 	
 	var _ProductConstants2 = _interopRequireDefault(_ProductConstants);
 	
@@ -60928,24 +60979,45 @@
 	
 	var _StringFormat2 = _interopRequireDefault(_StringFormat);
 	
+	var _SessionActions = __webpack_require__(226);
+	
+	var _SessionActions2 = _interopRequireDefault(_SessionActions);
+	
+	var _SessionStore = __webpack_require__(237);
+	
+	var _SessionStore2 = _interopRequireDefault(_SessionStore);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var SocialMedium = _react2.default.createClass({
 	    displayName: 'SocialMedium',
+	    componentWillMount: function componentWillMount() {
+	        if (!_SessionStore2.default.omni_auth_url(this.source())) {
+	            _SessionActions2.default.new_auth(this.source());
+	        }
+	    },
+	    align: function align() {
+	        return this.props.align.toLowerCase();
+	    },
+	    source: function source() {
+	        return this.props.source.toLowerCase();
+	    },
+	    label: function label() {
+	        return _StringFormat2.default.capitalize(this.props.source);
+	    },
 	    render: function render() {
-	        var align = this.props.align.toLowerCase(),
-	            source = this.props.source.toLowerCase(),
-	            label = _StringFormat2.default.capitalize(source);
-	
 	        return _react2.default.createElement(
 	            'a',
-	            { className: 'btn btn-primary ' + align + ' ' + source, href: 'index.html' },
-	            _react2.default.createElement('i', { className: 'fa fa-' + this.props.source.toLowerCase() }),
+	            { href: _SessionStore2.default.omni_auth_url(this.source()),
+	                className: 'btn btn-primary ' + this.align() + ' ' + this.source()
+	            },
+	            _react2.default.createElement('i', { className: 'fa fa-' + this.source() }),
 	            _react2.default.createElement(
 	                'span',
 	                null,
-	                label,
-	                ' Login'
+	                this.label(),
+	                " ",
+	                'Login'
 	            )
 	        );
 	    }
@@ -60953,6 +61025,18 @@
 	
 	var SocialMedia = _react2.default.createClass({
 	    displayName: 'SocialMedia',
+	    getInitialState: function getInitialState() {
+	        return { dummy: {} };
+	    },
+	    refresh: function refresh() {
+	        this.setState({ dummy: {} });
+	    },
+	    componentDidMount: function componentDidMount() {
+	        _SessionStore2.default.addChangeListener(this.refresh);
+	    },
+	    componentWillUnmount: function componentWillUnmount() {
+	        _SessionStore2.default.removeChangeListener(this.refresh);
+	    },
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
@@ -61281,9 +61365,15 @@
 	
 	var _TableStore2 = _interopRequireDefault(_TableStore);
 	
+	var _ApiEndpoints = __webpack_require__(236);
+	
+	var _ApiEndpoints2 = _interopRequireDefault(_ApiEndpoints);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	window.TableStore = _TableStore2.default;
+	
+	window.ApiEndpoints = _ApiEndpoints2.default;
 
 /***/ }
 /******/ ]);

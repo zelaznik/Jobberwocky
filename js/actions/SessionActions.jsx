@@ -4,7 +4,7 @@ import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
 import AlertActions from '../actions/AlertActions.jsx';
 import ApiEndpoints from '../constants/ApiEndpoints.jsx';
-import { POST, DELETE } from '../webApi/WebApi.jsx';
+import { GET , POST, DELETE } from '../webApi/WebApi.jsx';
 
 var SessionActions = Object.freeze({
     create(params) {
@@ -36,11 +36,28 @@ var SessionActions = Object.freeze({
         });
     },
 
+    new_auth(provider) {
+        var initialUrl = ApiEndpoints.AUTH.NEW + `?provider=` + provider;
+        GET(initialUrl, undefined, (error, response) => {
+            if (error) {
+                console.warn("Error fetching omni-auth links");
+                console.log(error);
+            }
+            if (response) {
+                AppDispatcher.delayedDispatch({
+                    actionType: SessionConstants.OMNIAUTH_URL_PRELOAD,
+                    provider: provider, url: response.url
+                });
+            }
+        });
+
+    },
+
     destroy() {
         AppDispatcher.dispatch({
             actionType: SessionConstants.SIGN_OUT
         });
-        DELETE(ApiEndpoints.SIGN_OUT, {}, (error, response) => {
+        DELETE(ApiEndpoints.SIGN_OUT, undefined, (error, response) => {
             if (error) {
                 console.warn(`Error Signing Out:`);
                 console.log(error);

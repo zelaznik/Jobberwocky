@@ -1,3 +1,5 @@
+var Immutable = require('immutable');
+
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
 import Store from './_templates/Store.jsx';
@@ -17,6 +19,14 @@ function clearSession() {
     Cookies.reset();
 }
 
+var _auth = Immutable.Map({});
+
+function set_omniauth_url(provider, url) {
+    var data = _auth.toJSON();
+    data[provider] = url;
+    _auth = Immutable.Map(data);
+}
+
 var SessionStore = new Store({
     data() {
         return {
@@ -24,6 +34,10 @@ var SessionStore = new Store({
             loggedIn: this.loggedIn(),
             currentUserId: this.currentUserId()
         };
+    },
+
+    omni_auth_url(provider) {
+        return _auth.get(provider);
     },
 
     email() {
@@ -53,6 +67,11 @@ AppDispatcher.register((payload) => {
         case SessionConstants.SIGN_OUT:
             clearSession();
             SessionStore.emit(LOGOUT);
+            SessionStore.emitChange();
+            break;
+
+        case SessionConstants.OMNIAUTH_URL_PRELOAD:
+            set_omniauth_url(payload.provider, payload.url);
             SessionStore.emitChange();
             break;
 

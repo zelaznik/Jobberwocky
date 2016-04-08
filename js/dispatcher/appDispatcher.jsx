@@ -7,6 +7,9 @@ class DispatcherType extends singleton(Dispatcher) {
             throw new Error("Cannot dispatch undefined actionType.");
         super.dispatch(...arguments);
     }
+    delayedDispatch(payload, dt=0) {
+        setTimeout(() => this.dispatch(payload), dt);
+    }
 }
 
 var AppDispatcher = new DispatcherType();
