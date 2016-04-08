@@ -18,5 +18,5 @@ app.get('*', function (req, res) {
 });
 
 app.listen(PORT, function() {
-    console.log('Production Express server running at localhost:' + PORT);
+    console.log('Express server running at localhost:' + PORT);
 });
