@@ -1,12 +1,8 @@
 var SessionStore = require('../stores/SessionStore.jsx');
-var ENV = require('../../config.js');
 
-['NODE_ENV','API_ROOT_URL'].forEach(function(name) {
-    console.warn(name + ": " + ENV[name]);
-});
-
-var ApiRoot = getEnv('API_ROOT_URL');
 var ApiEndpoints = {};
+var ApiRoot = 'http://api.jobberwocky.net';
+console.warn("FYI: the ApiRoot is hard coded for Production.")
 
 ApiEndpoints.ROOT_URL = ApiRoot;
 ApiEndpoints.VERSION = 'application/vnd.marketplace.v1';
