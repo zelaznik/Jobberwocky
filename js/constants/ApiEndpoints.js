@@ -1,22 +1,22 @@
-if (process.env.NODE_ENV === 'production') {
-    let ApiRoot = 'http://api.jobberwocky.net';
-} else {
-    let ApiRoot = 'http://api.jobberwocky.dev';
-}
+var SessionStore = require('../stores/SessionStore.jsx');
+var ENV = require('../../config.js');
 
-import SessionStore from '../stores/SessionStore.jsx';
+['NODE_ENV','API_ROOT_URL'].forEach(function(name) {
+    console.warn(name + ": " + ENV[name]);
+});
 
+var ApiRoot = getEnv('API_ROOT_URL');
 var ApiEndpoints = {};
 
 ApiEndpoints.ROOT_URL = ApiRoot;
 ApiEndpoints.VERSION = 'application/vnd.marketplace.v1';
 
-ApiEndpoints.SIGN_IN = `${ApiRoot}/users/sign_in`;
-ApiEndpoints.SIGN_OUT = `${ApiRoot}/users/sign_out`;
-ApiEndpoints.SIGN_UP = `${ApiRoot}/users`;
+ApiEndpoints.SIGN_IN =  ApiRoot + '/users/sign_in';
+ApiEndpoints.SIGN_OUT = ApiRoot + '/users/sign_out';
+ApiEndpoints.SIGN_UP =  ApiRoot + '/users';
 
 ApiEndpoints.AUTH = {
-    NEW: `${ApiRoot}/auth/new`
+    NEW: ApiRoot + '/auth/new'
 };
 
 function userProductsUrl(id) {

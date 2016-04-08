@@ -3,7 +3,7 @@ import assign from 'object-assign';
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
 import AlertActions from '../actions/AlertActions.jsx';
-import ApiEndpoints from '../constants/ApiEndpoints.jsx';
+import ApiEndpoints from '../constants/ApiEndpoints.js';
 import { GET , POST, DELETE } from '../webApi/WebApi.jsx';
 
 var SessionActions = Object.freeze({

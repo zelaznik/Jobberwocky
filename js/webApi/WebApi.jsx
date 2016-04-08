@@ -2,7 +2,7 @@ import $ from 'jquery';
 import assign from 'object-assign';
 
 import SessionStore from '../stores/SessionStore.jsx';
-import ApiEndpoints from '../constants/ApiEndpoints.jsx';
+import ApiEndpoints from '../constants/ApiEndpoints.js';
 
 function corsHeaders() {
     return {

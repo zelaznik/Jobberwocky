@@ -18,7 +18,7 @@ var SocialMedium = React.createClass({
 
     render() {
         return (
-            <Link to={ SessionStore.omni_auth_url(this.source()) }
+            <Link to={ SessionStore.omni_auth_url(this.source()) || '#' }
                className={`btn btn-primary ${this.align()} ${this.source()}`}
             >
                 <i className={`fa fa-${this.source()}`} />

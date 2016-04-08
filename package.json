@@ -3,18 +3,15 @@
   "version": "1.0.0",
   "description": "Inspired by the App Academy job-board.  This is a way for to keep track of applications and following up.  Like a CRM for job applications.",
   "main": "index.jsx",
-
   "scripts": {
-    "dual": "webpack && node server.js",
-    "start": "node server.js"
+    "start": "webpack && node server.js"
   },
-
   "keywords": [],
   "author": "Steve Zelaznik",
   "license": "ISC",
-
   "dependencies": {
     "compression": "^1.6.1",
+    "env": "0.0.2",
     "express": "^4.13.4",
     "flux": "^2.1.1",
     "if-env": "^1.0.0",
@@ -29,7 +26,6 @@
     "react-dom": "^0.14.7",
     "react-router": "^2.0.1"
   },
-
   "devDependencies": {
     "babel-core": "^6.7.4",
     "babel-loader": "^6.2.4",
