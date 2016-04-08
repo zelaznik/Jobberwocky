@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-dom';
+import { Link } from 'react-router';
 
 import StringFormat from '../../utils/StringFormat.jsx';
 import SessionStore from '../../stores/SessionStore.jsx';
@@ -13,10 +13,10 @@ var ButtonChoice = React.createClass({
 
     render() {
         return (
-            <a href={ this.props.href } className={ this.clsName() } >
+            <Link to={ this.props.href } className={ this.clsName() } >
                 { this.icon() }
                 <span>{ this.label() }</span>
-            </a>
+            </Link>
         );
     }
 });

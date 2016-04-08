@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router';
+
 import StringFormat from '../../utils/StringFormat.jsx';
 import SessionActions from '../../actions/SessionActions.jsx';
 import SessionStore from '../../stores/SessionStore.jsx';
@@ -16,12 +18,12 @@ var SocialMedium = React.createClass({
 
     render() {
         return (
-            <a href={ SessionStore.omni_auth_url(this.source()) }
+            <Link to={ SessionStore.omni_auth_url(this.source()) }
                className={`btn btn-primary ${this.align()} ${this.source()}`}
             >
                 <i className={`fa fa-${this.source()}`} />
                 <span>{this.label()}{" "}Login</span>
-            </a>
+            </Link>
         );
     }
 });

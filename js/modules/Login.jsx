@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-dom';
+import { Link } from 'react-router';
 
 import SessionActions from '../actions/SessionActions.jsx';
 import AlertModal from '../components/modals/AlertModal.jsx';
@@ -17,9 +17,9 @@ var LoginWithPassword = React.createClass({
                 { this.email_input('email', false) }
                 { this.password_input('password', true) }
                 <div className="form-options clearfix">
-                    <a href="/reset" className="pull-right">
+                    <Link to="/reset" className="pull-right">
                         Forgot password?
-                    </a>
+                    </Link>
                 </div>
             </form>
         )
@@ -49,9 +49,9 @@ var Login = React.createClass({
                     <p className="signup">
                         <span>Don't have an account yet?</span>
                         <span>{"  "}</span>
-                        <a href="/sign_up">
+                        <Link to="/sign_up">
                             <span>Sign Up now</span>
-                        </a>
+                        </Link>
                     </p>
                 </div>
 
