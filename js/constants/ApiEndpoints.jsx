@@ -1,4 +1,9 @@
-var ApiRoot = 'http://api.jobberwocky.dev';
+if (process.env.NODE_ENV === 'production') {
+    let ApiRoot = 'http://api.jobberwocky.net';
+} else {
+    let ApiRoot = 'http://api.jobberwocky.dev';
+}
+
 import SessionStore from '../stores/SessionStore.jsx';
 
 var ApiEndpoints = {};
