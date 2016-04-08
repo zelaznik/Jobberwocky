@@ -7,9 +7,11 @@ module.exports = {
         publicPath: '/'
     },
     devtool: 'source-map',
+
     resolve: {
         extensions: ["", ".js", ".jsx"]
     },
+
     module: {
         loaders: [
             {
