@@ -6,14 +6,10 @@ import SessionStore from '../../stores/SessionStore.jsx';
 
 var ButtonChoice = React.createClass({
     align() { return this.props.align; },
-    source() { return this.props.source.toLowerCase(); },
-    label() { return StringFormat.snake_to_label(this.props.source); },
-    icon() { return ((!this.props.icon) ? '' : <i className={ 'fa fa-' + this.props.icon } />); },
-
-    clsName() {
-        var c = this.props.category ? 'btn-' + this.props.category : '';
-        return 'btn ' + c + ' ' + (this.align() || '');
-    },
+    source() { return this.props.label.toLowerCase(); },
+    label() { return StringFormat.snake_to_label(this.props.label); },
+    icon() { return (<i className={ 'fa fa-' + this.props.icon } />); },
+    clsName() { return 'btn btn-primary ' + this.align() + ' ' + this.props.category; },
 
     render() {
         return (
@@ -45,9 +41,9 @@ var EnterOrCancel = React.createClass({
     render() {
         return (
             <div className="social-login clearfix">
-                <ButtonChoice align='left' category="primary" icon="envelope-o" source="reset_password" href="#" />
+                <ButtonChoice href="#"      align='left'  label="reset_password"  category="facebook" icon="envelope-o" />
                 {"   "}
-                <ButtonChoice align='right' category="info" icon="sign-in" source="return_to_login" href="/login" />
+                <ButtonChoice href="/login" align='right' label="return_to_login" category="twitter"  icon="sign-in" />
             </div>
         );
     }

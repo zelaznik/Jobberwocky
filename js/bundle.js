@@ -60770,8 +60770,8 @@
 	        return _react2.default.createElement(
 	            'form',
 	            { onSubmit: this.onSubmit },
-	            this.email_input(),
-	            this.input('password', true),
+	            this.email_input('email', false),
+	            this.password_input('password', true),
 	            _react2.default.createElement(
 	                'div',
 	                { className: 'form-options clearfix' },
@@ -60874,15 +60874,11 @@
 	        return _StringFormat2.default.label_to_snake(this.props.name);
 	    },
 	    inputField: function inputField() {
-	        var _this = this;
-	
 	        return _react2.default.createElement('input', { className: 'form-control',
 	            placeholder: this.label(),
 	            type: this.dataType,
 	            value: this.props.value,
-	            onChange: function onChange(e) {
-	                return _this.props.updateForm(e, _this.key());
-	            },
+	            onChange: this.props.onChange,
 	            autoComplete: 'off'
 	        });
 	    },
@@ -60913,43 +60909,45 @@
 	    dataType: 'text'
 	});
 	
-	var Credentials = Object.freeze({
+	var Credentials = {
 	    getInitialState: function getInitialState() {
-	        return { email: '', password: '', password_confirmation: '' };
+	        return {
+	            email: '', email_confirmation: '',
+	            password: '', password_confirmation: ''
+	        };
 	    },
-	    input: function input(name, isFinal) {
-	        return _react2.default.createElement(BasePassword, { name: name,
+	    password_input: function password_input(name, isFinal) {
+	        var _this = this;
+	
+	        return _react2.default.createElement(BasePassword, { key: name,
+	            name: name,
 	            isFinal: isFinal,
 	            value: this.state[name],
-	            updateForm: this.updateForm
+	            onChange: function onChange(e) {
+	                return _this.updateForm(e, name);
+	            }
 	        });
 	    },
 	    email_input: function email_input(key, isFinal) {
 	        var _this2 = this;
 	
-	        var placeholder;
-	        if (!key) {
-	            key = 'email';
-	            placeholder = 'Email Address';
-	        } else {
-	            placeholder = _StringFormat2.default.snake_to_label(key);
-	        }
-	
-	        return _react2.default.createElement(BaseEmail, { field: key, name: key,
+	        return _react2.default.createElement(BaseEmail, { key: key,
+	            name: key,
+	            isFinal: isFinal,
 	            value: this.state[key],
-	            placeholder: placeholder,
 	            onChange: function onChange(e) {
 	                return _this2.updateForm(e, key);
-	            }
+	            },
+	            placeholder: _StringFormat2.default.snake_to_label(key)
 	        });
 	    },
 	    updateForm: function updateForm(e, key) {
 	        this.state[key] = e.target.value;
 	        this.setState((0, _deepCopy2.default)(this.state));
 	    }
-	});
+	};
 	
-	exports.default = Credentials;
+	exports.default = Object.freeze(Credentials);
 
 /***/ },
 /* 516 */
@@ -60970,7 +60968,7 @@
 	    },
 	
 	    snake_to_label: function snake_to_label(orig) {
-	        var words = orig.split(/[_|\s]/).map(StringFormat.capitalize);
+	        var words = orig.split(/_/).map(StringFormat.capitalize);
 	        return words.join(" ");
 	    },
 	
@@ -61174,9 +61172,9 @@
 	        return _react2.default.createElement(
 	            'form',
 	            { href: '#', onSubmit: this.onSubmit },
-	            this.email_input(),
-	            this.input('password', false),
-	            this.input('password_confirmation', true),
+	            this.email_input('email', false),
+	            this.password_input('password', false),
+	            this.password_input('password_confirmation', true),
 	            _react2.default.createElement(
 	                'p',
 	                { 'class': 'signup' },
@@ -61288,7 +61286,7 @@
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'form',
-	            { href: '#', onSubmit: this.onSubmit },
+	            { onSubmit: this.onSubmit },
 	            this.email_input('email', false),
 	            this.email_input('email_confirmation', true),
 	            _react2.default.createElement(
@@ -61372,17 +61370,16 @@
 	        return this.props.align;
 	    },
 	    source: function source() {
-	        return this.props.source.toLowerCase();
+	        return this.props.label.toLowerCase();
 	    },
 	    label: function label() {
-	        return _StringFormat2.default.snake_to_label(this.props.source);
+	        return _StringFormat2.default.snake_to_label(this.props.label);
 	    },
 	    icon: function icon() {
-	        return !this.props.icon ? '' : _react2.default.createElement('i', { className: 'fa fa-' + this.props.icon });
+	        return _react2.default.createElement('i', { className: 'fa fa-' + this.props.icon });
 	    },
 	    clsName: function clsName() {
-	        var c = this.props.category ? 'btn-' + this.props.category : '';
-	        return 'btn ' + c + ' ' + (this.align() || '');
+	        return 'btn btn-primary ' + this.align() + ' ' + this.props.category;
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(
@@ -61416,9 +61413,9 @@
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'social-login clearfix' },
-	            _react2.default.createElement(ButtonChoice, { align: 'left', category: 'primary', icon: 'envelope-o', source: 'reset_password', href: '#' }),
+	            _react2.default.createElement(ButtonChoice, { href: '#', align: 'left', label: 'reset_password', category: 'facebook', icon: 'envelope-o' }),
 	            "   ",
-	            _react2.default.createElement(ButtonChoice, { align: 'right', category: 'info', icon: 'sign-in', source: 'return_to_login', href: '/login' })
+	            _react2.default.createElement(ButtonChoice, { href: '/login', align: 'right', label: 'return_to_login', category: 'twitter', icon: 'sign-in' })
 	        );
 	    }
 	});

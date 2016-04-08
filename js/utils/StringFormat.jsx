@@ -8,7 +8,7 @@ var StringFormat = Object.freeze({
     },
 
     snake_to_label: function(orig) {
-        var words = orig.split(/[_|\s]/).map(StringFormat.capitalize);
+        var words = orig.split(/_/).map(StringFormat.capitalize);
         return words.join(" ");
     },
 

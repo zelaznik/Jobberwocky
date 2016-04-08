@@ -13,9 +13,9 @@ var SignUpWithPassword = React.createClass({
     render() {
         return(
             <form href="#" onSubmit={this.onSubmit} >
-                { this.email_input() }
-                { this.input('password', false) }
-                { this.input('password_confirmation', true) }
+                { this.email_input('email', false) }
+                { this.password_input('password', false) }
+                { this.password_input('password_confirmation', true) }
                 <p class="signup">{""}</p>
             </form>
         );

@@ -14,8 +14,8 @@ var LoginWithPassword = React.createClass({
     render() {
         return(
             <form onSubmit={this.onSubmit} >
-                { this.email_input() }
-                { this.input('password', true) }
+                { this.email_input('email', false) }
+                { this.password_input('password', true) }
                 <div className="form-options clearfix">
                     <a href="/reset" className="pull-right">
                         Forgot password?

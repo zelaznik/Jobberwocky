@@ -12,7 +12,7 @@ var BaseInput = {
                    placeholder={ this.label() }
                    type={ this.dataType }
                    value={ this.props.value }
-                   onChange={ (e) => this.props.updateForm(e, this.key()) }
+                   onChange={ this.props.onChange }
                    autoComplete="off"
             />
         );
@@ -44,35 +44,33 @@ var BaseEmail = React.createClass({
 });
 
 
-var Credentials = Object.freeze({
+var Credentials = {
     getInitialState() {
-        return {email: '', password: '', password_confirmation: ''};
+        return {
+            email: '',    email_confirmation: '',
+            password: '', password_confirmation: ''
+        };
     },
 
-    input(name, isFinal) {
+    password_input(name, isFinal) {
         return (
-            <BasePassword name={name}
+            <BasePassword key={name}
+                          name={name}
                           isFinal={isFinal}
                           value={this.state[name]}
-                          updateForm={this.updateForm}
+                          onChange={(e) => this.updateForm(e, name)}
             />
         );
     },
 
     email_input(key, isFinal) {
-        var placeholder;
-        if (!key) {
-            key = 'email';
-            placeholder = 'Email Address';
-        } else {
-            placeholder = StringFormat.snake_to_label(key);
-        }
-
         return (
-            <BaseEmail field={key} name={key}
-                       value={this.state[key]}
-                       placeholder={placeholder}
+            <BaseEmail key={key}
+                       name={key}
+                       isFinal={isFinal}
+                       value={ this.state[key] }
                        onChange={(e) => this.updateForm(e, key)}
+                       placeholder={ StringFormat.snake_to_label(key) }
             />
         );
     },
@@ -81,6 +79,6 @@ var Credentials = Object.freeze({
         this.state[key] = e.target.value;
         this.setState(deepCopy(this.state));
     }
-});
+};
 
-export default Credentials;
+export default Object.freeze(Credentials);
