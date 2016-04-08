@@ -11,6 +11,7 @@ import MainContent from './components/Products.jsx';
 import { Error404 } from './components/Errors.jsx';
 import Login from './modules/Login.jsx';
 import SignUp from './modules/SignUp.jsx';
+import Reset from './modules/Reset.jsx';
 
 /* UTILITIES */
 import requireAuth from './utils/requireAuth.jsx';
@@ -33,8 +34,11 @@ var router = (
             <Route path="/charts" component={Charts} />
             <Route path="/gallery" component={Gallery} />
         </Route>
+
         <Route path="/login" component={Login} />
         <Route path="/sign_up" component={SignUp} />
+        <Route path="/reset" component={Reset} />
+
         <Route path="*" component={ Error404 } status="404" />
     </Router>
 );

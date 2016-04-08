@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-dom';
 
 import SessionActions from '../actions/SessionActions.jsx';
 import AlertModal from '../components/modals/AlertModal.jsx';
@@ -12,11 +13,13 @@ var LoginWithPassword = React.createClass({
 
     render() {
         return(
-            <form href="#" onSubmit={this.onSubmit} >
+            <form onSubmit={this.onSubmit} >
                 { this.email_input() }
                 { this.input('password', true) }
                 <div className="form-options clearfix">
-                    <a className="pull-right" href="#">Forgot password?</a>
+                    <a href="/reset" className="pull-right">
+                        Forgot password?
+                    </a>
                 </div>
             </form>
         )
@@ -38,7 +41,7 @@ var Login = React.createClass({
         return (
             <div className="login-wrapper">
                 <div id="login-container" className='login-container active'>
-                    <a href="#">
+                    <a>
                         <img width="100" height="30" src="/assets/images/logo-login@2x.png" />
                     </a>
                     <LoginWithPassword />
@@ -46,7 +49,7 @@ var Login = React.createClass({
                     <p className="signup">
                         <span>Don't have an account yet?</span>
                         <span>{"  "}</span>
-                        <a href="sign_up">
+                        <a href="/sign_up">
                             <span>Sign Up now</span>
                         </a>
                     </p>

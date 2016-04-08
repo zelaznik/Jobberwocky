@@ -4,22 +4,14 @@ import SessionActions from '../../actions/SessionActions.jsx';
 import SessionStore from '../../stores/SessionStore.jsx';
 
 var SocialMedium = React.createClass({
+    align() { return this.props.align.toLowerCase(); },
+    source() { return this.props.source.toLowerCase(); },
+    label() { return StringFormat.capitalize(this.props.source); },
+
     componentWillMount() {
         if (!SessionStore.omni_auth_url(this.source())) {
             SessionActions.new_auth(this.source());
         }
-    },
-
-    align() {
-        return this.props.align.toLowerCase();
-    },
-
-    source() {
-        return this.props.source.toLowerCase();
-    },
-
-    label() {
-        return StringFormat.capitalize(this.props.source);
     },
 
     render() {

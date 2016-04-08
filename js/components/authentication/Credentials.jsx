@@ -2,7 +2,7 @@ import React from 'react';
 import StringFormat from '../../utils/StringFormat.jsx';
 import deepCopy from '../../utils/deepCopy.jsx';
 
-var BasePassword = React.createClass({
+var BaseInput = {
     label() { return StringFormat.snake_to_label(this.props.name); },
     key()   { return StringFormat.label_to_snake(this.props.name); },
 
@@ -10,7 +10,7 @@ var BasePassword = React.createClass({
         return (
             <input className="form-control"
                    placeholder={ this.label() }
-                   type="password"
+                   type={ this.dataType }
                    value={ this.props.value }
                    onChange={ (e) => this.props.updateForm(e, this.key()) }
                    autoComplete="off"
@@ -31,7 +31,18 @@ var BasePassword = React.createClass({
             </div>
         );
     }
+};
+
+var BasePassword = React.createClass({
+    mixins: [BaseInput],
+    dataType: 'password'
 });
+
+var BaseEmail = React.createClass({
+    mixins: [BaseInput],
+    dataType: 'text'
+});
+
 
 var Credentials = Object.freeze({
     getInitialState() {
@@ -39,24 +50,30 @@ var Credentials = Object.freeze({
     },
 
     input(name, isFinal) {
-        return (<BasePassword key={name} name={name}
-                              isFinal={isFinal}
-                              value={this.state[name]}
-                              updateForm={this.updateForm}/>);
+        return (
+            <BasePassword name={name}
+                          isFinal={isFinal}
+                          value={this.state[name]}
+                          updateForm={this.updateForm}
+            />
+        );
     },
 
-    email_input() {
+    email_input(key, isFinal) {
+        var placeholder;
+        if (!key) {
+            key = 'email';
+            placeholder = 'Email Address';
+        } else {
+            placeholder = StringFormat.snake_to_label(key);
+        }
+
         return (
-            <div className="form-group" key="email">
-                <input className="form-control"
-                       placeholder="Email Address"
-                       field="email"
-                       type="text"
-                       value={this.state.email}
-                       onChange={ (e) => this.updateForm(e, 'email') }
-                       autoComplete="off"
-                />
-            </div>
+            <BaseEmail field={key} name={key}
+                       value={this.state[key]}
+                       placeholder={placeholder}
+                       onChange={(e) => this.updateForm(e, key)}
+            />
         );
     },
 

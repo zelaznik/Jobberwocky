@@ -1,11 +1,10 @@
 import React from 'react';
-
 import SessionActions from '../actions/SessionActions.jsx';
-import AlertModal from '../components/modals/AlertModal.jsx';
 
+import EnterOrCancel from '../components/authentication/EnterOrCancel.jsx';
 import Credentials from '../components/authentication/Credentials.jsx';
-import SocialMedia from '../components/authentication/SocialMedia.jsx';
 import AuthHandler from '../components/authentication/AuthHandler.jsx';
+import AlertModal from '../components/modals/AlertModal.jsx';
 
 var SignUpWithPassword = React.createClass({
     mixins: [Credentials],
@@ -13,9 +12,8 @@ var SignUpWithPassword = React.createClass({
     render() {
         return(
             <form href="#" onSubmit={this.onSubmit} >
-                { this.email_input() }
-                { this.input('password', false) }
-                { this.input('password_confirmation', true) }
+                { this.email_input('email', false) }
+                { this.email_input('email_confirmation', true) }
                 <p class="signup">{""}</p>
             </form>
         );
@@ -23,7 +21,7 @@ var SignUpWithPassword = React.createClass({
 
     onSubmit(e) {
         e.preventDefault();
-        SessionActions.new_user({
+        SessionActions.password_reset({
             email: this.state.email,
             password: this.state.password,
             password_confirmation: this.state.password_confirmation
@@ -39,17 +37,13 @@ var SignUp = React.createClass({
             <div className="login-wrapper">
                 <div id="login-container" className='login-container active'>
                     <a href="#">
-                        <img width="100" height="30" src="/assets/images/logo-login@2x.png" />
+                      <img width="100" height="30" src="/assets/images/logo-login@2x.png" />
                     </a>
                     <SignUpWithPassword />
-                    <SocialMedia />
-                    <p className="signup">
-                        <span>Already have an account?</span>
-                        <span>{"  "}</span>
-                        <a href="/login">
-                            <span>Log In Now</span>
-                        </a>
-                    </p>
+                    <EnterOrCancel />
+                    <h3 className="signup">
+                        Reset Your Password By Email
+                    </h3>
                 </div>
 
                 <AlertModal alerts={this.state.alerts} />
