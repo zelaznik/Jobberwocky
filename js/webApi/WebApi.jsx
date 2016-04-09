@@ -19,8 +19,12 @@ function full_url(url, params) {
         throw new Error("Missing URL argument for AJAX call");
 
     url = url || params.url;
-    if (url[0] === '/')
-        url = ApiEndpoints.ROOT_URL + url;
+    if (url[0] === '/') {
+        if (ApiEndpoints.ROOT_URL)
+            url = ApiEndpoints.ROOT_URL + url;
+        else
+            throw new Error("ApiEndpoints.ROOT_URL is not defined.");
+    }
 
     return url;
 }
