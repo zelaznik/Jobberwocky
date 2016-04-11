@@ -26117,8 +26117,8 @@
 	var SessionStore = __webpack_require__(237);
 	
 	var ApiEndpoints = {};
-	var ApiRoot = 'http://api.jobberwocky.net';
-	console.warn("FYI: the ApiRoot is hard coded for Production.");
+	var ApiRoot = 'http://api.jobberwocky.dev';
+	console.warn("FYI: the ApiRoot is hard coded for DEVELOPMENT.");
 	
 	ApiEndpoints.ROOT_URL = ApiRoot;
 	ApiEndpoints.VERSION = 'application/vnd.marketplace.v1';
@@ -26263,8 +26263,6 @@
 	    value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
 	var _events = __webpack_require__(239);
 	
 	var _objectAssign = __webpack_require__(217);
@@ -26275,43 +26273,21 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Store = function (_EventEmitter) {
-	    _inherits(Store, _EventEmitter);
-	
-	    function Store(props) {
-	        _classCallCheck(this, Store);
-	
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Store).call(this));
-	
-	        (0, _objectAssign2.default)(_this, props);
-	        return _this;
+	var StorePrototype = (0, _objectAssign2.default)({}, _events.EventEmitter.prototype, {
+	    emitChange: function emitChange() {
+	        this.emit(_EventConstants.CHANGE_EVENT);
+	    },
+	    addChangeListener: function addChangeListener(callback) {
+	        this.on(_EventConstants.CHANGE_EVENT, callback);
+	    },
+	    removeChangeListener: function removeChangeListener(callback) {
+	        this.removeListener(_EventConstants.CHANGE_EVENT, callback);
 	    }
+	});
 	
-	    _createClass(Store, [{
-	        key: 'emitChange',
-	        value: function emitChange() {
-	            this.emit(_EventConstants.CHANGE_EVENT);
-	        }
-	    }, {
-	        key: 'addChangeListener',
-	        value: function addChangeListener(callback) {
-	            this.on(_EventConstants.CHANGE_EVENT, callback);
-	        }
-	    }, {
-	        key: 'removeChangeListener',
-	        value: function removeChangeListener(callback) {
-	            this.removeListener(_EventConstants.CHANGE_EVENT, callback);
-	        }
-	    }]);
-	
-	    return Store;
-	}(_events.EventEmitter);
+	function Store(props) {
+	    (0, _objectAssign2.default)(this, StorePrototype, props);
+	}
 	
 	exports.default = Store;
 
@@ -31700,7 +31676,9 @@
 	    if (url && params.url) throw new Error("Duplicate URL arguments for AJAX call");else if (!url && !params.url) throw new Error("Missing URL argument for AJAX call");
 	
 	    url = url || params.url;
-	    if (url[0] === '/') url = _ApiEndpoints2.default.ROOT_URL + url;
+	    if (url[0] === '/') {
+	        if (_ApiEndpoints2.default.ROOT_URL) url = _ApiEndpoints2.default.ROOT_URL + url;else throw new Error("ApiEndpoints.ROOT_URL is not defined.");
+	    }
 	
 	    return url;
 	}
@@ -41921,21 +41899,17 @@
 	    value: true
 	});
 	
-	var _events = __webpack_require__(239);
+	var _AlertConstants = __webpack_require__(235);
 	
-	var _objectAssign = __webpack_require__(217);
-	
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	var _AlertConstants2 = _interopRequireDefault(_AlertConstants);
 	
 	var _AppDispatcher = __webpack_require__(227);
 	
 	var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
 	
-	var _AlertConstants = __webpack_require__(235);
+	var _Store = __webpack_require__(238);
 	
-	var _AlertConstants2 = _interopRequireDefault(_AlertConstants);
-	
-	var _EventConstants = __webpack_require__(240);
+	var _Store2 = _interopRequireDefault(_Store);
 	
 	var _deepCopy = __webpack_require__(249);
 	
@@ -41962,23 +41936,12 @@
 	    _displayStatus = false;
 	}
 	
-	var AlertStore = (0, _objectAssign2.default)({}, _events.EventEmitter.prototype, {
+	var AlertStore = new _Store2.default({
 	    data: function data() {
 	        return {
 	            messages: (0, _deepCopy2.default)(_alerts),
 	            displayStatus: !!_displayStatus
 	        };
-	    },
-	
-	    emitChange: function emitChange() {
-	        this.emit(_EventConstants.CHANGE_EVENT);
-	    },
-	
-	    addChangeListener: function addChangeListener(callback) {
-	        this.on(_EventConstants.CHANGE_EVENT, callback);
-	    },
-	    removeChangeListener: function removeChangeListener(callback) {
-	        this.removeListener(_EventConstants.CHANGE_EVENT, callback);
 	    }
 	});
 	
@@ -42013,7 +41976,6 @@
 	    }
 	});
 	
-	window.AlertStore = AlertStore;
 	exports.default = AlertStore;
 
 /***/ },
@@ -61760,14 +61722,27 @@
 
 /***/ },
 /* 526 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	// import TableStore from '../stores/TableStore.jsx';
-	// window.TableStore = TableStore;
-	//
-	// import ApiEndpoints from '../constants/ApiEndpoints.js';
-	// window.ApiEndpoints = ApiEndpoints;
-	"use strict";
+	'use strict';
+	
+	var _Store = __webpack_require__(238);
+	
+	var _Store2 = _interopRequireDefault(_Store);
+	
+	var _SessionStore = __webpack_require__(237);
+	
+	var _SessionStore2 = _interopRequireDefault(_SessionStore);
+	
+	var _ApiEndpoints = __webpack_require__(236);
+	
+	var _ApiEndpoints2 = _interopRequireDefault(_ApiEndpoints);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	window.Store = _Store2.default;
+	window.SessionStore = _SessionStore2.default;
+	window.ApiEndpoints = _ApiEndpoints2.default;
 
 /***/ }
 /******/ ]);

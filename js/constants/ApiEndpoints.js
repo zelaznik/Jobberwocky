@@ -1,8 +1,8 @@
 var SessionStore = require('../stores/SessionStore.jsx');
 
 var ApiEndpoints = {};
-var ApiRoot = 'http://api.jobberwocky.net';
-console.warn("FYI: the ApiRoot is hard coded for Production.")
+var ApiRoot = 'http://api.jobberwocky.dev';
+console.warn("FYI: the ApiRoot is hard coded for DEVELOPMENT.")
 
 ApiEndpoints.ROOT_URL = ApiRoot;
 ApiEndpoints.VERSION = 'application/vnd.marketplace.v1';

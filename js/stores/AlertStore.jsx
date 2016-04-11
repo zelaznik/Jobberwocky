@@ -1,10 +1,6 @@
-import { EventEmitter } from 'events';
-import assign from 'object-assign';
-
-import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
-
 import AlertConstants from '../constants/AlertConstants.jsx';
-import { CHANGE_EVENT, DISPLAY, HIDE } from '../constants/EventConstants.jsx';
+import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
+import Store from './_templates/Store.jsx';
 
 import deepCopy from '../utils/deepCopy.jsx';
 
@@ -27,24 +23,12 @@ function hide() {
     _displayStatus = false;
 }
 
-var AlertStore = assign({}, EventEmitter.prototype, {
+var AlertStore = new Store({
     data: function() {
         return {
             messages: deepCopy(_alerts),
             displayStatus: !!_displayStatus
         };
-    },
-
-    emitChange: function() {
-        this.emit(CHANGE_EVENT);
-    },
-
-    addChangeListener(callback) {
-        this.on(CHANGE_EVENT, callback);
-    },
-
-    removeChangeListener(callback) {
-        this.removeListener(CHANGE_EVENT, callback);
     }
 });
 
@@ -79,5 +63,4 @@ AppDispatcher.register((payload) => {
     }
 });
 
-window.AlertStore = AlertStore;
 export default AlertStore;
