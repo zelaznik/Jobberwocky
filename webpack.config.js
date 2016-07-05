@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 
-var NODE_ENV = (process.env.NODE_ENV || 'development').toDownCase();
+var NODE_ENV = (process.env.NODE_ENV || 'development').toLowerCase();
 var config_path = {
     'development':  'webpack.dev.config.js',
     'test':        'webpack.test.config.js',
@@ -41,7 +41,7 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             "process.env": {
-                "NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development")
+                "NODE_ENV": JSON.stringify(NODE_ENV)
             }
         }),
 

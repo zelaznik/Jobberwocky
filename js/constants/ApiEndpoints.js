@@ -1,4 +1,3 @@
-var config = require('./webpack.config.js');
 var SessionStore = require('../stores/SessionStore.jsx');
 
 var NODE_ENV = (process.env.NODE_ENV || 'development');
