@@ -1,7 +1,7 @@
 import { Dispatcher } from 'flux';
-import singleton from '../utils/singleton.jsx';
+//import singleton from '../utils/singleton.jsx';
 
-class DispatcherType extends singleton(Dispatcher) {
+class DispatcherType extends Dispatcher {
     dispatch(payload) {
         if (payload.actionType == undefined)
             throw new Error("Cannot dispatch undefined actionType.");
