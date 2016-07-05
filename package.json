@@ -4,8 +4,11 @@
   "description": "Inspired by the App Academy job-board.  This is a way for to keep track of applications and following up.  Like a CRM for job applications.",
   "main": "index.jsx",
   "scripts": {
-    "start": "node server.js",
-    "postinstall": "webpack --build"
+    "devserve": "webpack-dev-server -d --config webpack.dev.config.js --content-base public/ --progress --colors",
+    "devbuild": "webpack -d --config webpack.dev.config.js --profile --progress --colors",
+    "probuild": "webpack -p --config webpack.pro.config.js --profile --progress --colors",
+    "postinstall": "npm run probuild && npm run rejoice",
+    "rejoice": "echo yay!"
   },
   "keywords": [],
   "author": "Steve Zelaznik",
