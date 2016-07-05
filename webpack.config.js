@@ -1,12 +1,3 @@
-var webpack = require('webpack');
-
-var NODE_ENV = (process.env.NODE_ENV || 'development').toLowerCase();
-var config_path = {
-    'development':  'webpack.dev.config.js',
-    'test':        'webpack.test.config.js',
-    'production':   'webpack.prod.config.js'
-}[NODE_ENV];
-
 module.exports = {
     context: __dirname,
     entry: "./js/index.jsx",
@@ -38,18 +29,5 @@ module.exports = {
         ]
     },
 
-    plugins: [
-        new webpack.DefinePlugin({
-            "process.env": {
-                "NODE_ENV": JSON.stringify(NODE_ENV)
-            }
-        }),
-
-        new webpack.DefinePlugin({
-            "steve.zelaznik": {
-                "first": JSON.stringify("steve"),
-                "last": JSON.stringify("zelaznik")
-            }
-        })
-    ]
+    plugins: []
 };
