@@ -8,7 +8,9 @@
     "devbuild": "webpack -d --config  webpack.dev.config.js --profile --progress --colors",
     "probuild": "webpack -p --config webpack.prod.config.js",
     "postinstall": "npm run probuild && npm run rejoice",
-    "rejoice": "echo yay!"
+    "rejoice": "echo yay!",
+    "build": "webpack --config ./webpack.prod.config.js --progress --colors",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Steve Zelaznik",
