@@ -6,7 +6,7 @@
   "scripts": {
     "devserve": "webpack-dev-server -d --config webpack.dev.config.js --content-base public/ --progress --colors",
     "devbuild": "webpack -d --config  webpack.dev.config.js --profile --progress --colors",
-    "probuild": "webpack -p --config webpack.prod.config.js --profile --progress --colors",
+    "probuild": "webpack -p --config webpack.prod.config.js",
     "postinstall": "npm run probuild && npm run rejoice",
     "rejoice": "echo yay!"
   },
