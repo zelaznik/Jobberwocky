@@ -1,8 +1,12 @@
+var config = require('./webpack.config.js');
 var SessionStore = require('../stores/SessionStore.jsx');
 
+var NODE_ENV = (process.env.NODE_ENV || 'development');
 var ApiEndpoints = {};
-var ApiRoot = 'http://localhost:3000';
-console.warn("FYI: the ApiRoot is hard coded for DEVELOPMENT.");
+var ApiRoot = {
+    'development': 'http://localhost:3000',
+    'production': 'http://api.jobberwocky.net'
+}[NODE_ENV];
 
 ApiEndpoints.ROOT_URL = ApiRoot;
 ApiEndpoints.VERSION = 'application/vnd.marketplace.v1';
