@@ -4,7 +4,8 @@
   "description": "Inspired by the App Academy job-board.  This is a way for to keep track of applications and following up.  Like a CRM for job applications.",
   "main": "index.jsx",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "webpack --build"
   },
   "keywords": [],
   "author": "Steve Zelaznik",
