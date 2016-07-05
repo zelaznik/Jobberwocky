@@ -18,12 +18,12 @@ var SocialMedium = React.createClass({
 
     render() {
         return (
-            <Link to={ SessionStore.omni_auth_url(this.source()) || '#' }
+            <a href={ SessionStore.omni_auth_url(this.source()) || '#' }
                className={`btn btn-primary ${this.align()} ${this.source()}`}
             >
                 <i className={`fa fa-${this.source()}`} />
                 <span>{this.label()}{" "}Login</span>
-            </Link>
+            </a>
         );
     }
 });
@@ -50,7 +50,7 @@ var SocialMedia = React.createClass({
             <div className="social-login clearfix">
                 <SocialMedium align={'left'} source={'Facebook'} />
                 {"   "}
-                <SocialMedium align={'right'} source={'GitHub'} />
+                <SocialMedium align={'right'} source={'Twitter'} />
             </div>
         );
     }

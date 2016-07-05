@@ -4,7 +4,7 @@ var NODE_ENV = (process.env.NODE_ENV || 'development');
 var ApiEndpoints = {};
 var ApiRoot = {
     'development': 'http://localhost:3000',
-    'production': 'http://api.jobberwocky.net'
+    'production': 'https://api.jobberwocky.net'
 }[NODE_ENV];
 
 ApiEndpoints.ROOT_URL = ApiRoot;
