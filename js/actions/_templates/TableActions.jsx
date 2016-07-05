@@ -1,5 +1,5 @@
 import { POST , GET , PATCH , DELETE } from '../../webApi/WebApi.jsx';
-import AppDispatcher from '../../dispatcher/AppDispatcher.jsx';
+import AppDispatcher from '../../dispatcher/appDispatcher.jsx';
 import AlertActions from '../AlertActions.jsx';
 
 class TableActions {

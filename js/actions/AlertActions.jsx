@@ -1,4 +1,4 @@
-import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
+import AppDispatcher from '../dispatcher/appDispatcher.jsx';
 import AlertConstants from '../constants/AlertConstants.jsx';
 
 const AlertActions = Object.freeze({

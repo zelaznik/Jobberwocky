@@ -6,11 +6,10 @@
   "scripts": {
     "devserve": "webpack-dev-server -d --config webpack.dev.config.js --content-base public/ --progress --colors",
     "devbuild": "webpack -d --config  webpack.dev.config.js --profile --progress --colors",
-    "probuild": "webpack -p --config webpack.prod.config.js",
-    "postinstall": "npm run probuild && npm run rejoice",
-    "rejoice": "echo yay!",
     "build": "webpack --config ./webpack.prod.config.js --progress --colors",
-    "start": "node server.js"
+    "postinstall": "npm run build && npm run rejoice",
+    "start": "node server.js",
+    "rejoice": "echo yay!"
   },
   "keywords": [],
   "author": "Steve Zelaznik",

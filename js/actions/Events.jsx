@@ -1,4 +1,4 @@
-import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
+import AppDispatcher from '../dispatcher/appDispatcher.jsx';
 import MouseConstants from '../constants/MouseConstants.jsx';
 
 const MouseActions = Object.freeze({

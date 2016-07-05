@@ -1,6 +1,6 @@
 var Immutable = require('immutable');
 
-import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
+import AppDispatcher from '../dispatcher/appDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
 import Store from './_templates/Store.jsx';
 import { LOGOUT } from '../constants/EventConstants.jsx';

@@ -1,5 +1,5 @@
 import AlertConstants from '../constants/AlertConstants.jsx';
-import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
+import AppDispatcher from '../dispatcher/appDispatcher.jsx';
 import Store from './_templates/Store.jsx';
 
 import deepCopy from '../utils/deepCopy.jsx';

@@ -4,7 +4,7 @@ var Immutable = require('immutable');
 import Store from './_templates/Store.jsx';
 import { Sequence } from '../utils/sequence';
 import TableConstants from '../constants/ProductConstants.jsx';
-import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
+import AppDispatcher from '../dispatcher/appDispatcher.jsx';
 
 var _fields = Immutable.List(
     ['id','title','price','published', 'user']

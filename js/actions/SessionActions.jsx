@@ -1,6 +1,6 @@
 import assign from 'object-assign';
 
-import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
+import AppDispatcher from '../dispatcher/appDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
 import AlertActions from '../actions/AlertActions.jsx';
 import ApiEndpoints from '../constants/ApiEndpoints.js';
