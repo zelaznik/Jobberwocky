@@ -7,8 +7,12 @@ import App from './App.jsx';
 class OAuth extends App {
     componentDidMount() {
         App.prototype.componentDidMount.call(this);
+
+        var obj = this;
+        this.toRoot = function() {
+            obj.goToRoot();
+        };
         SessionStore.addChangeListener(this.toRoot);
-        this.toRoot = () => (this.goToRoot());
 
         const { query } = this.props.location;
         const { params } = this.props;
