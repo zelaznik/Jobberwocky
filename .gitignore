@@ -2,3 +2,5 @@ node_modules/*
 .idea*
 config.ru
 js/bundle.js*
+jobberwocky.csr
+jobberwocky.key
