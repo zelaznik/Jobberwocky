@@ -6,8 +6,7 @@ import Store from './_templates/Store.jsx';
 import { LOGOUT } from '../constants/EventConstants.jsx';
 import Cookies from '../utils/Cookies.jsx';
 import ApiEndpoints from '../constants/ApiEndpoints.js';
-
-var _errors=[];
+var querystring = require('querystring');
 
 function setSession(params) {
     var u = params.response.user;
@@ -38,7 +37,11 @@ var SessionStore = new Store({
     },
 
     omni_auth_url(provider) {
-        return ApiEndpoints.AUTH(provider);
+        var base_uri = ApiEndpoints.AUTH(provider);
+        var params = querystring.encode({
+            callback_uri: ApiEndpoints.AUTH_CALLBACK
+        });
+        return base_uri + "?" + params;
     },
 
     email() {

@@ -17,6 +17,7 @@ const App = React.createClass({
             alerts: AlertStore.data()
         };
     },
+
     render() {
         return (
             <div className="modal-shiftfix">
@@ -48,6 +49,10 @@ const App = React.createClass({
     goToLogin() {
         var { history } = this.props;
         history.push('/login');
+    },
+
+    goToRoot() {
+        history.push('/');
     }
 });
 

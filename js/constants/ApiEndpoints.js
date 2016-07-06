@@ -1,5 +1,6 @@
 var ApiEndpoints = {};
 var ApiRoot = process.env.API_ROOT_URL;
+var FrontUrl = process.env.FRONT_END_URL;
 
 ApiEndpoints.ROOT_URL = ApiRoot;
 ApiEndpoints.SIGN_IN =  ApiRoot + '/users/sign_in';
@@ -9,6 +10,8 @@ ApiEndpoints.SIGN_UP =  ApiRoot + '/users';
 ApiEndpoints.AUTH = function(src) {
     return ApiRoot + '/users/auth/' + src;
 };
+
+ApiEndpoints.AUTH_CALLBACK = FrontUrl + "/auth/callback";
 
 function userProductsUrl(id) {
     var usersUrl = ApiRoot + '/users/' + SessionStore.currentUserId();
