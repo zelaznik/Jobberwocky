@@ -1,9 +1,5 @@
-var NODE_ENV = (process.env.NODE_ENV || 'development');
 var ApiEndpoints = {};
-var ApiRoot = {
-    'development': 'http://api.railsapi.dev',
-    'production':  'https://jobberwocky-rails-api.herokuapp.com'
-}[NODE_ENV];
+var ApiRoot = process.env.API_ROOT_URL;
 
 ApiEndpoints.ROOT_URL = ApiRoot;
 ApiEndpoints.VERSION = 'application/vnd.marketplace.v1';

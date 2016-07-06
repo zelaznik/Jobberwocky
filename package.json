@@ -4,9 +4,7 @@
   "description": "Inspired by the App Academy job-board.  This is a way for to keep track of applications and following up.  Like a CRM for job applications.",
   "main": "index.jsx",
   "scripts": {
-    "devserve": "webpack-dev-server -d --config webpack.dev.config.js --content-base public/ --progress --colors",
-    "devbuild": "webpack -d --config  webpack.dev.config.js --profile --progress --colors",
-    "build": "webpack --config ./webpack.prod.config.js --progress --colors",
+    "build": "webpack --config ./webpack.config.js --progress --colors",
     "postinstall": "npm run build && npm run rejoice",
     "start": "node server.js",
     "rejoice": "echo yay!"

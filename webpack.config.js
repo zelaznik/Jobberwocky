@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 module.exports = {
     context: __dirname,
     entry: "./js/index.jsx",
@@ -29,5 +31,12 @@ module.exports = {
         ]
     },
 
-    plugins: []
+    plugins: [
+        new webpack.DefinePlugin({
+            "process.env": {
+                "NODE_ENV":     JSON.stringify(env.NODE_ENV     || "development"),
+                "API_ROOT_URL": JSON.stringify(env.API_ROOT_URL || "http://localhost:3000")
+            }
+        })
+    ]
 };
