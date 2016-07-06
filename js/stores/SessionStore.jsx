@@ -19,7 +19,9 @@ function clearSession() {
     Cookies.reset();
 }
 
-var _auth = Immutable.Map({});
+var _auth = Immutable.Map({
+
+});
 
 function set_omniauth_url(provider, url) {
     var data = _auth.toJSON();
