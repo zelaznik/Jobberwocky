@@ -1,7 +1,7 @@
 var NODE_ENV = (process.env.NODE_ENV || 'development');
 var ApiEndpoints = {};
 var ApiRoot = {
-    'development': 'http://railsapi.dev',
+    'development': 'http://api.railsapi.dev',
     'production':  'https://api.jobberwocky.net'
 }[NODE_ENV];
 
