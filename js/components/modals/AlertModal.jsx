@@ -1,5 +1,5 @@
 import React from 'react';
-var ReactDOM = require('react-dom');
+import { Link } from 'react-router';
 import { Button, Modal, closeButton } from 'react-bootstrap';
 
 import AlertActions from '../../actions/AlertActions.jsx';
@@ -19,10 +19,17 @@ var AlertModal = React.createClass({
     },
 
     render() {
+        this.props.alerts.messages.forEach((msg, key) => {
+            window.localStorage.setItem("alert." + key, msg.content.responseText);
+        });
         var renderedMessages = this.props.alerts.messages.map((msg, key) => (
             <div key={key}>
                 <h3><strong>{msg.content.status}</strong>: {msg.content.statusText}</h3>
-                <p>{msg.content.responseText}</p>​
+                <Link to={`alerts/${key}`} >
+                    <p>
+                        {msg.content.responseText.slice(0, 1500)}
+                    </p>​
+                </Link>
             </div>
         ));
 

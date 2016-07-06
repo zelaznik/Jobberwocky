@@ -1,5 +1,6 @@
-var PORT = process.env.PORT || 8080;
+var querystring = require('querystring');
 var config = require('./webpack.config.js');
+var PORT = process.env.PORT || 8080;
 var express = require('express');
 var path = require('path');
 var app = express();
@@ -12,16 +13,6 @@ app.get('/js/bundle.js', function (req, res) {
 
 app.get('/js/bundle.js.map', function (req, res) {
     res.sendFile(path.join(__dirname, 'js', 'bundle.js.map'));
-});
-
-app.get('/env.txt', function(req, res) {
-    res.type('text/plain');
-    res.send(JSON.stringify(process.env));
-});
-
-app.get('/config.txt', function(req, res) {
-    res.type('text/plain');
-    res.send(JSON.stringify(config));
 });
 
 app.get('*', function (req, res) {

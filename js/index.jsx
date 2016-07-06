@@ -8,7 +8,7 @@ import App from './modules/App.jsx';
 
 /* STANDALONE COMPONENTS */
 import MainContent from './components/Products.jsx';
-import { Error404 } from './components/Errors.jsx';
+import { Error404, Alert } from './components/Errors.jsx';
 import Login from './modules/Login.jsx';
 import SignUp from './modules/SignUp.jsx';
 import Reset from './modules/Reset.jsx';
@@ -39,6 +39,7 @@ var router = (
         <Route path="/sign_up" component={SignUp} />
         <Route path="/reset" component={Reset} />
 
+        <Route path="/alerts/:alert_id" component={Alert} />
         <Route path="*" component={ Error404 } status="404" />
     </Router>
 );

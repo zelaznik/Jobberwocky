@@ -1,8 +1,8 @@
 var NODE_ENV = (process.env.NODE_ENV || 'development');
 var ApiEndpoints = {};
 var ApiRoot = {
-    'development': 'http://127.0.0.1:3000', // 'http://railsapi.dev',
-    'production': 'https://api.jobberwocky.net'
+    'development': 'http://railsapi.dev',
+    'production':  'https://api.jobberwocky.net'
 }[NODE_ENV];
 
 ApiEndpoints.ROOT_URL = ApiRoot;

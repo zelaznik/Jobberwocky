@@ -1,14 +1,12 @@
 import $ from 'jquery';
 import assign from 'object-assign';
-
-import SessionStore from '../stores/SessionStore.jsx';
 import ApiEndpoints from '../constants/ApiEndpoints.js';
 
 function corsHeaders() {
     return {
         'Accept': ApiEndpoints.VERSION,
-        'Content-Type': 'application/json',
-        'Authorization': SessionStore.token()
+        'Authorization': SessionStore.token(),
+        'Content-Type': 'application/json'
     };
 }
 

@@ -23,4 +23,15 @@ var Error404 = React.createClass({
     }
 });
 
-export { Error404 }
+var Alert = React.createClass({
+    render() {
+        var alert_id = "alert." + this.props.params.alert_id;
+        var markup = localStorage.getItem(alert_id);
+        localStorage.removeItem(alert_id);
+        return (
+            <div dangerouslySetInnerHTML={{__html: markup}} />
+        );
+    }
+});
+
+export { Error404, Alert }

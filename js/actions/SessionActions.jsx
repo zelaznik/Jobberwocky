@@ -12,7 +12,7 @@ var SessionActions = Object.freeze({
             actionType: SessionConstants.SIGN_IN,
             params: params
         });
-        POST(ApiEndpoints.SIGN_IN, {session: params}, (error, response) => {
+        POST(ApiEndpoints.SIGN_IN, {user: params}, (error, response) => {
             if (error)
                 AlertActions.sendDelayed({error: error});
             if (response)
@@ -24,6 +24,8 @@ var SessionActions = Object.freeze({
     },
 
     new_user(params) {
+        console.log("new user params:");
+        console.log(params);
         var password = params.password;
         AppDispatcher.dispatch({
             actionType: SessionConstants.SIGN_UP
