@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var env = process.env;
 
 module.exports = {
     context: __dirname,
