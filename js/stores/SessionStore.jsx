@@ -72,7 +72,6 @@ AppDispatcher.register((payload) => {
             break;
 
         case SessionConstants.OMNIAUTH_URL_PRELOAD:
-            console.log("Preload: " + payload.provider + ", " + payload.url);
             set_omniauth_url(payload.provider, payload.url);
             SessionStore.emitChange();
             break;

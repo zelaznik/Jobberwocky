@@ -24,8 +24,6 @@ var SessionActions = Object.freeze({
     },
 
     new_user(params) {
-        console.log("new user params:");
-        console.log(params);
         var password = params.password;
         AppDispatcher.dispatch({
             actionType: SessionConstants.SIGN_UP
@@ -56,10 +54,7 @@ var SessionActions = Object.freeze({
     },
 
     destroy() {
-        AppDispatcher.dispatch({
-            actionType: SessionConstants.SIGN_OUT
-        });
-        DELETE(ApiEndpoints.SIGN_OUT, undefined, (error, response) => {
+        DELETE(ApiEndpoints.SIGN_OUT, null, (error, response) => {
             if (error) {
                 console.warn(`Error Signing Out:`);
                 console.log(error);
@@ -69,6 +64,9 @@ var SessionActions = Object.freeze({
                     response: response, error: error
                 });
             }
+        });
+        AppDispatcher.delayedDispatch({
+            actionType: SessionConstants.SIGN_OUT
         });
     }
 
