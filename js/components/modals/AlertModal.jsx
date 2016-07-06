@@ -27,7 +27,7 @@ var AlertModal = React.createClass({
                 <h3><strong>{msg.content.status}</strong>: {msg.content.statusText}</h3>
                 <Link to={`alerts/${key}`} >
                     <p>
-                        {msg.content.responseText.slice(0, 1500)}
+                        {(msg.content.responseText || '').slice(0, 1500)}
                     </p>​
                 </Link>
             </div>
