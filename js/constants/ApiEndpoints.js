@@ -1,9 +1,7 @@
-var SessionStore = require('../stores/SessionStore.jsx');
-
 var NODE_ENV = (process.env.NODE_ENV || 'development');
 var ApiEndpoints = {};
 var ApiRoot = {
-    'development': 'http://localhost:3000',
+    'development': 'http://127.0.0.1:3000', // 'http://railsapi.dev',
     'production': 'https://api.jobberwocky.net'
 }[NODE_ENV];
 
@@ -14,9 +12,7 @@ ApiEndpoints.SIGN_IN =  ApiRoot + '/users/sign_in';
 ApiEndpoints.SIGN_OUT = ApiRoot + '/users/sign_out';
 ApiEndpoints.SIGN_UP =  ApiRoot + '/users';
 
-ApiEndpoints.AUTH = {
-    NEW: ApiRoot + '/auth/new'
-};
+ApiEndpoints.AUTH = function(src) { return ApiRoot + '/auth/' + src; };
 
 function userProductsUrl(id) {
     var usersUrl = ApiRoot + '/users/' + SessionStore.currentUserId();
@@ -37,5 +33,4 @@ ApiEndpoints.PRODUCTS = Object.freeze({
     INDEX: productsUrl
 });
 
-module.exports = Object.freeze(ApiEndpoints);
-
+module.exports = ApiEndpoints;

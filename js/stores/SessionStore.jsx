@@ -5,6 +5,7 @@ import SessionConstants from '../constants/SessionConstants.jsx';
 import Store from './_templates/Store.jsx';
 import { LOGOUT } from '../constants/EventConstants.jsx';
 import Cookies from '../utils/Cookies.jsx';
+import ApiEndpoints from '../constants/ApiEndpoints.js';
 
 var _errors=[];
 
@@ -37,7 +38,7 @@ var SessionStore = new Store({
     },
 
     omni_auth_url(provider) {
-        return _auth.get(provider);
+        return ApiEndpoints.AUTH(provider);
     },
 
     email() {

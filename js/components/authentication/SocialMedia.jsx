@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 import StringFormat from '../../utils/StringFormat.jsx';
 import SessionActions from '../../actions/SessionActions.jsx';
