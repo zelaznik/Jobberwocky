@@ -2,8 +2,6 @@ var ApiEndpoints = {};
 var ApiRoot = process.env.API_ROOT_URL;
 
 ApiEndpoints.ROOT_URL = ApiRoot;
-ApiEndpoints.VERSION = 'application/vnd.marketplace.v1';
-
 ApiEndpoints.SIGN_IN =  ApiRoot + '/users/sign_in';
 ApiEndpoints.SIGN_OUT = ApiRoot + '/users/sign_out';
 ApiEndpoints.SIGN_UP =  ApiRoot + '/users';
