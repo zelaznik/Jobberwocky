@@ -6,7 +6,9 @@ ApiEndpoints.SIGN_IN =  ApiRoot + '/users/sign_in';
 ApiEndpoints.SIGN_OUT = ApiRoot + '/users/sign_out';
 ApiEndpoints.SIGN_UP =  ApiRoot + '/users';
 
-ApiEndpoints.AUTH = function(src) { return ApiRoot + '/auth/' + src; };
+ApiEndpoints.AUTH = function(src) {
+    return ApiRoot + '/users/auth/' + src;
+};
 
 function userProductsUrl(id) {
     var usersUrl = ApiRoot + '/users/' + SessionStore.currentUserId();

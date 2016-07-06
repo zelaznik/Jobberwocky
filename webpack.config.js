@@ -35,8 +35,9 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             "process.env": {
-                "NODE_ENV":     JSON.stringify(env.NODE_ENV     || "development"),
-                "API_ROOT_URL": JSON.stringify(env.API_ROOT_URL || "http://localhost:3000")
+                "NODE_ENV":      JSON.stringify(env.NODE_ENV      || "development"),
+                "API_ROOT_URL":  JSON.stringify(env.API_ROOT_URL  || "http://localhost:3000"),
+                "FRONT_END_URL": JSON.stringify(env.FRONT_END_URL || "http://nodereactjs.dev")
             }
         })
     ]
