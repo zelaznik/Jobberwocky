@@ -40,10 +40,6 @@ var SessionStore = new Store({
 
     omni_auth_url(provider) {
         var base_uri = ApiEndpoints.AUTH(provider);
-        var params = querystring.encode({
-            callback_uri: ApiEndpoints.AUTH_CALLBACK
-        });
-        return base_uri + "?" + params;
     },
 
     email() {

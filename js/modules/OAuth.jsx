@@ -22,7 +22,6 @@ class OAuth extends App {
     }
 
     componentWillUnmount() {
-        console.log("OAuth.componentDidMount");
         SessionStore.removeChangeListener(this.toRoot);
         App.prototype.componentWillUnmount.call(this);
     }
