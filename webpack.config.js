@@ -36,7 +36,7 @@ module.exports = {
         new webpack.DefinePlugin({
             "process.env": {
                 "NODE_ENV":      JSON.stringify(env.NODE_ENV      || "development"),
-                "API_ROOT_URL":  JSON.stringify(env.API_ROOT_URL  || "http://localhost:3000"),
+                "API_ROOT_URL":  JSON.stringify(env.API_ROOT_URL  || "http://railsapi.dev"),
                 "FRONT_END_URL": JSON.stringify(env.FRONT_END_URL || "http://nodereactjs.dev")
             }
         })

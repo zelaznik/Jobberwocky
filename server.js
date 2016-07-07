@@ -1,4 +1,3 @@
-var querystring = require('querystring');
 var config = require('./webpack.config.js');
 var PORT = process.env.PORT || 8080;
 var express = require('express');
