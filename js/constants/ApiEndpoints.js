@@ -12,6 +12,7 @@ ApiEndpoints.AUTH = function(src) {
 };
 
 ApiEndpoints.AUTH_CALLBACK = FrontUrl + "/auth_callback";
+ApiEndpoints.CURRENT_USER =  ApiRoot + '/current_user';
 
 function userProductsUrl(id) {
     var usersUrl = ApiRoot + '/users/' + SessionStore.currentUserId();

@@ -15,9 +15,8 @@ class OAuth extends App {
         SessionStore.addChangeListener(this.toRoot);
 
         const { query } = this.props.location;
-        const { params } = this.props;
-        const { auth_token, email, id } = query;
-        var auth = { auth_token, email, id };
+        const { auth_token, email, id , image , name } = query;
+        var auth = { auth_token, email, id, image, name };
         SessionActions.auth_callback(auth);
     }
 

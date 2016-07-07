@@ -1,7 +1,6 @@
 import React from 'react';
-
+import SessionStore from '../../../stores/SessionStore.jsx';
 import SessionActions from '../../../actions/SessionActions.jsx';
-
 import CurrentObjectMixin from '../../_mixins/Mixin-CurrentObject.jsx';
 
 const AccountSetting = React.createClass({
@@ -20,12 +19,16 @@ const AccountSetting = React.createClass({
 var AccountSettingsDropDown = React.createClass({
     mixins: [CurrentObjectMixin],
 
+    getInitialState() {
+        return {key: {value: "dummy"}};
+    },
+
     render() {
         return (
             <li className={`dropdown ${this._clsOpen()} user hidden-xs`}>
                 <a data-toggle="dropdown" className="dropdown-toggle" href="#">
-                    <img width="34" height="34" src="assets/images/avatar-male.jpg" />
-                    {this.props.user.email}
+                    <img width="34" height="34" src={ SessionStore.image() } />
+                    { SessionStore.name() || SessionStore.email() }
                     <b className="caret" />
                 </a>
                 <ul className="dropdown-menu">
@@ -36,7 +39,20 @@ var AccountSettingsDropDown = React.createClass({
                 </ul>
             </li>
         );
+    },
+
+    refresh() {
+        this.setState( this.getInitialState() );
+    },
+    componentDidMount() {
+        SessionStore.addChangeListener(this.refresh);
+    },
+    componentWillUnmount() {
+        SessionStore.removeChangeListener(this.refresh);
     }
+
 });
+
+
 
 export default AccountSettingsDropDown;

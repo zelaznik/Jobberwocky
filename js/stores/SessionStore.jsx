@@ -10,9 +10,13 @@ var querystring = require('querystring');
 
 function setSession(params) {
     var u = params.response.user;
+    console.log("params.response: " + JSON.stringify(params.response));
     Cookies.set('authToken', u.auth_token);
     Cookies.set('email', u.email);
+
     Cookies.set('currentUserId', u.id);
+    Cookies.set('image', u.image);
+    Cookies.set('name', u.name);
 }
 
 function clearSession() {
@@ -32,7 +36,9 @@ function set_omniauth_url(provider, url) {
 var SessionStore = new Store({
     data() {
         return {
+            name: this.name(),
             email: this.email(),
+            image: this.image(),
             loggedIn: this.loggedIn(),
             currentUserId: this.currentUserId()
         };
@@ -48,6 +54,14 @@ var SessionStore = new Store({
 
     currentUserId() {
         return Cookies.get('currentUserId');
+    },
+
+    name() {
+        return Cookies.get('name');
+    },
+
+    image() {
+        return Cookies.get('image');
     },
 
     token() {

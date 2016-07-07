@@ -36,6 +36,15 @@ var SessionActions = Object.freeze({
         });
     },
 
+    current_user() {
+        GET(ApiEndpoints.CURRENT_USER, null, (error, response) => {
+            if (error)
+                AlertActions.sendDelayed({error: error});
+            if (response)
+                SessionActions.create(assign({}, response.user, {password: password}));
+        });
+    },
+
     new_auth(provider) {
         var initialUrl = ApiEndpoints.AUTH.NEW + `?provider=` + provider;
         GET(initialUrl, undefined, (error, response) => {
