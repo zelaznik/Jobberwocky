@@ -39,7 +39,7 @@ var SessionStore = new Store({
     },
 
     omni_auth_url(provider) {
-        var base_uri = ApiEndpoints.AUTH(provider);
+        return ApiEndpoints.AUTH(provider);
     },
 
     email() {
