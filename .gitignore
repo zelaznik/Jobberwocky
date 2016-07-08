@@ -5,3 +5,4 @@ jobberwocky.csr
 jobberwocky.key
 Gemfile
 config.ru
+*debug.log*
