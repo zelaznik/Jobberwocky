@@ -50,6 +50,10 @@ var SocialMedia = React.createClass({
                 <SocialMedium align={'left'} source={'Facebook'} />
                 {"   "}
                 <SocialMedium align={'right'} source={'Twitter'} />
+                <br /><br />
+                <SocialMedium align={'left'} source={'Github'} />
+                {"   "}
+                <SocialMedium align={'right'} source={'Google'} />
             </div>
         );
     }
