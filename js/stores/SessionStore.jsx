@@ -10,7 +10,6 @@ var querystring = require('querystring');
 
 function setSession(params) {
     var u = params.response.current_user;
-    console.log("params.response: " + JSON.stringify(params.response));
     Cookies.set('authToken', u.auth_token);
     Cookies.set('email', u.email);
 
