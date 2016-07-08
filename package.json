@@ -30,6 +30,8 @@
     "immutable": "^3.7.6",
     "jquery": "^2.2.2",
     "keymirror": "^0.1.1",
+    "md5": "^2.1.0",
+    "node-base64-urlsafe": "^0.1.1",
     "node-pow": "0.0.2",
     "node-sass": "^3.4.2",
     "object-assign": "^4.0.1",
