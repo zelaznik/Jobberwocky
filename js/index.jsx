@@ -17,12 +17,6 @@ import Reset from './modules/Reset.jsx';
 /* UTILITIES */
 import requireAuth from './utils/requireAuth.jsx';
 
-/* Turn on the API's. Keep them out of the namespace */
-(function() {
-    require('./webApi/WebApi.jsx');
-    require('./_development/AddVariablesToWindow.jsx');
-})();
-
 /* DEVELOPMENT TOOLS */
 import {Home, Users, Charts, Gallery } from './_development/PlaceHolders.jsx';
 
