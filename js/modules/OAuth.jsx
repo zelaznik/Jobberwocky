@@ -16,17 +16,10 @@ class OAuth extends App {
         };
         SessionStore.addChangeListener(this.toRoot);
 
-        const { md5, data } = this.props.location.query;
+        const { data } = this.props.location.query;
         var serialized = base64.decode(data);
-        var actual_md5 = get_md5(serialized);
-        if (md5 !== actual_md5) {
-            AlertActions.danger({
-                "invalid md5 checksums": ("expected " + md5 + ", got " + actual_md5)
-            });
-        } else {
-            var auth = JSON.parse(serialized);
-            SessionActions.auth_callback(auth);
-        }
+        var auth = JSON.parse(serialized);
+        SessionActions.auth_callback(auth);
     }
 
     componentWillUnmount() {

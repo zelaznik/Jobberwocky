@@ -41,5 +41,11 @@ var router = (
 );
 
 document.addEventListener('DOMContentLoaded', ()=> {
+    /* DEBUGGING */
+    (function() {
+        window.SessionStore = require('./stores/SessionStore.jsx');
+        window.Cookies = require('./utils/cookies.js');
+    })();
+
     ReactDOM.render(router, document.getElementById('main'))
 });

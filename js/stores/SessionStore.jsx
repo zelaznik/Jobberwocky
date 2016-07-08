@@ -4,7 +4,7 @@ import AppDispatcher from '../dispatcher/appDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
 import Store from './_templates/Store.jsx';
 import { LOGOUT } from '../constants/EventConstants.jsx';
-import Cookies from '../utils/Cookies.jsx';
+import Cookies from '../utils/cookies.js';
 import ApiEndpoints from '../constants/ApiEndpoints.js';
 var querystring = require('querystring');
 
