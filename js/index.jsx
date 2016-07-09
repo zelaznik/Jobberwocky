@@ -40,12 +40,14 @@ var router = (
     </Router>
 );
 
-document.addEventListener('DOMContentLoaded', ()=> {
-    /* DEBUGGING */
-    (function() {
-        window.SessionStore = require('./stores/SessionStore.jsx');
-        window.Cookies = require('./utils/cookies.js');
-    })();
+/* DEBUGGING */
+import SessionStore from './stores/SessionStore.jsx';
+import Cookies from "./utils/Cookies.js";
 
+document.addEventListener('DOMContentLoaded', ()=> {
+    if (process.env.NODE_ENV === 'development') {
+        window.SessionStore = SessionStore;
+        window.Cookies = Cookies;
+    }
     ReactDOM.render(router, document.getElementById('main'))
 });
