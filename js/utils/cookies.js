@@ -1,6 +1,15 @@
+var rawArchive;
+var rawData;
+
 module.exports = {
     all: function() {
-        var data = {};
+        var raw = document.cookie;
+        if (raw === rawArchive) {
+            return rawData;
+        }
+
+        rawArchive = raw;
+        var data = rawData = {};
         var items = document.cookie.split(";");
         items.forEach(function(item) {
             var eq = item.search("=");
@@ -11,7 +20,7 @@ module.exports = {
         return data;
     },
     get: function(name) {
-        var value = Cookies.all()[name];
+        var value = this.all()[name];
         if (value == undefined)
             return undefined;
         if (value == null)
