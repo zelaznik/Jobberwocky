@@ -11,10 +11,19 @@ module.exports = {
         return data;
     },
     get: function(name) {
-        return Cookies.all()[name];
+        var value = Cookies.all()[name];
+        if (value == undefined)
+            return undefined;
+        if (value == null)
+            return null;
+        try {
+            return JSON.parse(value);
+        } catch(e) {
+            return value;
+        }
     },
     set: function(name, value) {
-        document.cookie = name + '=' + value + ';';
+        document.cookie = name + '=' + JSON.stringify(value) + ';';
     },
     del: function(name) {
         this.set(name, '');
