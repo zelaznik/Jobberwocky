@@ -32,7 +32,10 @@ var SessionActions = Object.freeze({
             if (error)
                 AlertActions.sendDelayed({error: error});
             if (response)
-                SessionActions.create(assign({}, response.user, {password: password}));
+                AppDispatcher.dispatch({
+                    actionType: SessionConstants.SIGN_IN_SUCCESS,
+                    response: response, error: error
+                });
         });
     },
 
