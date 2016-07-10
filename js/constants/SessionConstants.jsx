@@ -14,7 +14,9 @@ const SessionConstants = uniqueKeySet('Session', {
     SIGN_OUT_ERROR: null,
 
     OMNIAUTH_NEW: null,
-    OMNIAUTH_URL_PRELOAD: null
+    OMNIAUTH_URL_PRELOAD: null,
+
+    REQUEST_NEW_PASSWORD: null
 });
 
 export default SessionConstants;

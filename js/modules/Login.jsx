@@ -17,7 +17,7 @@ var LoginWithPassword = React.createClass({
                 { this.email_input('email', false) }
                 { this.password_input('password', true) }
                 <div className="form-options clearfix">
-                    <Link to="/reset" className="pull-right">
+                    <Link to="/reset_password_request" className="pull-right">
                         Forgot password?
                     </Link>
                 </div>

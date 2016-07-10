@@ -14,6 +14,9 @@ ApiEndpoints.AUTH = function(src) {
 ApiEndpoints.AUTH_CALLBACK = FrontUrl + "/auth_callback";
 ApiEndpoints.CURRENT_USER =  ApiRoot + '/current_user';
 
+ApiEndpoints.REQUEST_NEW_PASSWORD = ApiRoot + "/users/request_new_password";
+ApiEndpoints.ASSIGN_NEW_PASSWORD = ApiRoot + "/users/assign_new_password";
+
 function userProductsUrl(id) {
     var usersUrl = ApiRoot + '/users/' + SessionStore.currentUserId();
     var subUrl = '/products/' + (id || '');

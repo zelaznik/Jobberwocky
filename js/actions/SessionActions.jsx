@@ -22,6 +22,19 @@ var SessionActions = Object.freeze({
                 });
         });
     },
+    
+    request_new_password(params) {
+        AppDispatcher.dispatch({
+            actionType: SessionConstants.REQUEST_NEW_PASSWORD,
+            params: params
+        });
+        POST(ApiEndpoints.REQUEST_NEW_PASSWORD, {user: params}, (error, response) => {
+            if (error)
+                AlertActions.sendDelayed({error: error});
+            if (response)
+                AlertActions.sendDelayed({error: response});
+        });
+    },
 
     new_user(params) {
         var password = params.password;

@@ -21,15 +21,14 @@ var SignUpWithPassword = React.createClass({
 
     onSubmit(e) {
         e.preventDefault();
-        SessionActions.password_reset({
+        SessionActions.request_new_password({
             email: this.state.email,
-            password: this.state.password,
-            password_confirmation: this.state.password_confirmation
+            email_confirmation: this.state.email_confirmation
         });
     }
 });
 
-var SignUp = React.createClass({
+var RequestPasswordReset = React.createClass({
     mixins: [AuthHandler],
 
     render() {
@@ -47,10 +46,9 @@ var SignUp = React.createClass({
                 </div>
 
                 <AlertModal alerts={this.state.alerts} />
-
             </div>
         );
     }
 });
 
-export default SignUp;
+export default RequestPasswordReset;

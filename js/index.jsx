@@ -12,7 +12,8 @@ import { Error404, Alert } from './components/Errors.jsx';
 import OAuth from './modules/OAuth.jsx';
 import Login from './modules/Login.jsx';
 import SignUp from './modules/SignUp.jsx';
-import Reset from './modules/Reset.jsx';
+import ResetPassword from './modules/ResetPassword.jsx';
+import RequestPasswordReset from './modules/RequestPasswordReset.jsx';
 
 /* UTILITIES */
 import requireAuth from './utils/requireAuth.jsx';
@@ -33,7 +34,8 @@ var router = (
 
         <Route path="/login" component={ Login } />
         <Route path="/sign_up" component={ SignUp } />
-        <Route path="/reset" component={ Reset } />
+        <Route path="/reset_password_request" component={ RequestPasswordReset } />
+        <Route path="/reset_password" component={ ResetPassword } />
 
         <Route path="/alerts/:alert_id" component={Alert} />
         <Route path="*" component={ Error404 } status="404" />
