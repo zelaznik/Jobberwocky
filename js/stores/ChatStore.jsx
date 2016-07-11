@@ -1,5 +1,6 @@
 import AppDispatcher from '../dispatcher/appDispatcher.jsx';
 import ChatConstants from '../constants/ChatConstants.jsx';
+import ChatActions from '../actions/ChatActions.jsx';
 import SessionStore from "./SessionStore.jsx";
 import Store from './_templates/Store.jsx';
 var Immutable = require('immutable');
@@ -9,16 +10,14 @@ var _contacts;
 
 function setChatContacts(users) {
     var dct = {};
-    users.forEach((u) => {
-        dct[u.id] = Immutable.Map(u);
-    });
-    _contacts = Immutable.Map(dct);
+    users.forEach((u) => {dct[u.id] = u;});
+    _contacts = Immutable.fromJS(dct);
 }
 
 function setMessages(user_id, response) {
-    var dct = _messages.toObject();
-    dct[user_id] = Immutable.Map(response);
-    _messages = Immutable.Map(dct);
+    var dct = _messages.toJSON();
+    dct[user_id] = response;
+    _messages = Immutable.fromJS(dct);
 }
 
 var ChatStore = new Store({
@@ -26,28 +25,30 @@ var ChatStore = new Store({
         _contacts = undefined;
         _messages = Immutable.Map({});
     },
-    contacts()  {
+    contacts() {
+        if (_contacts === undefined)
+            setTimeout(() => (ChatActions.get_users()), 0);
         return _contacts;
     },
-    messages() {
-        return _messages;
+    messages(user_id) {
+        if (user_id === undefined)
+            return _messages;
+
+        var msg = _messages.get(`${user_id}`);
+        if (msg === undefined)
+            setTimeout(() => (ChatActions.get_messages(user_id)), 0);
+        return msg;
     }
 });
 
 AppDispatcher.register((payload) => {
     switch(payload.actionType) {
-        case ChatConstants.GET_USERS:
-            ChatStore.emitChange();
-            break;
-
         case ChatConstants.GET_USERS_SUCCESS:
-            setChatContacts(payload.response.users);
+            setChatContacts(payload.response);
             ChatStore.emitChange();
             break;
 
         case ChatConstants.GET_MESSAGES_SUCCESS:
-            console.log("ChatConstants.GET_MESSAGES_SUCCESS");
-            console.log(payload);
             setMessages(payload.user_id, payload.response);
             ChatStore.emitChange();
             break;
@@ -56,5 +57,4 @@ AppDispatcher.register((payload) => {
 
 SessionStore.addChangeListener(ChatStore.reset);
 
-window.ChatStore = ChatStore;
 export default ChatStore;

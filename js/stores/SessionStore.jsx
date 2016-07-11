@@ -9,13 +9,15 @@ import ApiEndpoints from '../constants/ApiEndpoints.js';
 var querystring = require('querystring');
 
 function setSession(params) {
-    var u = params.response.current_user;
-    Cookies.set('authToken', u.auth_token);
-    Cookies.set('email', u.email);
+    var session = params.response;
 
-    Cookies.set('currentUserId', u.id);
-    Cookies.set('image', u.image);
-    Cookies.set('name', u.name);
+    Cookies.set('authToken',     session.token);
+    Cookies.set('expireDate',    session.expire_date);
+    Cookies.set('email',         session.user.email);
+
+    Cookies.set('currentUserId', session.user.id);
+    Cookies.set('image',         session.user.image);
+    Cookies.set('name',          session.user.name);
 }
 
 function clearSession() {
