@@ -26,7 +26,7 @@ var AccountSettingsDropDown = React.createClass({
     render() {
         return (
             <li className={`dropdown ${this._clsOpen()} user hidden-xs`}>
-                <a data-toggle="dropdown" className="dropdown-toggle" href="#">
+                <a data-toggle="dropdown" className="dropdown-toggle">
                     <img width="34" height="34" src={ SessionStore.image() || 'assets/images/avatar-male.jpg' } />
                     { SessionStore.name() || SessionStore.email() }
                     <b className="caret" />

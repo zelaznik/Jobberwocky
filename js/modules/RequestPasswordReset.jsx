@@ -38,7 +38,7 @@ var RequestPasswordReset = React.createClass({
         return (
             <div className="login-wrapper">
                 <div id="login-container" className='login-container active'>
-                    <a href="#">
+                    <a>
                       <img width="100" height="30" src="/assets/images/logo-login@2x.png" />
                     </a>
                     <SignUpWithPassword />

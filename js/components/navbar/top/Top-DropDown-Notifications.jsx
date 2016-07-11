@@ -14,7 +14,7 @@ var Notification = React.createClass({
     render() {
         return (
             <li>
-                <a href="#">
+                <a>
                     { this.newFlag() }
                     <p>{this.props.item.message}</p>
                 </a>

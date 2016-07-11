@@ -68,7 +68,7 @@ var ChatHeader = React.createClass({
         return (
             <div className="heading">
                 <i className="fa fa-comments" />
-                <span>Chat with <a href="#">{ this.props.activeUser.get('name') || '?' }</a></span>
+                <span>Chat with <a>{ this.props.activeUser.get('name') || '?' }</a></span>
                 <i className="fa fa-cog pull-right" />
                 <i className="fa fa-smile-o pull-right" />
             </div>

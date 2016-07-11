@@ -25,7 +25,7 @@ import { Home, Users, Charts, Gallery } from './_development/PlaceHolders.jsx';
 var router = (
     <Router history={ browserHistory } >
         <Route path="/auth_callback" component={ OAuth } />
-        <Route path="/" component={ App } onEnter={ requireAuth }>
+        <Route path="/" component={ App } > /*onEnter={ requireAuth } */
             <IndexRoute component={ Home } />
             <Route path="/products" component={ MainContent } />
             <Route path="/users"    component={ Users } />

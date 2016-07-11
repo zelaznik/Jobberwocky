@@ -12,7 +12,7 @@ var SignUpWithPassword = React.createClass({
 
     render() {
         return(
-            <form href="#" onSubmit={this.onSubmit} >
+            <form onSubmit={this.onSubmit} >
                 { this.email_input('email', false) }
                 { this.password_input('password', false) }
                 { this.password_input('password_confirmation', true) }
@@ -38,7 +38,7 @@ var SignUp = React.createClass({
         return (
             <div className="login-wrapper">
                 <div id="login-container" className='login-container active'>
-                    <a href="#">
+                    <a>
                         <img width="100" height="30" src="/assets/images/logo-login@2x.png" />
                     </a>
                     <SignUpWithPassword />

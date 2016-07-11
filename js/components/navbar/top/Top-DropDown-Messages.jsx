@@ -6,7 +6,7 @@ var Message = React.createClass({
     render() {
         return (
             <li>
-                <a href="#">
+                <a>
                     <img width="34" height="34" src={`assets/images/${this.props.item.img}`} />
                     {this.props.item.body}
                 </a>
