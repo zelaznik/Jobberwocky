@@ -1,7 +1,6 @@
 import React from 'react';
 import SessionActions from '../actions/SessionActions.jsx';
 
-import EnterOrCancel from '../components/authentication/EnterOrCancel.jsx';
 import Credentials from '../components/authentication/Credentials.jsx';
 import AuthHandler from '../components/authentication/AuthHandler.jsx';
 import AlertModal from '../components/modals/AlertModal.jsx';
@@ -15,6 +14,10 @@ var SignUpWithPassword = React.createClass({
                 { this.email_input('email', false) }
                 { this.email_input('email_confirmation', true) }
                 <p class="signup">{""}</p>
+                <div className="btn btn-primary right facebook" onClick={this.onSubmit}>
+                    <i className="fa fa-envelope-o" />
+                    <span>Submit</span>
+                </div>
             </form>
         );
     },
@@ -39,7 +42,6 @@ var RequestPasswordReset = React.createClass({
                       <img width="100" height="30" src="/assets/images/logo-login@2x.png" />
                     </a>
                     <SignUpWithPassword />
-                    <EnterOrCancel />
                     <h3 className="signup">
                         Reset Your Password By Email
                     </h3>
