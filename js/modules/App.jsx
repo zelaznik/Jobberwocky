@@ -2,13 +2,14 @@ import React from 'react';
 import assign from 'object-assign';
 import { browserHistory } from 'react-router';
 
-import NavBar from './../components/navbar/NavBar.jsx';
+import { LOGOUT, REDIRECT_TO_LOGIN , SIGN_IN_SUCCESS } from '../constants/EventConstants.jsx';
+import SessionActions from '../actions/SessionActions.jsx';
 import SessionStore from '../stores/SessionStore.jsx';
 import AlertStore from '../stores/AlertStore.jsx';
-import { LOGOUT, REDIRECT_TO_LOGIN } from '../constants/EventConstants.jsx';
-import routes from '../routes.jsx';
 
 import AlertModal from '../components/modals/AlertModal.jsx';
+import NavBar from './../components/navbar/NavBar.jsx';
+import routes from '../routes.jsx';
 
 const App = React.createClass({
     getInitialState() {
@@ -32,13 +33,15 @@ const App = React.createClass({
     componentDidMount() {
         document.addEventListener('click', this.pageClick);
         SessionStore.addChangeListener(this.getNewSession);
-        AlertStore.addChangeListener(this.getNewSession);
+        SessionStore.on(SIGN_IN_SUCCESS, SessionActions.toPreviousPage);
         SessionStore.on(REDIRECT_TO_LOGIN, this.goToLogin);
         SessionStore.on(LOGOUT, this.goToLogin);
+        AlertStore.addChangeListener(this.getNewSession);
     },
 
     componentWillUnmount() {
         document.removeEventListener('click', this.pageClick);
+        SessionStore.removeListener(SIGN_IN_SUCCESS, SessionActions.toPreviousPage);
         SessionStore.removeChangeListener(this.getNewSession);
         AlertStore.removeChangeListener(this.getNewSession);
         SessionStore.removeListener(LOGOUT, this.goToLogin);

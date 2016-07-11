@@ -1,8 +1,7 @@
 import { SIGN_IN_SUCCESS } from '../../constants/EventConstants.jsx';
+import SessionActions from '../../actions/SessionActions.jsx';
 import SessionStore from '../../stores/SessionStore.jsx';
 import AlertStore from '../../stores/AlertStore.jsx';
-import { browserHistory } from 'react-router';
-var Immutable = require('immutable');
 
 var AuthHandler = Object.freeze({
     getInitialState() {
@@ -16,35 +15,23 @@ var AuthHandler = Object.freeze({
         this.setState(this.getInitialState());
     },
 
+    redirect() {
+        browserHistory.push("/");
+        SessionActions.toPreviousPage();
+    },
+
     componentDidMount() {
         document.body.classList.add('login1');
-        SessionStore.on(SIGN_IN_SUCCESS, this.toPreviousPage);
-        AlertStore.removeListener(this.refresh);
+        SessionStore.on(SIGN_IN_SUCCESS, this.redirect);
+        SessionStore.addChangeListener(this.refresh);
+        AlertStore.addChangeListener(this.refresh);
     },
 
     componentWillUnmount() {
         document.body.classList.remove('login1');
-        SessionStore.removeListener(SIGN_IN_SUCCESS, this.toPreviousPage);
+        SessionStore.removeListener(SIGN_IN_SUCCESS, this.redirect);
+        SessionStore.removeChangeListener(this.refresh);
         AlertStore.removeChangeListener(this.refresh);
-    },
-
-    toPreviousPage() {
-        var fcn = (v)=>(Immutable.fromJS(v));
-
-        var orig = fcn(SessionStore.saved_location());
-        var back = browserHistory.goBack();
-        var current = fcn(window.location);
-
-        while (back && !current.equals(prev)) {
-            back = browserHistory.goBack();
-            current = fcn(window.location);
-            console.log("Going back a page: ");
-            console.log(current.toJSON());
-            console.log('');
-        }
-        if (!prev.equals(current)) {
-            browserHistory.push(orig.get('href'));
-        }
     }
 });
 

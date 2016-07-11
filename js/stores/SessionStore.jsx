@@ -36,6 +36,10 @@ function save_current_location(params) {
     Cookies.set('saved_location', params);
 }
 
+function clear_saved_location() {
+    Cookies.del('saved_location');
+}
+
 var SessionStore = new Store({
     data() {
         return {
@@ -103,6 +107,10 @@ AppDispatcher.register((payload) => {
             save_current_location(payload.params);
             SessionStore.emit(REDIRECT_TO_LOGIN);
             SessionStore.emitChange();
+            break;
+
+        case SessionConstants.CLEAR_SAVED_LOCATION:
+            clear_saved_location();
             break;
 
     }
