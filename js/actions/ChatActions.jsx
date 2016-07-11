@@ -22,9 +22,10 @@ var ChatActions = Object.freeze({
     },
 
     get_messages(user_id) {
+        console.log("ChatActions.get_messages");
         AppDispatcher.dispatch({
             actionType: ChatConstants.GET_MESSAGES,
-            params: {}
+            user_id: user_id
         });
         GET(ApiEndpoints.MESSAGES(user_id), {}, (error, response) => {
             if (error)
@@ -32,7 +33,8 @@ var ChatActions = Object.freeze({
             if (response)
                 AppDispatcher.dispatch({
                     actionType: ChatConstants.GET_MESSAGES_SUCCESS,
-                    response: response, error: error, user_id: user_id
+                    response: response, error: error,
+                    user_id: user_id
                 });
         });
     }

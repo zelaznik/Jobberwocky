@@ -9,13 +9,15 @@ var _contacts;
 
 function setChatContacts(users) {
     var dct = {};
-    users.forEach((u) => {dct[u.id] = u;});
+    users.forEach((u) => {
+        dct[u.id] = Immutable.Map(u);
+    });
     _contacts = Immutable.Map(dct);
 }
 
 function setMessages(user_id, response) {
     var dct = _messages.toObject();
-    dct[user_id] = response;
+    dct[user_id] = Immutable.Map(response);
     _messages = Immutable.Map(dct);
 }
 
@@ -27,8 +29,8 @@ var ChatStore = new Store({
     contacts()  {
         return _contacts;
     },
-    messages(user_id) {
-        return _messages && _messages.get(user_id);
+    messages() {
+        return _messages;
     }
 });
 
@@ -44,6 +46,8 @@ AppDispatcher.register((payload) => {
             break;
 
         case ChatConstants.GET_MESSAGES_SUCCESS:
+            console.log("ChatConstants.GET_MESSAGES_SUCCESS");
+            console.log(payload);
             setMessages(payload.user_id, payload.response);
             ChatStore.emitChange();
             break;

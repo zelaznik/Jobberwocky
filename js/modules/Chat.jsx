@@ -8,7 +8,7 @@ var md5 = require('md5');
 
 var ChatContacts = React.createClass({
     status(contact) {
-        var i = parseInt(md5(contact.email)[0], 16) % 4;
+        var i = parseInt(md5(contact.get('email'))[0], 16) % 4;
         return ['success', 'warning', 'danger', 'muted'][i];
     },
 
@@ -21,10 +21,10 @@ var ChatContacts = React.createClass({
                 </div>
                 <ul>
                     {this.props.contacts.map((c) => (
-                        <li key={c.id} >
-                            <Link to="/messages" query={{user_id: c.id}} >
-                                <img width="30" height="30" src={c.image} />
-                                <span>{ c.name }</span>
+                        <li key={c.get('id')} >
+                            <Link to="/messages" query={{user_id: c.get('id')}} onClick={ this.props.synch } >
+                                <img width="30" height="30" src={c.get('image')} />
+                                <span>{ c.get('name') }</span>
                                 <i className={`fa fa-circle text-${this.status(c)}`} />
                             </Link>
                         </li>
@@ -40,7 +40,7 @@ var ChatHeader = React.createClass({
         return (
             <div className="heading">
                 <i className="fa fa-comments" />
-                <span>Chat with <a href="#">{ this.props.activeUser.name || '?' }</a></span>
+                <span>Chat with <a href="#">{ this.props.activeUser.get('name') || '?' }</a></span>
                 <i className="fa fa-cog pull-right" />
                 <i className="fa fa-smile-o pull-right" />
             </div>
@@ -56,7 +56,7 @@ var ChatContent = React.createClass({
                     <li>
                         <img width="30" height="30" src="images/avatar-male.jpg" />
                         <div className="bubble">
-                            <a className="user-name" href="">{ this.props.activeUser.name || '?' }</a>
+                            <a className="user-name" href="">{ this.props.activeUser.get('name') }</a>
                             <p className="message">
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
                             </p>
@@ -98,7 +98,8 @@ var Chat = React.createClass({
     getInitialState() {
         return {
             dummy: {},
-            contacts: ChatStore.contacts()
+            contacts: ChatStore.contacts(),
+            messages: ChatStore.messages()
         };
     },
 
@@ -111,18 +112,26 @@ var Chat = React.createClass({
     },
 
     activeUser() {
-        if (this.user_id())
+        if (this.user_id() && this.state.contacts)
             return this.state.contacts.get(this.user_id());
+    },
+
+    messages() {
+        return this.state.messages.get(`${this.user_id()}`);
+    },
+
+    synch() {
+        if (this.user_id() && !this.messages()) {
+            ChatActions.get_messages(this.user_id())
+        }
+        if (!this.state.contacts) {
+            ChatActions.get_users();
+        }
     },
 
     componentDidMount() {
         ChatStore.addChangeListener(this.refresh);
-        if (!this.state.contacts) {
-            ChatActions.get_users();
-        }
-        if (this.activeUser() && !this.state.messages) {
-            ChatActions.get_messages(this.ActiveUser().id);
-        }
+        this.synch();
     },
 
     componentWillUnmount() {
@@ -139,7 +148,7 @@ var Chat = React.createClass({
         } else {
             return (
                 <div className="widget-container scrollable chat chat-page">
-                    <ChatContacts contacts={ this.state.contacts } />
+                    <ChatContacts contacts={ this.state.contacts } synch={this.synch} />
                     <ChatHeader   activeUser={ this.activeUser() } />
                     <ChatContent  activeUser={ this.activeUser() } />
                     <ChatFooter   activeUser={ this.activeUser() } />

@@ -14,7 +14,7 @@ ApiEndpoints.USER = function(id) {
 };
 
 ApiEndpoints.MESSAGES = function(user_id) {
-    return ApiEndpoints.USERS(user_id) + '/messages';
+    return ApiEndpoints.USER(user_id) + '/messages';
 };
 
 ApiEndpoints.AUTH = function(src) {
