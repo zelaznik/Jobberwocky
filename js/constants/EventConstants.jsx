@@ -5,5 +5,8 @@ module.exports = uniqueKeySet('Events', {
     LOGOUT: null,
 
     DISPLAY: null,
-    HIDE: null
+    HIDE: null,
+
+    REDIRECT_TO_LOGIN: null,
+    SIGN_IN_SUCCESS: null
 });

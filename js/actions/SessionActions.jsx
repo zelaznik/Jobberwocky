@@ -5,8 +5,16 @@ import SessionConstants from '../constants/SessionConstants.jsx';
 import AlertActions from '../actions/AlertActions.jsx';
 import ApiEndpoints from '../constants/ApiEndpoints.js';
 import { GET , POST, DELETE } from '../webApi/WebApi.jsx';
+var Immutable = require('immutable');
 
 var SessionActions = Object.freeze({
+    redirect_to_login() {
+        AppDispatcher.dispatch({
+            actionType: SessionConstants.SAVE_CURRENT_LOCATION,
+            params: Immutable.fromJS(window.location)
+        });
+    },
+
     create(params) {
         AppDispatcher.dispatch({
             actionType: SessionConstants.SIGN_IN,
@@ -78,8 +86,6 @@ var SessionActions = Object.freeze({
     },
 
     auth_callback(response) {
-        console.log("SessionActions.auth_callback(response)");
-        console.log(response);
         AppDispatcher.dispatch({
             actionType: SessionConstants.SIGN_IN_SUCCESS,
             response: response, error: null

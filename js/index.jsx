@@ -16,16 +16,13 @@ import SignUp from './modules/SignUp.jsx';
 import ResetPassword from './modules/ResetPassword.jsx';
 import RequestPasswordReset from './modules/RequestPasswordReset.jsx';
 
-/* UTILITIES */
-import requireAuth from './utils/requireAuth.jsx';
-
 /* DEVELOPMENT TOOLS */
 import { Home, Users, Charts, Gallery } from './_development/PlaceHolders.jsx';
 
 var router = (
     <Router history={ browserHistory } >
         <Route path="/auth_callback" component={ OAuth } />
-        <Route path="/" component={ App } > /*onEnter={ requireAuth } */
+        <Route path="/" component={ App } >
             <IndexRoute component={ Home } />
             <Route path="/products" component={ MainContent } />
             <Route path="/users"    component={ Users } />

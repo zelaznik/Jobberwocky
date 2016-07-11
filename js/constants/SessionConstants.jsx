@@ -16,7 +16,10 @@ const SessionConstants = uniqueKeySet('Session', {
     OMNIAUTH_NEW: null,
     OMNIAUTH_URL_PRELOAD: null,
 
-    REQUEST_NEW_PASSWORD: null
+    REQUEST_NEW_PASSWORD: null,
+
+    REDIRECT_TO_LOGIN: null,
+    SAVE_CURRENT_LOCATION: null
 });
 
 export default SessionConstants;

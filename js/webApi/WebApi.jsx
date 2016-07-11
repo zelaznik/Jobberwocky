@@ -1,7 +1,11 @@
 import $ from 'jquery';
 import assign from 'object-assign';
+
 import ApiEndpoints from '../constants/ApiEndpoints.js';
+import SessionActions from '../actions/SessionActions.jsx';
 import SessionStore from '../stores/SessionStore.jsx';
+import { browserHistory } from 'react-router';
+window.browserHistory = browserHistory;
 
 function corsHeaders() {
     return {
@@ -55,7 +59,11 @@ function apiRequest(method, url, data, callback) {
             callback(null, response);
         },
         error(error) {
-            callback(error, null);
+            if (error.status == 401) {
+                SessionActions.redirect_to_login();
+            } else {
+                callback(error, null);
+            }
         }
     };
     for (var key in data) {

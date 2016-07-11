@@ -3,7 +3,7 @@ var Immutable = require('immutable');
 import AppDispatcher from '../dispatcher/appDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
 import Store from './_templates/Store.jsx';
-import { LOGOUT } from '../constants/EventConstants.jsx';
+import { LOGOUT, REDIRECT_TO_LOGIN, SIGN_IN_SUCCESS } from '../constants/EventConstants.jsx';
 import Cookies from '../utils/cookies.js';
 import ApiEndpoints from '../constants/ApiEndpoints.js';
 var querystring = require('querystring');
@@ -24,14 +24,17 @@ function clearSession() {
     Cookies.reset();
 }
 
-var _auth = Immutable.Map({
-
-});
+var _saved_location = Immutable.Map({});
+var _auth = Immutable.Map({});
 
 function set_omniauth_url(provider, url) {
     var data = _auth.toJSON();
     data[provider] = url;
     _auth = Immutable.Map(data);
+}
+
+function save_current_location(params) {
+    _saved_location = Immutable.fromJS(params);
 }
 
 var SessionStore = new Store({
@@ -43,6 +46,10 @@ var SessionStore = new Store({
             loggedIn: this.loggedIn(),
             currentUserId: this.currentUserId()
         };
+    },
+
+    saved_location() {
+        return _saved_location;
     },
 
     omni_auth_url(provider) {
@@ -78,6 +85,7 @@ AppDispatcher.register((payload) => {
     switch(payload.actionType) {
         case SessionConstants.SIGN_IN_SUCCESS:
             setSession(payload);
+            SessionStore.emit(SIGN_IN_SUCCESS);
             SessionStore.emitChange();
             break;
 
@@ -89,6 +97,12 @@ AppDispatcher.register((payload) => {
 
         case SessionConstants.OMNIAUTH_URL_PRELOAD:
             set_omniauth_url(payload.provider, payload.url);
+            SessionStore.emitChange();
+            break;
+
+        case SessionConstants.SAVE_CURRENT_LOCATION:
+            save_current_location(payload.params);
+            SessionStore.emit(REDIRECT_TO_LOGIN);
             SessionStore.emitChange();
             break;
 

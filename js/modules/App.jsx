@@ -1,10 +1,11 @@
 import React from 'react';
 import assign from 'object-assign';
+import { browserHistory } from 'react-router';
 
 import NavBar from './../components/navbar/NavBar.jsx';
 import SessionStore from '../stores/SessionStore.jsx';
 import AlertStore from '../stores/AlertStore.jsx';
-import { LOGOUT } from '../constants/EventConstants.jsx';
+import { LOGOUT, REDIRECT_TO_LOGIN } from '../constants/EventConstants.jsx';
 import routes from '../routes.jsx';
 
 import AlertModal from '../components/modals/AlertModal.jsx';
@@ -32,6 +33,7 @@ const App = React.createClass({
         document.addEventListener('click', this.pageClick);
         SessionStore.addChangeListener(this.getNewSession);
         AlertStore.addChangeListener(this.getNewSession);
+        SessionStore.on(REDIRECT_TO_LOGIN, this.goToLogin);
         SessionStore.on(LOGOUT, this.goToLogin);
     },
 
@@ -47,12 +49,11 @@ const App = React.createClass({
     },
 
     goToLogin() {
-        var { history } = this.props;
-        history.push('/login');
+        browserHistory.push('/login');
     },
 
     goToRoot() {
-        history.push('/');
+        browserHistory.push('/');
     }
 });
 
