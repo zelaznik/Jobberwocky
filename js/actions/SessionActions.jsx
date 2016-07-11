@@ -77,8 +77,9 @@ var SessionActions = Object.freeze({
         });
     },
 
-    auth_callback(params) {
-        var response = {current_user: params};
+    auth_callback(response) {
+        console.log("SessionActions.auth_callback(response)");
+        console.log(response);
         AppDispatcher.dispatch({
             actionType: SessionConstants.SIGN_IN_SUCCESS,
             response: response, error: null

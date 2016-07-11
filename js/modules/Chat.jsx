@@ -58,12 +58,8 @@ var ChatSingleMessage = React.createClass({
 });
 
 var ChatContent = React.createClass({
-    sender(sender_id) {
-        return this.props.senders.get(`${sender_id}`);
-    },
-
     className(msg) {
-        return (msg.get('sender_id') == this.props.currentUserId) ? "current-user" : "";
+        return (msg.get('sender').get('id') == this.props.currentUserId) ? "current-user" : "";
     },
 
     render() {
@@ -73,15 +69,14 @@ var ChatContent = React.createClass({
                     {this.props.messages.map((msg) => (
                         <li key={msg.get('id')} className={this.className(msg)} >
                             <img width="30" height="30"
-                                 src={ this.sender(msg.get('sender_id')).get('image') }
+                                 src={ msg.get('sender').get('image') }
                             />
                             <div className="bubble">
                                 <a className="user-name" href="">
-                                    { this.sender(msg.get('sender_id')).get('name') }
+                                    { msg.get('sender').get('name') }
                                 </a>
                                 <p className="message">
                                     { msg.get('body') }
-                                    { /*`CurrentUserId: ${this.props.currentUserId}, msg.get('sender_id'): ${msg.get('sender_id')}, className:${this.className(msg)}`*/ }
                                 </p>
                                 <p className="time">
                                     <strong>{ msg.get('created_at') }</strong>
@@ -133,18 +128,6 @@ var Chat = React.createClass({
             return this.state.contacts.get(this.user_id());
     },
 
-    response() {
-        return this.state.messages;
-    },
-
-    messages() {
-        return this.response() ? this.response().get('messages') : [];
-    },
-
-    senders() {
-        return this.response() ? this.response().get('senders') : {};
-    },
-
     componentDidMount() {
         SessionStore.addChangeListener(this.refresh);
         ChatStore.addChangeListener(this.refresh);
@@ -170,8 +153,7 @@ var Chat = React.createClass({
                     />
                     <ChatHeader   activeUser    = { this.activeUser() } />
                     <ChatContent  activeUser    = { this.activeUser() }
-                                  messages      = { this.messages()   }
-                                  senders       = { this.senders()    }
+                                  messages      = { this.state.messages }
                                   currentUserId = { SessionStore.currentUserId() }
                     />
                     <ChatFooter   activeUser={ this.activeUser() } />
