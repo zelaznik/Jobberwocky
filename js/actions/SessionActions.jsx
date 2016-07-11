@@ -120,10 +120,16 @@ var SessionActions = Object.freeze({
 
     toPreviousPage() {
         if (!SessionStore.saved_location()) {
-            return;
+            return false;
         }
-        var orig = SessionStore.saved_location();
-        browserHistory.push(orig.href);
+
+        const { user_id, location } = SessionStore.saved_location();
+        if (user_id != SessionStore.currentUserId()) {
+            return false;
+        }
+
+        browserHistory.push(location.href);
+        return true;
     }
 
 });

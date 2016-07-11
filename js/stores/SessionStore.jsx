@@ -33,7 +33,10 @@ function set_omniauth_url(provider, url) {
 }
 
 function save_current_location(params) {
-    Cookies.set('saved_location', params);
+    Cookies.set('saved_location', {
+        user_id: SessionStore.currentUserId(),
+        location: params
+    });
 }
 
 function clear_saved_location() {
@@ -94,6 +97,7 @@ AppDispatcher.register((payload) => {
 
         case SessionConstants.SIGN_OUT:
             clearSession();
+            clear_saved_location();
             SessionStore.emit(LOGOUT);
             SessionStore.emitChange();
             break;

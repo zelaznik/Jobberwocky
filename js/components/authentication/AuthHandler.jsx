@@ -16,8 +16,9 @@ var AuthHandler = Object.freeze({
     },
 
     redirect() {
-        browserHistory.push("/");
-        SessionActions.toPreviousPage();
+        if (!SessionActions.toPreviousPage()) {
+            browserHistory.push("/");
+        }
     },
 
     componentDidMount() {
