@@ -20,7 +20,7 @@ import RequestPasswordReset from './modules/RequestPasswordReset.jsx';
 import requireAuth from './utils/requireAuth.jsx';
 
 /* DEVELOPMENT TOOLS */
-import {Home, Users, Charts, Gallery } from './_development/PlaceHolders.jsx';
+import { Home, Users, Charts, Gallery } from './_development/PlaceHolders.jsx';
 
 var router = (
     <Router history={ browserHistory } >
@@ -32,7 +32,7 @@ var router = (
             <Route path="/charts"   component={ Charts } />
             <Route path="/gallery"  component={ Gallery } />
 
-            <Route path="/chat"     component={ Chat } />
+            <Route path="/messages"     component={ Chat } />
         </Route>
 
         <Route path="/login" component={ Login } />

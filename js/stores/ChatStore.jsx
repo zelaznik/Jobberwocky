@@ -7,6 +7,14 @@ var _loaded, _updating;
 var _contacts = Immutable.List([]);
 var _messages = Immutable.Map({});
 
+function setChatContacts(users) {
+    var dct = {};
+    users.forEach((u) => { dct[u.id] = u; });
+    _contacts = Immutable.Map(dct);
+    _updating = false;
+    _loaded = true;
+}
+
 var ChatStore = new Store({
     updating()  {
         return !!_updating;
@@ -33,9 +41,7 @@ AppDispatcher.register((payload) => {
             break;
 
         case ChatConstants.GET_USERS_SUCCESS:
-            _contacts = Immutable.List(payload.response.users);
-            _updating = false;
-            _loaded = true;
+            setChatContacts(payload.response.users);
             ChatStore.emitChange();
             break;
     }

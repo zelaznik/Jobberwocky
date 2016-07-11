@@ -1,5 +1,4 @@
 import React from 'react';
-var Router = require('react-router');
 import assign from 'object-assign';
 
 import NavBar from './../components/navbar/NavBar.jsx';
@@ -11,8 +10,6 @@ import routes from '../routes.jsx';
 import AlertModal from '../components/modals/AlertModal.jsx';
 
 const App = React.createClass({
-    /* mixins: [ Router.State ], */
-
     getInitialState() {
         return {
             loggedIn: SessionStore.loggedIn(),

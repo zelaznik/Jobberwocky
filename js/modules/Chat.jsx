@@ -1,7 +1,10 @@
+import React from 'react';
+import { Link } from 'react-router';
+
 import ChatActions from '../actions/ChatActions.jsx';
 import ChatStore from '../stores/ChatStore.jsx';
 
-import React from 'react';
+import assign from 'object-assign';
 var md5 = require('md5');
 
 var ChatContacts = React.createClass({
@@ -18,13 +21,13 @@ var ChatContacts = React.createClass({
                     <i className="fa fa-plus pull-right" />
                 </div>
                 <ul>
-                    {this.props.contacts.map((c, i) => (
-                        <li key={i}>
-                            <a href="#">
+                    {this.props.contacts.map((c) => (
+                        <li key={c.id} >
+                            <Link to="/messages" query={{user_id: c.id}} >
                                 <img width="30" height="30" src={c.image} />
                                 <span>{ c.name }</span>
                                 <i className={`fa fa-circle text-${this.status(c)}`} />
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>
@@ -46,6 +49,11 @@ var Chat = React.createClass({
         this.setState( this.getInitialState() );
     },
 
+    activeUser() {
+        var q = this.props.location.query;
+        return this.state.contacts.get(q.user_id) || {};
+    },
+
     componentDidMount() {
         ChatStore.addChangeListener(this.refresh);
         if (!this.state.loaded) {
@@ -62,9 +70,9 @@ var Chat = React.createClass({
             return (
                 <div className="container-fluid main-content">
                     <div className="page-title">
-                        <h1>
+                        <center><h1>
                             Loading...
-                        </h1>
+                        </h1></center>
                     </div>
                 </div>
             );
@@ -73,9 +81,9 @@ var Chat = React.createClass({
         return (
            <div className="container-fluid main-content">
                <div className="page-title">
-                   <h1>
+                   <center><h1>
                        Chat
-                   </h1>
+                   </h1></center>
                </div>
 
                <div className="row">
@@ -83,14 +91,17 @@ var Chat = React.createClass({
                        <div className="widget-container scrollable chat chat-page">
                            <ChatContacts contacts={ this.state.contacts } />
                            <div className="heading">
-                               <i className="fa fa-comments" />Chat with <a href="#">John Smith</a><i className="fa fa-cog pull-right" /><i className="fa fa-smile-o pull-right" />
+                               <i className="fa fa-comments" />
+                               <span>Chat with <a href="#">{ this.activeUser().name }</a></span>
+                               <i className="fa fa-cog pull-right" />
+                               <i className="fa fa-smile-o pull-right" />
                            </div>
                            <div className="widget-content padded">
                                <ul>
                                    <li>
                                        <img width="30" height="30" src="images/avatar-male.jpg" />
                                        <div className="bubble">
-                                           <a className="user-name" href="">John Smith</a>
+                                           <a className="user-name" href="">{ this.activeUser().name }</a>
                                            <p className="message">
                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
                                            </p>
