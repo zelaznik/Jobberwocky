@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import ChatActions from '../actions/ChatActions.jsx';
+import SessionStore from '../stores/SessionStore.jsx';
 import ChatStore from '../stores/ChatStore.jsx';
 
 var md5 = require('md5');
@@ -22,7 +22,10 @@ var ChatContacts = React.createClass({
                 <ul>
                     {this.props.contacts.map((c) => (
                         <li key={c.get('id')} >
-                            <Link to="/messages" query={{user_id: c.get('id')}} onClick={ this.props.synch } >
+                            <Link to="/messages"
+                                  query={{user_id: c.get('id')} }
+                                  onClick={() => (this.props.setUserId(c.get('id')))}
+                            >
                                 <img width="30" height="30" src={c.get('image')} />
                                 <span>{ c.get('name') }</span>
                                 <i className={`fa fa-circle text-${this.status(c)}`} />
@@ -48,35 +51,44 @@ var ChatHeader = React.createClass({
     }
 });
 
+var ChatSingleMessage = React.createClass({
+    render() {
+        return (<div></div>);
+    }
+});
+
 var ChatContent = React.createClass({
+    sender(sender_id) {
+        return this.props.senders.get(`${sender_id}`);
+    },
+
+    className(msg) {
+        return (msg.get('sender_id') == this.props.currentUserId) ? "current-user" : "";
+    },
+
     render() {
         return (
             <div className="widget-content padded">
                 <ul>
-                    <li>
-                        <img width="30" height="30" src="images/avatar-male.jpg" />
-                        <div className="bubble">
-                            <a className="user-name" href="">{ this.props.activeUser.get('name') }</a>
-                            <p className="message">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
-                            </p>
-                            <p className="time">
-                                <strong>Today </strong>3:53 pm
-                            </p>
-                        </div>
-                    </li>
-                    <li className="current-user">
-                        <img width="30" height="30" src="images/avatar-female.jpg" />
-                        <div className="bubble">
-                            <a className="user-name" href="">Jane Smith</a>
-                            <p className="message">
-                                Donec odio. Quisque volutpat mattis eros.
-                            </p>
-                            <p className="time">
-                                <strong>Today </strong>3:53 pm
-                            </p>
-                        </div>
-                    </li>
+                    {this.props.messages.map((msg) => (
+                        <li key={msg.get('id')} className={this.className(msg)} >
+                            <img width="30" height="30"
+                                 src={ this.sender(msg.get('sender_id')).get('image') }
+                            />
+                            <div className="bubble">
+                                <a className="user-name" href="">
+                                    { this.sender(msg.get('sender_id')).get('name') }
+                                </a>
+                                <p className="message">
+                                    { msg.get('body') }
+                                    { /*`CurrentUserId: ${this.props.currentUserId}, msg.get('sender_id'): ${msg.get('sender_id')}, className:${this.className(msg)}`*/ }
+                                </p>
+                                <p className="time">
+                                    <strong>{ msg.get('created_at') }</strong>
+                                </p>
+                            </div>
+                        </li>
+                    ))}
                 </ul>
             </div>
         );
@@ -99,7 +111,7 @@ var Chat = React.createClass({
         return {
             dummy: {},
             contacts: ChatStore.contacts(),
-            messages: ChatStore.messages()
+            messages: (this.user_id() ? ChatStore.messages(this.user_id()) : undefined)
         };
     },
 
@@ -107,8 +119,13 @@ var Chat = React.createClass({
         this.setState( this.getInitialState() );
     },
 
+    setUserId(user_id) {
+        this._userId = user_id;
+        this.refresh();
+    },
+
     user_id() {
-        return this.props.location.query.user_id;
+        return this._userId || this.props.location.query.user_id;
     },
 
     activeUser() {
@@ -116,25 +133,25 @@ var Chat = React.createClass({
             return this.state.contacts.get(this.user_id());
     },
 
-    messages() {
-        return this.state.messages.get(`${this.user_id()}`);
+    response() {
+        return this.state.messages;
     },
 
-    synch() {
-        if (this.user_id() && !this.messages()) {
-            ChatActions.get_messages(this.user_id())
-        }
-        if (!this.state.contacts) {
-            ChatActions.get_users();
-        }
+    messages() {
+        return this.response() ? this.response().get('messages') : [];
+    },
+
+    senders() {
+        return this.response() ? this.response().get('senders') : {};
     },
 
     componentDidMount() {
+        SessionStore.addChangeListener(this.refresh);
         ChatStore.addChangeListener(this.refresh);
-        this.synch();
     },
 
     componentWillUnmount() {
+        SessionStore.removeChangeListener(this.refresh);
         ChatStore.removeChangeListener(this.refresh);
     },
 
@@ -148,9 +165,15 @@ var Chat = React.createClass({
         } else {
             return (
                 <div className="widget-container scrollable chat chat-page">
-                    <ChatContacts contacts={ this.state.contacts } synch={this.synch} />
-                    <ChatHeader   activeUser={ this.activeUser() } />
-                    <ChatContent  activeUser={ this.activeUser() } />
+                    <ChatContacts contacts={ this.state.contacts }
+                                  onClick={this.refresh}
+                    />
+                    <ChatHeader   activeUser    = { this.activeUser() } />
+                    <ChatContent  activeUser    = { this.activeUser() }
+                                  messages      = { this.messages()   }
+                                  senders       = { this.senders()    }
+                                  currentUserId = { SessionStore.currentUserId() }
+                    />
                     <ChatFooter   activeUser={ this.activeUser() } />
                 </div>
             );
@@ -188,4 +211,6 @@ var Chat = React.createClass({
     }
 });
 
+window.SessionStore = SessionStore;
+window.ChatStore = ChatStore;
 export default Chat;
