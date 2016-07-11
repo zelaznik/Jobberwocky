@@ -7,6 +7,16 @@ ApiEndpoints.SIGN_IN =  ApiRoot + '/users/sign_in';
 ApiEndpoints.SIGN_OUT = ApiRoot + '/users/sign_out';
 ApiEndpoints.SIGN_UP =  ApiRoot + '/users';
 
+ApiEndpoints.USERS = ApiRoot + '/users';
+
+ApiEndpoints.USER = function(id) {
+    return ApiEndpoints.USERS + "/" + id;
+};
+
+ApiEndpoints.MESSAGES = function(user_id) {
+    return ApiEndpoints.USERS(user_id) + '/messages';
+};
+
 ApiEndpoints.AUTH = function(src) {
     return ApiRoot + '/users/auth/' + src;
 };

@@ -1,5 +1,6 @@
+import ChatActions from '../actions/ChatActions.jsx';
 import ChatStore from '../stores/ChatStore.jsx';
-import SessionStore from '../stores/SessionStore.jsx'
+
 import React from 'react';
 var md5 = require('md5');
 
@@ -33,7 +34,42 @@ var ChatContacts = React.createClass({
 });
 
 var Chat = React.createClass({
+    getInitialState() {
+        return {
+            dummy: {},
+            loaded: ChatStore.loaded(),
+            contacts: ChatStore.contacts()
+        };
+    },
+
+    refresh() {
+        this.setState( this.getInitialState() );
+    },
+
+    componentDidMount() {
+        ChatStore.addChangeListener(this.refresh);
+        if (!this.state.loaded) {
+            ChatActions.get_users();
+        }
+    },
+
+    componentWillUnmount() {
+        ChatStore.removeChangeListener(this.refresh);
+    },
+
     render() {
+        if (!this.state.loaded) {
+            return (
+                <div className="container-fluid main-content">
+                    <div className="page-title">
+                        <h1>
+                            Loading...
+                        </h1>
+                    </div>
+                </div>
+            );
+        }
+
         return (
            <div className="container-fluid main-content">
                <div className="page-title">
@@ -45,7 +81,7 @@ var Chat = React.createClass({
                <div className="row">
                    <div className="col-lg-12">
                        <div className="widget-container scrollable chat chat-page">
-                           <ChatContacts contacts={ ChatStore.contact_list() } />
+                           <ChatContacts contacts={ this.state.contacts } />
                            <div className="heading">
                                <i className="fa fa-comments" />Chat with <a href="#">John Smith</a><i className="fa fa-cog pull-right" /><i className="fa fa-smile-o pull-right" />
                            </div>
