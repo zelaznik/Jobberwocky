@@ -27,10 +27,10 @@ var router = (
         <Route path="/auth_callback" component={ OAuth } />
         <Route path="/" component={ App } onEnter={ requireAuth }>
             <IndexRoute component={ Home } />
-            <Route path="products" component={ MainContent } />
-            <Route path="users"    component={ Users } />
-            <Route path="charts"   component={ Charts } />
-            <Route path="gallery"  component={ Gallery } />
+            <Route path="/products" component={ MainContent } />
+            <Route path="/users"    component={ Users } />
+            <Route path="/charts"   component={ Charts } />
+            <Route path="/gallery"  component={ Gallery } />
 
             <Route path="/messages" component={ Chat } >
                 <IndexRoute component={ ChatBlank } />
