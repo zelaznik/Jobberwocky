@@ -9,6 +9,7 @@ import App from './modules/App.jsx';
 /* STANDALONE COMPONENTS */
 import MainContent from './components/Products.jsx';
 import { Error404, Alert } from './components/Errors.jsx';
+import Chat from './modules/Chat.jsx';
 import OAuth from './modules/OAuth.jsx';
 import Login from './modules/Login.jsx';
 import SignUp from './modules/SignUp.jsx';
@@ -27,9 +28,11 @@ var router = (
         <Route path="/" component={ App } onEnter={ requireAuth }>
             <IndexRoute component={ Home } />
             <Route path="/products" component={ MainContent } />
-            <Route path="/users" component={Users} />
+            <Route path="/chat"   component={ Users } />
             <Route path="/charts" component={Charts} />
             <Route path="/gallery" component={Gallery} />
+
+            <Route path="/chat"   component={ Chat } />
         </Route>
 
         <Route path="/login" component={ Login } />
