@@ -19,7 +19,8 @@ const SessionConstants = uniqueKeySet('Session', {
     REQUEST_NEW_PASSWORD: null,
 
     REDIRECT_TO_LOGIN: null,
-    SAVE_CURRENT_LOCATION: null
+    SAVE_CURRENT_LOCATION: null,
+    CLEAR_SAVED_LOCATION: null
 });
 
 export default SessionConstants;

@@ -1,4 +1,4 @@
-var Immutable = require('immutable');
+var Immutable = window.Immutable = require('immutable');
 
 import AppDispatcher from '../dispatcher/appDispatcher.jsx';
 import SessionConstants from '../constants/SessionConstants.jsx';
@@ -11,20 +11,19 @@ var querystring = require('querystring');
 function setSession(params) {
     var session = params.response;
 
-    Cookies.set('authToken',     session.token);
-    Cookies.set('expireDate',    session.expire_date);
-    Cookies.set('email',         session.user.email);
+    Cookies.set('authToken',       session.token);
+    Cookies.set('expireDate',      session.expire_date);
+    Cookies.set('email',           session.user.email);
 
-    Cookies.set('currentUserId', session.user.id);
-    Cookies.set('image',         session.user.image);
-    Cookies.set('name',          session.user.name);
+    Cookies.set('currentUserId',   session.user.id);
+    Cookies.set('image',           session.user.image);
+    Cookies.set('name',            session.user.name);
 }
 
 function clearSession() {
     Cookies.reset();
 }
 
-var _saved_location = Immutable.Map({});
 var _auth = Immutable.Map({});
 
 function set_omniauth_url(provider, url) {
@@ -34,7 +33,7 @@ function set_omniauth_url(provider, url) {
 }
 
 function save_current_location(params) {
-    _saved_location = Immutable.fromJS(params);
+    Cookies.set('saved_location', params);
 }
 
 var SessionStore = new Store({
@@ -49,7 +48,7 @@ var SessionStore = new Store({
     },
 
     saved_location() {
-        return _saved_location;
+        return Cookies.get('saved_location');
     },
 
     omni_auth_url(provider) {

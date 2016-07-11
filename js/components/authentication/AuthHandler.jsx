@@ -2,6 +2,7 @@ import { SIGN_IN_SUCCESS } from '../../constants/EventConstants.jsx';
 import SessionStore from '../../stores/SessionStore.jsx';
 import AlertStore from '../../stores/AlertStore.jsx';
 import { browserHistory } from 'react-router';
+var Immutable = require('immutable');
 
 var AuthHandler = Object.freeze({
     getInitialState() {
@@ -28,10 +29,21 @@ var AuthHandler = Object.freeze({
     },
 
     toPreviousPage() {
-        var prev = SessionStore.saved_location();
-        var current = browserHistory.goBack();
-        while ((!!current) && (prev.get('pathname') != window.location.pathname)) {
-            browserHistory.goBack();
+        var fcn = (v)=>(Immutable.fromJS(v));
+
+        var orig = fcn(SessionStore.saved_location());
+        var back = browserHistory.goBack();
+        var current = fcn(window.location);
+
+        while (back && !current.equals(prev)) {
+            back = browserHistory.goBack();
+            current = fcn(window.location);
+            console.log("Going back a page: ");
+            console.log(current.toJSON());
+            console.log('');
+        }
+        if (!prev.equals(current)) {
+            browserHistory.push(orig.get('href'));
         }
     }
 });
