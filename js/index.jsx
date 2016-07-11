@@ -28,11 +28,11 @@ var router = (
         <Route path="/" component={ App } onEnter={ requireAuth }>
             <IndexRoute component={ Home } />
             <Route path="/products" component={ MainContent } />
-            <Route path="/chat"   component={ Users } />
-            <Route path="/charts" component={Charts} />
-            <Route path="/gallery" component={Gallery} />
+            <Route path="/users"    component={ Users } />
+            <Route path="/charts"   component={ Charts } />
+            <Route path="/gallery"  component={ Gallery } />
 
-            <Route path="/chat"   component={ Chat } />
+            <Route path="/chat"     component={ Chat } />
         </Route>
 
         <Route path="/login" component={ Login } />
