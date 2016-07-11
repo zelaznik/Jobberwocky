@@ -22,7 +22,6 @@ var ChatActions = Object.freeze({
     },
 
     get_messages(user_id) {
-        console.log("ChatActions.get_messages");
         AppDispatcher.dispatch({
             actionType: ChatConstants.GET_MESSAGES,
             user_id: user_id

@@ -9,7 +9,7 @@ import App from './modules/App.jsx';
 /* STANDALONE COMPONENTS */
 import MainContent from './components/Products.jsx';
 import { Error404, Alert } from './components/Errors.jsx';
-import Chat from './modules/Chat.jsx';
+import { Chat, ChatBlank, ChatUser } from './modules/Chat.jsx';
 import OAuth from './modules/OAuth.jsx';
 import Login from './modules/Login.jsx';
 import SignUp from './modules/SignUp.jsx';
@@ -27,12 +27,15 @@ var router = (
         <Route path="/auth_callback" component={ OAuth } />
         <Route path="/" component={ App } onEnter={ requireAuth }>
             <IndexRoute component={ Home } />
-            <Route path="/products" component={ MainContent } />
-            <Route path="/users"    component={ Users } />
-            <Route path="/charts"   component={ Charts } />
-            <Route path="/gallery"  component={ Gallery } />
+            <Route path="products" component={ MainContent } />
+            <Route path="users"    component={ Users } />
+            <Route path="charts"   component={ Charts } />
+            <Route path="gallery"  component={ Gallery } />
 
-            <Route path="/messages"     component={ Chat } />
+            <Route path="/messages" component={ Chat } >
+                <IndexRoute component={ ChatBlank } />
+                <Route path="/messages/users/:user_id" component= { ChatUser } />
+            </Route>
         </Route>
 
         <Route path="/login" component={ Login } />

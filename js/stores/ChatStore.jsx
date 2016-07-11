@@ -25,18 +25,27 @@ var ChatStore = new Store({
         _contacts = undefined;
         _messages = Immutable.Map({});
     },
+
     contacts() {
-        if (_contacts === undefined)
+        if (_contacts === undefined) {
             setTimeout(() => (ChatActions.get_users()), 0);
-        return _contacts;
+            return Immutable.Map({});
+        } else {
+            return _contacts;
+        }
     },
+
     messages(user_id) {
-        if (user_id === undefined)
+        if (user_id === undefined) {
             return _messages;
+        }
 
         var msg = _messages.get(`${user_id}`);
-        if (msg === undefined)
+        if (msg === undefined) {
             setTimeout(() => (ChatActions.get_messages(user_id)), 0);
+            return Immutable.List([]);
+        }
+
         return msg;
     }
 });
