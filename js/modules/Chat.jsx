@@ -12,7 +12,7 @@ var Chat = React.createClass({
                </div>
 
                <div className="row">
-                   <!-- Conversation -->
+                   { /* <!-- Conversation --> */ }
                    <div className="col-lg-12">
                        <div className="widget-container scrollable chat chat-page">
                            <div className="contact-list">
