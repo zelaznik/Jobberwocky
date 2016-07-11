@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 import ChatActions from '../actions/ChatActions.jsx';
 import ChatStore from '../stores/ChatStore.jsx';
 
-import assign from 'object-assign';
 var md5 = require('md5');
 
 var ChatContacts = React.createClass({
@@ -36,11 +35,69 @@ var ChatContacts = React.createClass({
     }
 });
 
+var ChatHeader = React.createClass({
+    render() {
+        return (
+            <div className="heading">
+                <i className="fa fa-comments" />
+                <span>Chat with <a href="#">{ this.props.activeUser.name || '?' }</a></span>
+                <i className="fa fa-cog pull-right" />
+                <i className="fa fa-smile-o pull-right" />
+            </div>
+        );
+    }
+});
+
+var ChatContent = React.createClass({
+    render() {
+        return (
+            <div className="widget-content padded">
+                <ul>
+                    <li>
+                        <img width="30" height="30" src="images/avatar-male.jpg" />
+                        <div className="bubble">
+                            <a className="user-name" href="">{ this.props.activeUser.name || '?' }</a>
+                            <p className="message">
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
+                            </p>
+                            <p className="time">
+                                <strong>Today </strong>3:53 pm
+                            </p>
+                        </div>
+                    </li>
+                    <li className="current-user">
+                        <img width="30" height="30" src="images/avatar-female.jpg" />
+                        <div className="bubble">
+                            <a className="user-name" href="">Jane Smith</a>
+                            <p className="message">
+                                Donec odio. Quisque volutpat mattis eros.
+                            </p>
+                            <p className="time">
+                                <strong>Today </strong>3:53 pm
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        );
+    }
+});
+
+var ChatFooter = React.createClass({
+   render() {
+       return (
+           <div className="post-message">
+               <input className="form-control" placeholder="Write your message here…" type="text" />
+               <input type="submit" value="Send" />
+           </div>
+       );
+   }
+});
+
 var Chat = React.createClass({
     getInitialState() {
         return {
             dummy: {},
-            loaded: ChatStore.loaded(),
             contacts: ChatStore.contacts()
         };
     },
@@ -49,15 +106,22 @@ var Chat = React.createClass({
         this.setState( this.getInitialState() );
     },
 
+    user_id() {
+        return this.props.location.query.user_id;
+    },
+
     activeUser() {
-        var q = this.props.location.query;
-        return this.state.contacts.get(q.user_id) || {};
+        if (this.user_id())
+            return this.state.contacts.get(this.user_id());
     },
 
     componentDidMount() {
         ChatStore.addChangeListener(this.refresh);
-        if (!this.state.loaded) {
+        if (!this.state.contacts) {
             ChatActions.get_users();
+        }
+        if (this.activeUser() && !this.state.messages) {
+            ChatActions.get_messages(this.ActiveUser().id);
         }
     },
 
@@ -65,8 +129,27 @@ var Chat = React.createClass({
         ChatStore.removeChangeListener(this.refresh);
     },
 
+    chat_page() {
+        if (!this.activeUser()) {
+            return (
+                <div className="widget-container scrollable chat chat-page">
+                    <ChatContacts contacts={ this.state.contacts } />
+                </div>
+            );
+        } else {
+            return (
+                <div className="widget-container scrollable chat chat-page">
+                    <ChatContacts contacts={ this.state.contacts } />
+                    <ChatHeader   activeUser={ this.activeUser() } />
+                    <ChatContent  activeUser={ this.activeUser() } />
+                    <ChatFooter   activeUser={ this.activeUser() } />
+                </div>
+            );
+        }
+    },
+
     render() {
-        if (!this.state.loaded) {
+        if ( !this.state.contacts ) {
             return (
                 <div className="container-fluid main-content">
                     <div className="page-title">
@@ -88,47 +171,7 @@ var Chat = React.createClass({
 
                <div className="row">
                    <div className="col-lg-12">
-                       <div className="widget-container scrollable chat chat-page">
-                           <ChatContacts contacts={ this.state.contacts } />
-                           <div className="heading">
-                               <i className="fa fa-comments" />
-                               <span>Chat with <a href="#">{ this.activeUser().name }</a></span>
-                               <i className="fa fa-cog pull-right" />
-                               <i className="fa fa-smile-o pull-right" />
-                           </div>
-                           <div className="widget-content padded">
-                               <ul>
-                                   <li>
-                                       <img width="30" height="30" src="images/avatar-male.jpg" />
-                                       <div className="bubble">
-                                           <a className="user-name" href="">{ this.activeUser().name }</a>
-                                           <p className="message">
-                                               Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
-                                           </p>
-                                           <p className="time">
-                                               <strong>Today </strong>3:53 pm
-                                           </p>
-                                       </div>
-                                   </li>
-                                   <li className="current-user">
-                                       <img width="30" height="30" src="images/avatar-female.jpg" />
-                                       <div className="bubble">
-                                           <a className="user-name" href="">Jane Smith</a>
-                                           <p className="message">
-                                               Donec odio. Quisque volutpat mattis eros.
-                                           </p>
-                                           <p className="time">
-                                               <strong>Today </strong>3:53 pm
-                                           </p>
-                                       </div>
-                                   </li>
-                               </ul>
-                           </div>
-                           <div className="post-message">
-                               <input className="form-control" placeholder="Write your message here…" type="text" />
-                               <input type="submit" value="Send" />
-                           </div>
-                       </div>
+                       { this.chat_page() }
                    </div>
                </div>
            </div>

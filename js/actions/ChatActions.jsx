@@ -10,13 +10,29 @@ var ChatActions = Object.freeze({
             actionType: ChatConstants.GET_USERS,
             params: {}
         });
-        GET(ApiEndpoints.USERS, null, (error, response) => {
+        GET(ApiEndpoints.USERS, {}, (error, response) => {
             if (error)
                 AlertActions.sendDelayed({error: error});
             if (response)
                 AppDispatcher.dispatch({
                     actionType: ChatConstants.GET_USERS_SUCCESS,
                     response: response, error: error
+                });
+        });
+    },
+
+    get_messages(user_id) {
+        AppDispatcher.dispatch({
+            actionType: ChatConstants.GET_MESSAGES,
+            params: {}
+        });
+        GET(ApiEndpoints.MESSAGES(user_id), {}, (error, response) => {
+            if (error)
+                AlertActions.sendDelayed({error: error});
+            if (response)
+                AppDispatcher.dispatch({
+                    actionType: ChatConstants.GET_MESSAGES_SUCCESS,
+                    response: response, error: error, user_id: user_id
                 });
         });
     }
