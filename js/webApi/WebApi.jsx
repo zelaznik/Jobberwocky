@@ -48,17 +48,20 @@ function ajaxWrapper(url_or_params, params_or_missing) {
 }
 
 function apiRequest(method, url, data, callback) {
-    ajaxWrapper({
+    var settings = {
         url: url,
         type: method,
-        data: JSON.stringify(data),
         success(response) {
             callback(null, response);
         },
         error(error) {
             callback(error, null);
         }
-    });
+    };
+    for (var key in data) {
+        settings.data = JSON.stringify(data);
+    }
+    ajaxWrapper(settings);
 }
 
 var GET = (url, data, cb) => (apiRequest('GET', url, data, cb)),
