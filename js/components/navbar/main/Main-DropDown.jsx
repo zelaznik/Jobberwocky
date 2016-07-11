@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router';
 import CurrentObjectMixin from '../../_mixins/Mixin-CurrentObject.jsx';
 
 class DropDownItem extends React.Component {
     render() {
         return (
             <li key={this.props.key}>
-                <a href={this.props.item.href}>
+                <Link to={this.props.item.href}>
                     <p>{this.props.item.label}</p>
-                </a>
+                </Link>
             </li>
         );
     }
@@ -31,9 +32,7 @@ var NavMainDropDown = React.createClass({
                 </ul>
             </li>
         );
-    },
-
-
+    }
 });
 
 export default NavMainDropDown;
