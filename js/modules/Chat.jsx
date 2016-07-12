@@ -126,6 +126,10 @@ var NewMessageForm = React.createClass({
         return {body: ''};
     },
 
+    reset() {
+        this.setState( this.getInitialState() );
+    },
+
     onChange(e) {
         this.state = {body: `${e.target.value}`};
     },
@@ -136,6 +140,7 @@ var NewMessageForm = React.createClass({
             user_id: this.props.user_id,
             body: this.state.body
         });
+        setTimeout(()=>{this.reset();},0)
     },
 
     render() {
@@ -194,7 +199,7 @@ var ChatUser = React.createClass({
                               messages      = { ChatStore.messages(this.user_id()) }
                               currentUserId = { SessionStore.currentUserId() }
                 />
-                <NewMessageForm user_id={ this.user_id()} />
+                <NewMessageForm user_id={ this.user_id() } />
             </div>
         );
     }
