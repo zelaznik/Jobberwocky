@@ -81,6 +81,18 @@ var ChatContent = React.createClass({
         return (msg.get('sender').get('id') == this.props.currentUserId) ? "current-user" : "";
     },
 
+    componentWillUpdate() {
+        var node = this.getDOMNode();
+        this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+    },
+
+    componentDidUpdate() {
+        if (this.shouldScrollBottom) {
+            var node = this.getDOMNode();
+            node.scrollTop = node.scrollHeight
+        }
+    },
+
     render() {
         return (
             <div className="widget-content padded">
