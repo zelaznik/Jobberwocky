@@ -5,7 +5,7 @@ var Immutable = require('immutable');
 import ChatActions from '../actions/ChatActions.jsx';
 import SessionStore from '../stores/SessionStore.jsx';
 import ChatStore from '../stores/ChatStore.jsx';
-
+import deepCopy from '../utils/deepCopy.jsx';
 var md5 = require('md5');
 
 var ChatContacts = React.createClass({
@@ -126,12 +126,9 @@ var NewMessageForm = React.createClass({
         return {body: ''};
     },
 
-    reset() {
-        this.setState( this.getInitialState() );
-    },
-
     onChange(e) {
-        this.state = {body: `${e.target.value}`};
+        this.state.body = e.target.value;
+        this.setState(deepCopy(this.State));
     },
 
     onSubmit(e) {
@@ -140,13 +137,18 @@ var NewMessageForm = React.createClass({
             user_id: this.props.user_id,
             body: this.state.body
         });
-        setTimeout(()=>{this.reset();},0)
+        this.setState({body: ''});
     },
 
     render() {
         return (
-            <form className="post-message" onChange={this.onChange} onSubmit={this.onSubmit} >
-                <input className="form-control" placeholder="Write your message here…" type="text" />
+            <form className="post-message" onSubmit={this.onSubmit} >
+                <input className="form-control"
+                       placeholder="Write your message here…"
+                       type="text"
+                       onChange = { this.onChange   }
+                       value    = { this.state.body }
+                />
                 <input type="submit" value="Send" />
             </form>
         );

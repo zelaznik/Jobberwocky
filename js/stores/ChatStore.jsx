@@ -84,11 +84,6 @@ AppDispatcher.register((payload) => {
             ChatStore.emitChange();
             break;
 
-        case ChatConstants.SEND_MESSAGE:
-            ChatStore.emit(ChatConstants.SEND_MESSAGE);
-            ChatStore.emitChange();
-            break;
-
         case ChatConstants.SEND_MESSAGE_SUCCESS:
             addMessage(payload.params.user_id, payload.response);
             ChatStore.emitChange();
