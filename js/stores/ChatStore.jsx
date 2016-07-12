@@ -3,8 +3,10 @@ import ChatConstants from '../constants/ChatConstants.jsx';
 import ChatActions from '../actions/ChatActions.jsx';
 import SessionStore from "./SessionStore.jsx";
 import Store from './_templates/Store.jsx';
-var Immutable = require('immutable');
+import { Sequence } from '../utils/sequence.js';
+import Immutable from 'immutable';
 
+var seq = new Sequence();
 var _messages = Immutable.Map({});
 var _contacts;
 
@@ -14,9 +16,25 @@ function setChatContacts(users) {
     _contacts = Immutable.fromJS(dct);
 }
 
+function f(v) {
+    return Date.parse(v.created_at);
+}
+
+function by_date(a, b) {
+    return f(a) - f(b);
+}
+
 function setMessages(user_id, response) {
     var dct = _messages.toJSON();
-    dct[user_id] = response;
+    dct[user_id] = response.sort(by_date);
+    _messages = Immutable.fromJS(dct);
+}
+
+function addMessage(user_id, msg) {
+    var dct = _messages.toJSON();
+    var messages = dct[user_id];
+    messages.push(msg);
+    dct[user_id] = messages.sort(by_date);
     _messages = Immutable.fromJS(dct);
 }
 
@@ -24,6 +42,10 @@ var ChatStore = new Store({
     reset() {
         _contacts = undefined;
         _messages = Immutable.Map({});
+    },
+
+    tempId() {
+        return seq.low;
     },
 
     contacts() {
@@ -59,6 +81,11 @@ AppDispatcher.register((payload) => {
 
         case ChatConstants.GET_MESSAGES_SUCCESS:
             setMessages(payload.user_id, payload.response);
+            ChatStore.emitChange();
+            break;
+
+        case ChatConstants.SEND_MESSAGE_SUCCESS:
+            addMessage(payload.params.user_id, payload.response);
             ChatStore.emitChange();
             break;
     }

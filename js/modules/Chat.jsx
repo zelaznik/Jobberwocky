@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 var Immutable = require('immutable');
-
+import ChatActions from '../actions/ChatActions.jsx';
 import SessionStore from '../stores/SessionStore.jsx';
 import ChatStore from '../stores/ChatStore.jsx';
 
@@ -109,15 +109,31 @@ var ChatContent = React.createClass({
     }
 });
 
-var ChatFooter = React.createClass({
-   render() {
-       return (
-           <div className="post-message">
-               <input className="form-control" placeholder="Write your message here…" type="text" />
-               <input type="submit" value="Send" />
-           </div>
-       );
-   }
+var NewMessageForm = React.createClass({
+    getInitialState() {
+        return {body: ''};
+    },
+
+    onChange(e) {
+        this.state = {body: `${e.target.value}`};
+    },
+
+    onSubmit(e) {
+        e.preventDefault();
+        ChatActions.send_message({
+            user_id: this.props.user_id,
+            body: this.state.body
+        });
+    },
+
+    render() {
+        return (
+            <form className="post-message" onChange={this.onChange} onSubmit={this.onSubmit} >
+                <input className="form-control" placeholder="Write your message here…" type="text" />
+                <input type="submit" value="Send" />
+            </form>
+        );
+    }
 });
 
 var ChatUser = React.createClass({
@@ -166,7 +182,7 @@ var ChatUser = React.createClass({
                               messages      = { ChatStore.messages(this.user_id()) }
                               currentUserId = { SessionStore.currentUserId() }
                 />
-                <ChatFooter activeUser={ this.activeUser() }/>
+                <NewMessageForm user_id={ this.user_id()} />
             </div>
         );
     }
@@ -191,6 +207,9 @@ var ChatBlank = React.createClass({
 });
 
 var Chat = React.createClass({
+    getInitialState() {
+        return {dummy: {}};
+    },
     render() {
         return (
            <div className="container-fluid main-content">
@@ -207,6 +226,15 @@ var Chat = React.createClass({
                </div>
            </div>
         );
+    },
+    refresh() {
+       this.setState( this.getInitialState() );
+    },
+    componentDidMount() {
+        ChatStore.addChangeListener(this.refresh);
+    },
+    componentWillUnmount() {
+        ChatStore.removeChangeListener(this.refresh);
     }
 });
 

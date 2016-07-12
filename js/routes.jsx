@@ -41,6 +41,10 @@ var routes = (r) => ([
     ]),
 
     {href: '/gallery', icon: 'se7en-gallery', label: 'Gallery'}
+
+    /* {href: '/feed', icon: 'se7en-feed', label: 'Feed'},
+       {href: '/flag', icon: 'se7en-flag', label: 'Flag'},
+       {href: '/gear', icon: 'se7en-gear', label: 'Gear'} */
 ]);
 
 export default routes;
