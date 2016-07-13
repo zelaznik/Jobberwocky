@@ -46,6 +46,7 @@ var ChatActions = Object.freeze({
             actionType: ChatConstants.SEND_MESSAGE,
             params: params, temp_id: pk
         });
+
         POST(ApiEndpoints.MESSAGES(params.user_id), {body: params.body}, (error, response) => {
             if (error)
                 AlertActions.sendDelayed({error: error});
@@ -57,7 +58,6 @@ var ChatActions = Object.freeze({
                 });
         });
     }
-
 });
 
 export default ChatActions;

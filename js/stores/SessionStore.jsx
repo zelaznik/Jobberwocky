@@ -50,6 +50,7 @@ var SessionStore = new Store({
             email: this.email(),
             image: this.image(),
             loggedIn: this.loggedIn(),
+            id: this.currentUserId(),
             currentUserId: this.currentUserId()
         };
     },
@@ -120,4 +121,5 @@ AppDispatcher.register((payload) => {
     }
 });
 
+window.Cookies = Cookies;
 export default SessionStore;

@@ -82,7 +82,10 @@ var ChatHeader = React.createClass({
 
 var ChatContent = React.createClass({
     className(msg) {
-        return (msg.get('sender').get('id') == this.props.currentUserId) ? "current-user" : "";
+        var classes = [];
+        if (msg.get('sender').get('id') == this.props.currentUserId)
+            classes.push('current-user');
+        return classes.join(' ');
     },
 
     componentWillUpdate() {
@@ -101,8 +104,8 @@ var ChatContent = React.createClass({
         return (
             <div className="widget-content padded">
                 <ul>
-                    {this.props.messages.map((msg) => (
-                        <li key={msg.get('id')} className={this.className(msg)} >
+                    {this.props.messages.map((msg, i) => (
+                        <li key={i} className={this.className(msg)} >
                             <img width="30" height="30"
                                  src={ msg.get('sender').get('image') }
                             />
@@ -114,7 +117,9 @@ var ChatContent = React.createClass({
                                     { msg.get('body') }
                                 </p>
                                 <p className="time">
-                                    <strong>{ msg.get('created_at') }</strong>
+                                    <strong>{
+                                        msg.get('temp_id') ? 'sending...' : msg.get('created_at')
+                                    }</strong>
                                 </p>
                             </div>
                         </li>
@@ -132,7 +137,7 @@ var NewMessageForm = React.createClass({
 
     onChange(e) {
         this.state.body = e.target.value;
-        this.setState(deepCopy(this.State));
+        this.setState(deepCopy(this.state));
     },
 
     onSubmit(e) {
