@@ -22,8 +22,12 @@ var ChatContacts = React.createClass({
     },
 
     status(contact) {
-        var i = parseInt(md5(contact.get('email'))[0], 16) % 4;
-        return ['success', 'warning', 'danger', 'muted'][i];
+        try {
+            var i = parseInt(md5(contact.get('email'))[0], 16) % 4;
+            return ['success', 'warning', 'danger', 'muted'][i];
+        } catch(e) {
+            return 'muted';
+        }
     },
 
     componentDidMount() {
