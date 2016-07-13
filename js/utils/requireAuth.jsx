@@ -10,7 +10,6 @@ function requireAuth(nextState, replace, callback) {
         });
     }
 
-    SessionActions.authenticate();
     if (callback)
         callback();
 }

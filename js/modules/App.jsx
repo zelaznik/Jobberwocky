@@ -6,7 +6,6 @@ import Pusher from 'pusher-js';
 import { LOGOUT, REDIRECT_TO_LOGIN , SIGN_IN_SUCCESS } from '../constants/EventConstants.jsx';
 import SessionActions from '../actions/SessionActions.jsx';
 import SessionStore from '../stores/SessionStore.jsx';
-import ChatActions from '../actions/ChatActions.jsx';
 import AlertStore from '../stores/AlertStore.jsx';
 
 import AlertModal from '../components/modals/AlertModal.jsx';
@@ -32,18 +31,7 @@ const App = React.createClass({
         );
     },
 
-    socketSetup() {
-        this.pusher = new Pusher(process.env.PUSHER_KEY, {encrypted: true});
-        this.notifications = this.pusher.subscribe(''+SessionStore.currentUserId());
-        this.notifications.bind('NEW_MESSAGE', ChatActions.receive_message);
-    },
-
-    socketTakedown() {
-        this.notifications.unbind('NEW_MESSAGE', ChatActions.receive_message);
-    },
-
     componentDidMount() {
-        this.socketSetup();
         document.addEventListener('click', this.pageClick);
         SessionStore.addChangeListener(this.getNewSession);
         SessionStore.on(SIGN_IN_SUCCESS, SessionActions.toPreviousPage);
@@ -53,8 +41,6 @@ const App = React.createClass({
     },
 
     componentWillUnmount() {
-        this.socketTakedown();
-
         document.removeEventListener('click', this.pageClick);
         SessionStore.removeListener(SIGN_IN_SUCCESS, SessionActions.toPreviousPage);
         SessionStore.removeChangeListener(this.getNewSession);
