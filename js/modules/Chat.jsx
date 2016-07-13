@@ -6,12 +6,16 @@ var Immutable = require('immutable');
 import ChatActions from '../actions/ChatActions.jsx';
 import SessionStore from '../stores/SessionStore.jsx';
 import ChatStore from '../stores/ChatStore.jsx';
+import SearchBarStore from '../stores/SearchBarStore.jsx';
 import deepCopy from '../utils/deepCopy.jsx';
 var md5 = require('md5');
 
 var ChatContacts = React.createClass({
     getInitialState() {
-        return { contacts: ChatStore.contacts()};
+        return {
+            contacts: ChatStore.contacts(),
+            search: SearchBarStore.value().toLowerCase()
+        };
     },
 
     refresh() {
@@ -19,7 +23,14 @@ var ChatContacts = React.createClass({
     },
 
     contacts() {
-        return (this.state.contacts || Immutable.List([]));
+        var whole = (this.state.contacts || Immutable.List([]));
+        if (!this.state.search) {
+            return whole;
+        } else {
+            return whole.filter((v) => (
+                v.get('name').toLowerCase().indexOf(this.state.search) > -1
+            ));
+        }
     },
 
     status(contact) {
@@ -32,10 +43,12 @@ var ChatContacts = React.createClass({
     },
 
     componentDidMount() {
+        SearchBarStore.addChangeListener(this.refresh);
         ChatStore.addChangeListener(this.refresh);
     },
 
     componentWillUnmount() {
+        SearchBarStore.removeChangeListener(this.refresh);
         ChatStore.removeChangeListener(this.refresh);
     },
 
@@ -237,7 +250,9 @@ var ChatBlank = React.createClass({
 
 var Chat = React.createClass({
     getInitialState() {
-        return {dummy: {}};
+        return {
+            dummy: {}
+        };
     },
     render() {
         return (
@@ -265,11 +280,15 @@ var Chat = React.createClass({
         this.pusher = new Pusher(process.env.PUSHER_KEY, {encrypted: true});
         this.notifications = this.pusher.subscribe(''+SessionStore.currentUserId());
         this.notifications.bind('NEW_MESSAGE', ChatActions.receive_message);
+
+        SearchBarStore.addChangeListener(this.refresh);
         ChatStore.addChangeListener(this.refresh);
     },
 
     componentWillUnmount() {
         this.notifications.unbind('NEW_MESSAGE', ChatActions.receive_message);
+
+        SearchBarStore.removeChangeListener(this.refresh);
         ChatStore.removeChangeListener(this.refresh);
     }
 });

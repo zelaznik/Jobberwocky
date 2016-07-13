@@ -3,6 +3,7 @@ import React from 'react';
 import NotificationsDropDown   from './Top-DropDown-Notifications.jsx';
 import NewMessagesDropDown     from './Top-DropDown-Messages.jsx';
 import AccountSettingsDropDown from './Top-DropDown-AccountSettings.jsx';
+import SearchBarActions from '../../../actions/SearchBarActions.jsx';
 
 var NavBarTopRight = React.createClass({
     render() {
@@ -18,6 +19,22 @@ var NavBarTopRight = React.createClass({
     }
 });
 
+var SearchBar = React.createClass({
+    onChange(e) {
+        SearchBarActions.update(e.target.value);
+    },
+
+    render() {
+        return (
+            <form className="navbar-form form-inline col-lg-2 hidden-xs">
+                <input className="form-control" placeholder="Search"
+                       type="text" onChange={this.onChange}
+                />
+            </form>
+        );
+    }
+});
+
 var NavBarTop = React.createClass({
     render() {
         return (
@@ -29,9 +46,7 @@ var NavBarTop = React.createClass({
                     <span className="icon-bar" />
                 </button>
                 <a className="logo" href="index.html">se7en</a>
-                <form className="navbar-form form-inline col-lg-2 hidden-xs">
-                    <input className="form-control" placeholder="Search" type="text" />
-                </form>
+                <SearchBar />
             </div>
         );
     }
