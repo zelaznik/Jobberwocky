@@ -27,8 +27,8 @@ var ChatContacts = React.createClass({
         if (!this.state.search) {
             return whole;
         } else {
-            return whole.filter((v) => (
-                v.get('name').toLowerCase().indexOf(this.state.search) > -1
+             return whole.filter((v) => (
+                 (v.get('name')||'').toLowerCase().indexOf(this.state.search) > -1
             ));
         }
     },
