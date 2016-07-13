@@ -1,3 +1,5 @@
+import { browserHistory } from 'react-router';
+
 import { SIGN_IN_SUCCESS } from '../../constants/EventConstants.jsx';
 import SessionActions from '../../actions/SessionActions.jsx';
 import SessionStore from '../../stores/SessionStore.jsx';

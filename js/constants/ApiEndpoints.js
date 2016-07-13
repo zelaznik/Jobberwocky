@@ -22,6 +22,8 @@ ApiEndpoints.AUTH = function(src) {
     return ApiRoot + '/users/auth/' + src;
 };
 
+ApiEndpoints.PUSHER_AUTH = ApiRoot + "/pusher_auth";
+
 ApiEndpoints.AUTH_CALLBACK = FrontUrl + "/auth_callback";
 ApiEndpoints.CURRENT_USER =  ApiRoot + '/current_user';
 

@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 import Pusher from 'pusher-js';
 
 var Immutable = require('immutable');
+
+import ApiEndpoints from '../constants/ApiEndpoints.js';
 import ChatActions from '../actions/ChatActions.jsx';
 import SessionStore from '../stores/SessionStore.jsx';
 import ChatStore from '../stores/ChatStore.jsx';
@@ -277,8 +279,12 @@ var Chat = React.createClass({
     },
 
     componentDidMount() {
-        this.pusher = new Pusher(process.env.PUSHER_KEY, {encrypted: true});
-        this.notifications = this.pusher.subscribe(''+SessionStore.currentUserId());
+        this.pusher = new Pusher(process.env.PUSHER_KEY, {
+            authEndpoint: ApiEndpoints.PUSHER_AUTH + "/" + SessionStore.token(),
+            authTransport: 'jsonp',
+            encrypted: true
+        });
+        this.notifications = this.pusher.subscribe('private-'+SessionStore.currentUserId());
         this.notifications.bind('NEW_MESSAGE', ChatActions.receive_message);
 
         SearchBarStore.addChangeListener(this.refresh);
