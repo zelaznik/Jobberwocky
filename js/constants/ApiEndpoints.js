@@ -8,6 +8,7 @@ ApiEndpoints.SIGN_OUT = ApiRoot + '/users/sign_out';
 ApiEndpoints.SIGN_UP =  ApiRoot + '/users';
 
 ApiEndpoints.USERS = ApiRoot + '/users';
+ApiEndpoints.SESSION = ApiRoot + '/session';
 
 ApiEndpoints.USER = function(id) {
     return ApiEndpoints.USERS + "/" + id;

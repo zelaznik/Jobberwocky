@@ -1,10 +1,12 @@
 import React from 'react';
 import assign from 'object-assign';
 import { browserHistory } from 'react-router';
+import Pusher from 'pusher-js';
 
 import { LOGOUT, REDIRECT_TO_LOGIN , SIGN_IN_SUCCESS } from '../constants/EventConstants.jsx';
 import SessionActions from '../actions/SessionActions.jsx';
 import SessionStore from '../stores/SessionStore.jsx';
+import ChatActions from '../actions/ChatActions.jsx';
 import AlertStore from '../stores/AlertStore.jsx';
 
 import AlertModal from '../components/modals/AlertModal.jsx';
@@ -28,6 +30,16 @@ const App = React.createClass({
                 <AlertModal alerts={this.state.alerts} />
             </div>
         );
+    },
+
+    socketSetup() {
+        this.pusher = new Pusher(process.env.PUSHER_KEY, {encrypted: true});
+        this.notifications = this.pusher.subscribe(''+SessionStore.currentUserId());
+        this.notifications.bind('NEW_MESSAGE', ChatActions.receive_message);
+    },
+
+    socketTakedown() {
+        this.notifications.bind('NEW_MESSAGE', ChatActions.receive_message);
     },
 
     componentDidMount() {

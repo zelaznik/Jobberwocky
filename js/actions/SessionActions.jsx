@@ -11,6 +11,12 @@ import SessionStore from '../stores/SessionStore.jsx';
 
 
 var SessionActions = Object.freeze({
+    authenticate() {
+        GET(ApiEndpoints.SESSION, {}, (error, response) => {
+            /* LET THE 401 ERROR HANDLING TO THE WORK */
+        });
+    },
+
     redirect_to_login() {
         AppDispatcher.dispatch({
             actionType: SessionConstants.SAVE_CURRENT_LOCATION,

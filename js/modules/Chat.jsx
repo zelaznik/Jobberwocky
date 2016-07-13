@@ -256,6 +256,7 @@ var Chat = React.createClass({
            </div>
         );
     },
+
     refresh() {
        this.setState( this.getInitialState() );
     },
@@ -264,7 +265,6 @@ var Chat = React.createClass({
         this.pusher = new Pusher(process.env.PUSHER_KEY, {encrypted: true});
         this.notifications = this.pusher.subscribe(''+SessionStore.currentUserId());
         this.notifications.bind('NEW_MESSAGE', ChatActions.receive_message);
-
         ChatStore.addChangeListener(this.refresh);
     },
 
