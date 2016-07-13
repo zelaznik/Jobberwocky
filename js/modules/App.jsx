@@ -39,10 +39,11 @@ const App = React.createClass({
     },
 
     socketTakedown() {
-        this.notifications.bind('NEW_MESSAGE', ChatActions.receive_message);
+        this.notifications.unbind('NEW_MESSAGE', ChatActions.receive_message);
     },
 
     componentDidMount() {
+        this.socketSetup();
         document.addEventListener('click', this.pageClick);
         SessionStore.addChangeListener(this.getNewSession);
         SessionStore.on(SIGN_IN_SUCCESS, SessionActions.toPreviousPage);
@@ -52,6 +53,8 @@ const App = React.createClass({
     },
 
     componentWillUnmount() {
+        this.socketTakedown();
+
         document.removeEventListener('click', this.pageClick);
         SessionStore.removeListener(SIGN_IN_SUCCESS, SessionActions.toPreviousPage);
         SessionStore.removeChangeListener(this.getNewSession);
