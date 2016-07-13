@@ -39,7 +39,7 @@ function addMessage(user_id, msg, temp_id) {
             }
         }
     }
-    messages.push(msg);
+    messages.push(msg); 
     dct[user_id] = messages.sort(by_date);
     _messages = Immutable.fromJS(dct);
 }
