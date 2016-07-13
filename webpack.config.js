@@ -26,10 +26,18 @@ module.exports = {
                 }
             },
             {
+                test: /\.scss$/,
+                loaders: ["style", "css", "sass"]
+            },
+            {
                 test: /\.node$/,
                 loader: "node-loader"
             }
         ]
+    },
+
+    sassLoader: {
+        includePaths: [__dirname + "/assets/css"]
     },
 
     plugins: [
