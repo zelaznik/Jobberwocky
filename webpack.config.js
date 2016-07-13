@@ -1,4 +1,3 @@
-var assign = require('object-assign');
 var webpack = require('webpack');
 var env = process.env;
 
@@ -6,6 +5,10 @@ try {
   var secrets = require('./webpack.secrets.config.js');
 } catch(e) {
   secrets = {};
+}
+
+function config(name, alt) {
+    return JSON.stringify(env[name] || secrets[name] || alt || '');
 }
 
 module.exports = {
@@ -49,12 +52,12 @@ module.exports = {
 
     plugins: [
         new webpack.DefinePlugin({
-            "process.env": assign({
-                "PUSHER_KEY":    JSON.stringify(env.PUSHER_KEY    ||  secrets.PUSHER_KEY),
-                "NODE_ENV":      JSON.stringify(env.NODE_ENV      || "development"),
-                "API_ROOT_URL":  JSON.stringify(env.API_ROOT_URL  || "http://railsapi.dev"),
-                "FRONT_END_URL": JSON.stringify(env.FRONT_END_URL || "http://nodereactjs.dev")
-            })
+            "process.env": {
+                "PUSHER_KEY":    config("PUSHER_KEY"),
+                "NODE_ENV":      config("NODE_ENV"),
+                "API_ROOT_URL":  config("API_ROOT_URL"),
+                "FRONT_END_URL": config("FRONT_END_URL")
+            }
         })
     ]
 };
