@@ -6,3 +6,4 @@ jobberwocky.key
 Gemfile
 config.ru
 *debug.log*
+webpack.secrets.config.js

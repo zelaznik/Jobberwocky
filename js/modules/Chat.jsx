@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import Pusher from 'pusher-js';
 
 var Immutable = require('immutable');
 import ChatActions from '../actions/ChatActions.jsx';
@@ -258,10 +259,17 @@ var Chat = React.createClass({
     refresh() {
        this.setState( this.getInitialState() );
     },
+
     componentDidMount() {
+        this.pusher = new Pusher(process.env.PUSHER_KEY, {encrypted: true});
+        this.notifications = this.pusher.subscribe(''+SessionStore.currentUserId());
+        this.notifications.bind('NEW_MESSAGE', ChatActions.receive_message);
+
         ChatStore.addChangeListener(this.refresh);
     },
+
     componentWillUnmount() {
+        this.notifications.unbind('NEW_MESSAGE', ChatActions.receive_message);
         ChatStore.removeChangeListener(this.refresh);
     }
 });

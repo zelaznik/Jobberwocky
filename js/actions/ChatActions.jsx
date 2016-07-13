@@ -57,6 +57,13 @@ var ChatActions = Object.freeze({
                     params: params, temp_id: pk
                 });
         });
+    },
+
+    receive_message(params) {
+        AppDispatcher.dispatch({
+            actionType: ChatConstants.RECEIVE_MESSAGE,
+            response: params
+        });
     }
 });
 

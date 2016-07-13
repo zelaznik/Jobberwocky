@@ -11,7 +11,9 @@ const ChatConstants = uniqueKeySet('Chat', {
 
     SEND_MESSAGE: null,
     SEND_MESSAGE_SUCCESS: null,
-    SEND_MESSAGE_FAILURE: null
+    SEND_MESSAGE_FAILURE: null,
+
+    RECEIVE_MESSAGE: null
 });
 
 export default ChatConstants;

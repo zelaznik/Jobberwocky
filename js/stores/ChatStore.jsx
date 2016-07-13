@@ -28,11 +28,6 @@ function setMessages(user_id, response) {
 
 function addMessage(user_id, msg, temp_id) {
     var dct = _messages.toJSON();
-    console.log("Params: " + JSON.stringify({
-            user_id: user_id, msg: msg, temp_id: temp_id
-    }));
-    console.log("Messages Stored:");
-    console.log(dct);
     var messages = dct[user_id];
     if (temp_id !== undefined) {
         for (var i=messages.length-1; i>=0; i--) {
@@ -117,6 +112,11 @@ AppDispatcher.register((payload) => {
 
         case ChatConstants.SEND_MESSAGE_SUCCESS:
             addMessage(payload.params.user_id, payload.response, payload.temp_id);
+            ChatStore.emitChange();
+            break;
+
+        case ChatConstants.RECEIVE_MESSAGE:
+            addMessage(payload.response.sender.id, payload.response);
             ChatStore.emitChange();
             break;
     }
