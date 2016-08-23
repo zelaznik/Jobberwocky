@@ -1,7 +1,6 @@
 import React from 'react';
 import assign from 'object-assign';
 import { browserHistory } from 'react-router';
-import Pusher from 'pusher-js';
 
 import { LOGOUT, REDIRECT_TO_LOGIN , SIGN_IN_SUCCESS } from '../constants/EventConstants.jsx';
 import SessionActions from '../actions/SessionActions.jsx';
